@@ -12,7 +12,7 @@ int main() {
   // Variables for number of inputs and the largest input
   int number_of_values = 0;
   int position_of_largest_value = 1;
-  int largest_value;
+  int largest_value = 0;
 
   int number;
   int base;
