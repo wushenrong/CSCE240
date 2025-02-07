@@ -1,0 +1,2 @@
+add_executable(program1 assignment1/program1.cc)
+target_link_libraries(program1 csce240_compiler_flags)
