@@ -1,4 +1,27 @@
 Checks:
-  # - cppcoreguidelines-*
+  - cppcoreguidelines-*
   - google-*
-  # - modernize-*
+  - modernize-*
+  - performance-*
+  - portability-*
+  - readability-*
+  # Ignore rules that are not applicable
+  - -google-objc-*
+  - -modernize-use-trailing-return-type
+  - -readability-identifier-length
+
+FormatStyle: file
+
+CheckOptions:
+  cppcoreguidelines-avoid-magic-numbers.IgnoredIntegerValues: 1;2;3;4;5;6;7;8;9;
+  cppcoreguidelines-init-variables.IncludeStyle: google
+  cppcoreguidelines-init-variables.MathHeader: <cmath>
+  cppcoreguidelines-pro-bounds-constant-array-index.IncludeStyle: google
+  modernize-loop-convert.IncludeStyle: google
+  modernize-make-shared.IncludeStyle: google
+  modernize-make-unique.IncludeStyle: google
+  modernize-pass-by-value.IncludeStyle: google
+  modernize-replace-auto-ptr.IncludeStyle: google
+  modernize-use-std-numbers.IncludeStyle: google
+  performance-unnecessary-value-param.IncludeStyle: google
+  readability-magic-numbers.IgnoredIntegerValues: 1;2;3;4;5;6;7;8;9;

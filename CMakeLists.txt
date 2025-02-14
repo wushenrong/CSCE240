@@ -13,6 +13,8 @@ target_compile_options(
   csce240_compiler_flags
   INTERFACE
     "$<${gcc_like_cxx}:$<BUILD_INTERFACE:-Wall;-Wextra;-Weffc++;-Wconversion;-Wsign-conversion;-Werror;-pedantic-errors>>"
-    "$<${msvc_cxx}:$<BUILD_INTERFACE:-W4;-w44365;-permissive-;-WX>>")
+    "$<${msvc_cxx}:$<BUILD_INTERFACE:/W4;/w44365;/permissive-;/WX>>")
+target_include_directories(csce240_compiler_flags
+                           INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_subdirectory(src)
