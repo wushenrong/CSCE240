@@ -11,7 +11,7 @@
         "_UNICODE"
       ],
       "includePath": [
-        "${workspaceFolder}/**"
+        "${workspaceFolder}/include/**"
       ],
       "intelliSenseMode": "linux-gcc-x64",
       "name": "Linux"
@@ -27,7 +27,7 @@
         "_UNICODE"
       ],
       "includePath": [
-        "${workspaceFolder}/**"
+        "${workspaceFolder}/include/**"
       ],
       "intelliSenseMode": "windows-msvc-x64",
       "name": "Win32",
@@ -52,7 +52,7 @@
       "cppStandard": "c++17",
       "cStandard": "c17",
       "includePath": [
-        "${workspaceFolder}/**"
+        "${workspaceFolder}/include/**"
       ],
       "intelliSenseMode": "windows-gcc-x64",
       "macFrameworkPath": [],
@@ -71,7 +71,7 @@
         "_UNICODE"
       ],
       "includePath": [
-        "${workspaceFolder}/**"
+        "${workspaceFolder}/include/**"
       ],
       "intelliSenseMode": "windows-clang-x64",
       "name": "Win32 (Clang)",
@@ -87,7 +87,7 @@
         "_UNICODE"
       ],
       "includePath": [
-        "${workspaceFolder}/**"
+        "${workspaceFolder}/include/**"
       ],
       "intelliSenseMode": "linux-clang-x64",
       "name": "Linux (Clang)",

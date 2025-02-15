@@ -2,7 +2,7 @@
  * Copyright 2025 Samuel Wu
  */
 
-#include "src/assignment2/program2functions.h"
+#include "csce240/assignment2/program2functions.h"
 
 #include <cmath>
 #include <utility>
