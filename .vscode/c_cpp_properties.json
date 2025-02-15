@@ -1,16 +1,97 @@
 {
   "configurations": [
     {
-      "name": "Linux",
+      "compilerPath": "/usr/bin/g++",
+      "configurationProvider": "ms-vscode.cmake-tools",
+      "cppStandard": "c++17",
+      "cStandard": "c17",
+      "defines": [
+        "_DEBUG",
+        "UNICODE",
+        "_UNICODE"
+      ],
       "includePath": [
         "${workspaceFolder}/**"
       ],
-      "defines": [],
-      "compilerPath": "/usr/bin/g++",
-      "cStandard": "c17",
-      "cppStandard": "c++17",
       "intelliSenseMode": "linux-gcc-x64",
-      "configurationProvider": "ms-vscode.cmake-tools"
+      "name": "Linux"
+    },
+    {
+      "compilerPath": "cl.exe",
+      "configurationProvider": "ms-vscode.cmake-tools",
+      "cppStandard": "c++17",
+      "cStandard": "c17",
+      "defines": [
+        "_DEBUG",
+        "UNICODE",
+        "_UNICODE"
+      ],
+      "includePath": [
+        "${workspaceFolder}/**"
+      ],
+      "intelliSenseMode": "windows-msvc-x64",
+      "name": "Win32",
+      "windowsSdkVersion": "10.0.22621.0"
+    },
+    {
+      "browse": {
+        "limitSymbolsToIncludedHeaders": true,
+        "path": [
+          "C:/PROGRAM FILES/MICROSOFT VISUAL STUDIO/2022/COMMUNITY/VC/TOOLS/MSVC/14.43.34808/include/*",
+          "C:/PROGRAM FILES/MICROSOFT VISUAL STUDIO/2022/COMMUNITY/VC/TOOLS/MSVC/14.43.34808/atlmfc/include/*",
+          "C:/PROGRAM FILES (X86)/WINDOWS KITS/10/INCLUDE/10.0.22621.0/um",
+          "C:/PROGRAM FILES (X86)/WINDOWS KITS/10/INCLUDE/10.0.22621.0/ucrt",
+          "C:/PROGRAM FILES (X86)/WINDOWS KITS/10/INCLUDE/10.0.22621.0/shared",
+          "C:/PROGRAM FILES (X86)/WINDOWS KITS/10/INCLUDE/10.0.22621.0/winrt",
+          "C:/PROGRAM FILES (X86)/WINDOWS KITS/10/INCLUDE/10.0.22621.0/cppwinrt",
+          "${workspaceFolder}/**"
+        ]
+      },
+      "compilerPath": "C:/msys64/ucrt64/bin/g++.exe",
+      "configurationProvider": "ms-vscode.cmake-tools",
+      "cppStandard": "c++17",
+      "cStandard": "c17",
+      "includePath": [
+        "${workspaceFolder}/**"
+      ],
+      "intelliSenseMode": "windows-gcc-x64",
+      "macFrameworkPath": [],
+      "mergeConfigurations": false,
+      "name": "MINGW64 (UCRT)",
+      "windowsSdkVersion": "10.0.22621.0"
+    },
+    {
+      "compilerPath": "clang++.exe",
+      "configurationProvider": "ms-vscode.cmake-tools",
+      "cppStandard": "c++17",
+      "cStandard": "c17",
+      "defines": [
+        "_DEBUG",
+        "UNICODE",
+        "_UNICODE"
+      ],
+      "includePath": [
+        "${workspaceFolder}/**"
+      ],
+      "intelliSenseMode": "windows-clang-x64",
+      "name": "Win32 (Clang)",
+      "windowsSdkVersion": "10.0.22621.0"
+    },
+    {
+      "compilerPath": "/usr/bin/clang++",
+      "cppStandard": "c++17",
+      "cStandard": "c17",
+      "defines": [
+        "_DEBUG",
+        "UNICODE",
+        "_UNICODE"
+      ],
+      "includePath": [
+        "${workspaceFolder}/**"
+      ],
+      "intelliSenseMode": "linux-clang-x64",
+      "name": "Linux (Clang)",
+      "windowsSdkVersion": "10.0.22621.0"
     }
   ],
   "version": 4
