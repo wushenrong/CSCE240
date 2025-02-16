@@ -26,7 +26,9 @@ bool IsSquare(int n) {
   const double root = std::sqrt(n);
   const double flooredRoot = std::floor(root);
 
-  // Compare the root and the floored root using an
+  // Compare the root and the floored root using an percentage threshold because
+  // of possible floating point rounding errors
+  // https://www.learncpp.com/cpp-tutorial/relational-operators-and-floating-point-comparisons/
   constexpr double relEpsilon{1e-8};
 
   return (std::abs(root - flooredRoot) <=
