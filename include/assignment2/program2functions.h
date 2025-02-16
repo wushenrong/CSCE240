@@ -2,8 +2,8 @@
  * Copyright 2025 Samuel Wu
  */
 
-#ifndef CSCE240_ASSIGNMENT2_PROGRAM2FUNCTIONS_H_
-#define CSCE240_ASSIGNMENT2_PROGRAM2FUNCTIONS_H_
+#ifndef ASSIGNMENT2_PROGRAM2FUNCTIONS_H_
+#define ASSIGNMENT2_PROGRAM2FUNCTIONS_H_
 
 /**
  * Checks if an integer is a perfect square. If the integer is negative, return
@@ -49,4 +49,4 @@ int Range(int& x, int& y);  // NOLINT: We need reference to swap values
  */
 int DigitInPosition(double x, int position);
 
-#endif  // CSCE240_ASSIGNMENT2_PROGRAM2FUNCTIONS_H_
+#endif  // ASSIGNMENT2_PROGRAM2FUNCTIONS_H_

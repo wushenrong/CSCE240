@@ -44,7 +44,7 @@ int main() {
 
     // Convert the value from base n to base 10 from right to left
     while (number > 0) {
-      int current_digit = number % radix;
+      const int current_digit = number % radix;
 
       // Reject value if the current digit is not in base n
       if (current_digit >= base) {
@@ -77,7 +77,7 @@ int main() {
        << position_of_largest_value;
 
   // Make sure 11th, 12th, and 13th is correctly outputted
-  bool is_position_a_10s_position =
+  const bool is_position_a_10s_position =
       (position_of_largest_value / radix) % radix == 1;
 
   if (!is_position_a_10s_position) {

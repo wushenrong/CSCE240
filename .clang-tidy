@@ -1,27 +1,36 @@
 Checks:
   - cppcoreguidelines-*
   - google-*
+  - misc-*
   - modernize-*
   - performance-*
   - portability-*
   - readability-*
   # Ignore rules that are not applicable
   - -google-objc-*
+  - -misc-use-anonymous-namespace
   - -modernize-use-trailing-return-type
-  - -readability-identifier-length
 
 FormatStyle: file
 
 CheckOptions:
+  cppcoreguidelines-avoid-do-while.IgnoreMacros: true
   cppcoreguidelines-avoid-magic-numbers.IgnoredIntegerValues: 1;2;3;4;5;6;7;8;9;
   cppcoreguidelines-init-variables.IncludeStyle: google
   cppcoreguidelines-init-variables.MathHeader: <cmath>
+  cppcoreguidelines-pro-bounds-constant-array-index.GslHeader: <gsl/gsl>
   cppcoreguidelines-pro-bounds-constant-array-index.IncludeStyle: google
   modernize-loop-convert.IncludeStyle: google
   modernize-make-shared.IncludeStyle: google
   modernize-make-unique.IncludeStyle: google
   modernize-pass-by-value.IncludeStyle: google
   modernize-replace-auto-ptr.IncludeStyle: google
+  modernize-replace-random-shuffle.IncludeStyle: google
   modernize-use-std-numbers.IncludeStyle: google
+  modernize-use-std-print.IncludeStyle: google
+  performance-type-promotion-in-math-fn.IncludeStyle: google
   performance-unnecessary-value-param.IncludeStyle: google
+  readability-function-cognitive-complexity.IgnoreMacros: true
+  readability-identifier-length.IgnoredVariableNames: ^[xy]$
+  readability-identifier-length.IgnoredParameterNames: ^[cnxy]$
   readability-magic-numbers.IgnoredIntegerValues: 1;2;3;4;5;6;7;8;9;

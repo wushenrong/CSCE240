@@ -2,8 +2,13 @@
  * Copyright 2025 Samuel Wu
  */
 
-#include "csce240/assignment2/program2functions.h"
+#include "assignment2/program2functions.h"
 
+// clang-format: off -- GSL is currently an external library
+#include <gsl/util>
+// clang-format: on
+
+#include <algorithm>
 #include <cmath>
 #include <utility>
 
@@ -18,10 +23,14 @@ bool IsSquare(int n) {
     return false;
   }
 
-  double root = std::sqrt(n);
-  double flooredRoot = std::floor(root);
+  const double root = std::sqrt(n);
+  const double flooredRoot = std::floor(root);
 
-  return root == flooredRoot;
+  // Compare the root and the floored root using an
+  constexpr double relEpsilon{1e-8};
+
+  return (std::abs(root - flooredRoot) <=
+          std::max(std::abs(root), std::abs(flooredRoot)) * relEpsilon);
 }
 
 /**
@@ -48,17 +57,17 @@ bool IsPerfect(int n) {
 /**
  * Checks if a character is a vowel by first checking if the character is an
  * uppercase character between 'A' and 'Z' inclusive. Convert the character to
- * lowercase by adding the ASCII difference of 'a' and 'A'. Then if check_y is
- * true and the character is 'y', return true. Else check if the character is
- * either 'a', 'e', 'i', 'o', 'u'.
+ * lowercase by adding the ASCII difference of 'a' and 'A'. If the character is
+ * 'y', return check_y. Else check if the character is either 'a', 'e', 'i',
+ * 'o', 'u'.
  */
 bool IsVowel(char c, bool check_y) {
   if (c >= 'A' && c <= 'Z') {
     c += 'a' - 'A';
   }
 
-  if (check_y && c == 'y') {
-    return true;
+  if (c == 'y') {
+    return check_y;
   }
 
   return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
@@ -67,21 +76,21 @@ bool IsVowel(char c, bool check_y) {
 /**
  * Checks if a character is a vowel by first checking if the character is an
  * uppercase character between 'A' and 'Z' inclusive. Convert the character to
- * lowercase by adding the ASCII difference of 'a' and 'A'. Then if check_y is
- * true and the character is 'y', return true. Else check if the character is
- * a consonant between 'a' to 'z' excluding 'a', 'e', 'i', 'o', 'u', and 'y'.
+ * lowercase by adding the ASCII difference of 'a' and 'A'. If the character is
+ * 'y', return check_y. Else check if the character is a consonant between
+ * 'a' to 'z' excluding 'a', 'e', 'i', 'o', 'u', and 'y'.
  */
 bool IsConsonant(char c, bool check_y) {
   if (c >= 'A' && c <= 'Z') {
     c += 'a' - 'A';
   }
 
-  if (check_y && c == 'y') {
-    return true;
+  if (c == 'y') {
+    return check_y;
   }
 
   return (c > 'a' && c < 'e') || (c > 'e' && c < 'i') || (c > 'i' && c < 'o') ||
-         (c > 'o' && c < 'u') || (c > 'u' && c < 'y') || (c > 'y' && c <= 'z');
+         (c > 'o' && c < 'u') || (c > 'u' && c < 'y') || (c == 'z');
 }
 
 /**
@@ -134,5 +143,5 @@ int Range(int &x, int &y) {  // NOLINT: We need reference to swap values
  */
 int DigitInPosition(double x, int position) {
   constexpr int base = 10;
-  return static_cast<int>(std::fmod(x * std::pow(base, position), base));
+  return gsl::narrow_cast<int>(std::fmod(x * std::pow(base, position), base));
 }

@@ -1,0 +1,8 @@
+{
+  "cmake.configureArgs": [
+    "-DENABLE_CODE_COVERAGE=ON"
+  ],
+  "coverage-gutters.coverageFileNames": [
+    "*_coverage.info"
+  ],
+}
