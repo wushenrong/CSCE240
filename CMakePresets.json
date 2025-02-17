@@ -1,0 +1,24 @@
+{
+  "configurePresets": [
+    {
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_CXX_EXTENSIONS": false,
+        "CMAKE_EXPORT_COMPILE_COMMANDS": true
+      },
+      "generator": "Ninja",
+      "name": "default"
+    },
+    {
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
+        "USE_VCPKG": true
+      },
+      "inherits": [
+        "default"
+      ],
+      "name": "vcpkg"
+    }
+  ],
+  "version": 2
+}
