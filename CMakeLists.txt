@@ -22,7 +22,7 @@ set(gcc_warning_flags
 set(msvc_warning_flags "/W4;/w44365;/permissive-;/WX")
 
 set(gcc_build_flags "$<$<CONFIG:Debug>:-Og;-ggdb>")
-set(msvc_build_flags "$<$<CONFIG:Debug>:/ZI>")
+set(msvc_build_flags "$<$<CONFIG:Debug>:/ZI>" "$<$<CONFIG:Release>:/Oi;/Gl;/Gy>" "/sdl;/utf-8;/Gs")
 
 set(gcc_compile_flags "${gcc_warning_flags};${gcc_build_flags}")
 set(msvc_compile_flags "${msvc_warning_flags};${msvc_build_flags}")
@@ -35,7 +35,7 @@ target_compile_options(
 target_link_options(
   csce240_compiler_flags INTERFACE
   "$<${gcc_like_cxx}:$<BUILD_INTERFACE:${gcc_warning_flags}>>"
-  "$<${msvc_cxx}:$<BUILD_INTERFACE:${msvc_warning_flags}>>")
+  "$<${msvc_cxx}:$<BUILD_INTERFACE:/WX>>")
 
 # Get dependencies
 if(USE_VCPKG)
@@ -65,10 +65,8 @@ include(Catch)
 
 # Code coverage from https://github.com/claremacrae/catch_cmake_coverage MIT
 # License
-if(ENABLE_CODE_COVERAGE)
-  message(STATUS "Enable
-  Code
-  Coverage")
+if(ENABLE_CODE_COVERAGE AND !MSVC)
+  message(STATUS "Enable Code Coverage")
 
   # --- Coverage specific configuration --- start add the project specific cmake
   # modules directory to the cmake module path (w.r.t. CI/CD builds this is not
@@ -82,8 +80,7 @@ if(ENABLE_CODE_COVERAGE)
   append_coverage_compiler_flags()
 
   # exclude /test directories from coverage analysis
-  set(COVERAGE_LCOV_EXCLUDES "test/*
-  ")
+  set(COVERAGE_LCOV_EXCLUDES "test/*")
 
   # cmake code coverage module target
   setup_target_for_coverage_lcov(

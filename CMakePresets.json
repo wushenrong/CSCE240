@@ -3,8 +3,8 @@
     {
       "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
-        "CMAKE_CXX_EXTENSIONS": false,
-        "CMAKE_EXPORT_COMPILE_COMMANDS": true
+        "CMAKE_CXX_EXTENSIONS": "OFF",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
       },
       "generator": "Ninja",
       "name": "default"
@@ -12,7 +12,7 @@
     {
       "cacheVariables": {
         "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
-        "USE_VCPKG": true
+        "USE_VCPKG": "ON"
       },
       "inherits": [
         "default"
