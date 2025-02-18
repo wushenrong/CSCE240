@@ -6,7 +6,6 @@ project(
   LANGUAGES CXX)
 
 # Options for building the project
-option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 option(ENABLE_CODE_COVERAGE "Enable coverage reporting" OFF)
 option(USE_VCPKG "Use vcpkg instead of FetchContent" OFF)
 
@@ -18,14 +17,28 @@ set(gcc_like_cxx "$<COMPILE_LANG_AND_ID:CXX,ARMClang,AppleClang,Clang,GNU,LCC>")
 set(msvc_cxx "$<COMPILE_LANG_AND_ID:CXX,MSVC>")
 
 set(gcc_warning_flags
-    "-Wall;-Wextra;-Wconversion;-Wsign-conversion;-pedantic-errors;-Werror")
+    "-Wall;-Wextra;-Weffc++;-Wconversion;-Wsign-conversion;-pedantic-errors;-Werror"
+)
 set(msvc_warning_flags "/W4;/w44365;/permissive-;/WX")
 
 set(gcc_build_flags "$<$<CONFIG:Debug>:-Og;-ggdb>")
-set(msvc_build_flags "$<$<CONFIG:Debug>:/ZI>" "$<$<CONFIG:Release>:/Oi;/Gl;/Gy>" "/sdl;/utf-8;/Gs")
+set(msvc_build_flags "$<$<CONFIG:Debug>:/ZI>"
+                     "$<$<CONFIG:Release>:/Oi;/GL;/Gy>" "/sdl;/utf-8;/Gs")
 
 set(gcc_compile_flags "${gcc_warning_flags};${gcc_build_flags}")
 set(msvc_compile_flags "${msvc_warning_flags};${msvc_build_flags}")
+
+# Enable IPO/WPO/LTO
+include(CheckIPOSupported)
+
+check_ipo_supported(RESULT IPO_RESULT OUTPUT IPO_OUTPUT)
+
+if(IPO_RESULT)
+  set_target_properties(csce240_compiler_flags
+                        PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
+else()
+  message(WARNING "IPO is not supported: ${output}")
+endif()
 
 target_compile_options(
   csce240_compiler_flags
@@ -63,30 +76,20 @@ endif()
 include(CTest)
 include(Catch)
 
-# Code coverage from https://github.com/claremacrae/catch_cmake_coverage MIT
-# License
+# Code coverage from https://github.com/claremacrae/catch_cmake_coverage
 if(ENABLE_CODE_COVERAGE AND !MSVC)
   message(STATUS "Enable Code Coverage")
 
-  # --- Coverage specific configuration --- start add the project specific cmake
-  # modules directory to the cmake module path (w.r.t. CI/CD builds this is not
-  # the best approach)
   list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake")
-
-  # include the cmake code coverage module
   include(CodeCoverage)
 
-  # Update the default compiler flags to enable coverage
   append_coverage_compiler_flags()
 
-  # exclude /test directories from coverage analysis
   set(COVERAGE_LCOV_EXCLUDES "test/*")
 
-  # cmake code coverage module target
   setup_target_for_coverage_lcov(
     NAME assignment2_tests_coverage EXECUTABLE assignment2_tests DEPENDENCIES
     assignment2_tests)
-  # --- Coverage specific configuration --- end
 endif()
 
 # Include source and test code

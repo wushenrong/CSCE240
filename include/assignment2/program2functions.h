@@ -40,7 +40,7 @@ int ToDigit(char c);
  * Returns the range between two numbers. If x is greater than y, then the
  * values of those variables are swapped.
  */
-int Range(int& x, int& y);  // NOLINT: We need reference to swap values
+int Range(int& x, int& y);
 
 /**
  * Returns a digit in a double based on its position. The position left of the

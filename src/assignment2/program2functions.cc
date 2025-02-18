@@ -129,7 +129,7 @@ int ToDigit(char c) {
  * y. If true swap the values of the variables referenced by x and y. Then
  * return the difference of y and x.
  */
-int Range(int &x, int &y) {  // NOLINT: We need reference to swap values
+int Range(int &x, int &y) {
   if (x > y) {
     std::swap(x, y);
   }
