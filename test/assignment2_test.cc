@@ -102,9 +102,14 @@ TEST_CASE("Get range between numbers", "[Range]") {
 }
 
 TEST_CASE("Get digit in position", "[DigitInPosition]") {
-  constexpr double test_number{12345.06789};
+  constexpr double test_positive_number{12345.06789};
+  constexpr double test_negative_number{12345.06789};
 
-  REQUIRE(DigitInPosition(test_number, 0) == 5);
-  REQUIRE(DigitInPosition(test_number, -3) == 2);
-  REQUIRE(DigitInPosition(test_number, 4) == 8);
+  REQUIRE(DigitInPosition(test_positive_number, 0) == 5);
+  REQUIRE(DigitInPosition(test_positive_number, -3) == 2);
+  REQUIRE(DigitInPosition(test_positive_number, 4) == 8);
+
+  REQUIRE(DigitInPosition(test_negative_number, 0) == 5);
+  REQUIRE(DigitInPosition(test_negative_number, -3) == 2);
+  REQUIRE(DigitInPosition(test_negative_number, 4) == 8);
 }

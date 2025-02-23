@@ -9,6 +9,15 @@
       },
       "generator": "Ninja",
       "name": "default"
+    },
+    {
+      "name": "shared",
+      "cacheVariables": {
+        "BUILD_SHARED_LIBS": "ON"
+      },
+      "inherits": [
+        "default"
+      ]
     }
   ],
   "version": 2
