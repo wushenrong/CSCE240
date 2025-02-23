@@ -79,6 +79,7 @@
     },
     {
       "compilerPath": "/usr/bin/clang++",
+      "configurationProvider": "ms-vscode.cmake-tools",
       "cppStandard": "c++17",
       "cStandard": "c17",
       "defines": [
