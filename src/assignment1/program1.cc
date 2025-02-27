@@ -1,6 +1,11 @@
-/*
- * Copyright 2025 Samuel Wu
- */
+/// @file program1.cc
+/// @author Samuel Wu
+/// @brief Example program that converts numbers from base 2-9 to base 10.
+/// @version 0.0.0
+/// @date 2025-02-27
+///
+/// @copyright Copyright (c) 2025
+///
 
 #include <iostream>
 

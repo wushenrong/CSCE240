@@ -16,12 +16,14 @@ target_compile_features(csce240_compiler_flags INTERFACE cxx_std_17)
 set(_gcc_cxx "$<COMPILE_LANG_AND_ID:CXX,ARMClang,AppleClang,Clang,GNU,LCC>")
 set(_msvc_cxx "$<COMPILE_LANG_AND_ID:CXX,MSVC>")
 
-set(_gcc_warning_flags "-Wall;-Wextra;-Weffc++;-Wconversion;-Wsign-conversion"
-                       "-pedantic-errors;-Werror")
-set(_msvc_warning_flags "/W4;/w44365;/permissive-;/WX")
+set(_gcc_warning_flags "-Wall;-Wextra;-Wpedantic;-Werror;-Weffc++;-Wconversion"
+                       "-Wsign-conversion;-Wformat=2")
+set(_msvc_warning_flags "/W4;/permissive-;/WX;/w44365;")
 
-set(_gcc_compile_flags "$<$<CONFIG:Debug>:-ggdb;-Og>")
-set(_msvc_compile_flags "$<$<CONFIG:Release>:/Oi;/GL;/Gy>" "/Gs;/sdl")
+set(_gcc_compile_flags "$<$<CONFIG:Debug>:-ggdb;-Og>"
+                       "$<$<CONFIG:Release>:-flto>")
+set(_msvc_compile_flags "$<$<CONFIG:Debug>:/ZI>"
+                        "$<$<CONFIG:Release>:/Oi;/GL;/Gy>" "/Gs;/sdl;/guard:cf")
 
 set(_gcc_flags "${_gcc_warning_flags};${_gcc_compile_flags}")
 set(_msvc_flags "${_msvc_warning_flags};${_msvc_compile_flags}")
