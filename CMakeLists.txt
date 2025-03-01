@@ -7,7 +7,6 @@ project(
 
 # Options for building the project
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
-option(ENABLE_CODE_COVERAGE "Enable coverage reporting" OFF)
 
 # Set compiler flags
 add_library(csce240_compiler_flags INTERFACE)
@@ -42,7 +41,7 @@ include(CTest)
 include(Catch)
 
 # Code coverage from https://github.com/claremacrae/catch_cmake_coverage
-if(ENABLE_CODE_COVERAGE AND !MSVC)
+if(ENABLE_CODE_COVERAGE AND NOT MSVC)
   message(STATUS "Enable Code Coverage")
 
   list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake")
@@ -50,11 +49,10 @@ if(ENABLE_CODE_COVERAGE AND !MSVC)
 
   append_coverage_compiler_flags()
 
-  set(COVERAGE_LCOV_EXCLUDES "test/*")
+  set(COVERAGE_LCOV_EXCLUDES "/usr/include/*" "build/*" "test/*")
 
-  setup_target_for_coverage_lcov(
-    NAME assignment2_tests_coverage EXECUTABLE assignment2_tests DEPENDENCIES
-    assignment2_tests)
+  setup_target_for_coverage_lcov(NAME csce240_tests_coverage EXECUTABLE
+                                 csce240_tests DEPENDENCIES csce240_tests)
 endif()
 
 # Include source and test code
