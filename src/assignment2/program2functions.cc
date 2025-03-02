@@ -16,6 +16,13 @@
 #include <locale>
 #include <utility>
 
+using std::abs;
+using std::floor;
+using std::fmod;
+using std::max;
+using std::pow;
+using std::sqrt;
+
 /// Check if an integer is a perfect square by first checking if the integer is
 /// negative. If true, return false. Else calculate the square root of the
 /// integer. Then flooring the root and check if the floored root is the same as
@@ -25,16 +32,16 @@ bool IsSquare(int n) {
     return false;
   }
 
-  const double root = std::sqrt(n);
-  const double flooredRoot = std::floor(root);
+  const double root = sqrt(n);
+  const double flooredRoot = floor(root);
 
   // Compare the root and the floored root using an percentage threshold because
   // of possible floating point rounding errors.
   // https://www.learncpp.com/cpp-tutorial/relational-operators-and-floating-point-comparisons/
   constexpr double relEpsilon{1e-8};
 
-  return (std::abs(root - flooredRoot) <=
-          std::max(std::abs(root), std::abs(flooredRoot)) * relEpsilon);
+  return (abs(root - flooredRoot) <=
+          max(abs(root), abs(flooredRoot)) * relEpsilon);
 }
 
 /// Checking if a integer is a perfect number by first checking if the integer
@@ -129,6 +136,5 @@ int Range(int& x, int& y) {
 /// and truncating the digit to an int.
 int DigitInPosition(double x, int pos) {
   constexpr int base = 10;
-  return gsl::narrow_cast<int>(
-      std::fmod(std::abs(x) * std::pow(base, pos), base));
+  return gsl::narrow_cast<int>(fmod(abs(x) * pow(base, pos), base));
 }

@@ -11,6 +11,8 @@
 #include <iostream>
 #include <string>
 
+using std::cout;
+using std::size_t;
 using std::string;
 
 /// Read a word search file and put it in an existing character array of kSize
@@ -58,9 +60,9 @@ bool ReadWordSearch(const string& file_name, WordSearch& grid) {
 void PrintWordSearch(const WordSearch& grid) {
   for (const auto& row : grid) {
     for (const auto& col : row) {
-      std::cout << col << ' ';
+      cout << col << ' ';
     }
-    std::cout << '\n';
+    cout << '\n';
   }
 }
 
