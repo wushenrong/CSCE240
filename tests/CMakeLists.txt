@@ -1,4 +1,4 @@
-add_executable(csce240_tests assignment2_tests.cc assignment3_tests.cc)
+add_executable(csce240_tests assignment2_test.cc assignment3_test.cc)
 target_link_libraries(
   csce240_tests
   PRIVATE csce240_compiler_flags program2functions wordsearchfunctions

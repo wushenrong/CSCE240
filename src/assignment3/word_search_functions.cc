@@ -1,6 +1,11 @@
-/*
- * Copyright 2025 Samuel Wu
- */
+/// @file word_search_functions.cc
+/// @author Samuel Wu
+/// @brief Functions to find words in a word search.
+/// @version 0.0.0
+/// @date 2025-03-04
+///
+/// @copyright Copyright (c) 2025
+///
 
 #include "assignment3/word_search_functions.h"
 
@@ -78,10 +83,10 @@ void PrintWordSearch(const WordSearch& grid) {
 /// search and return false.
 bool FindWordRight(const WordSearch& grid, const string& to_find, int& row,
                    int& col) {
-  for (size_t grid_row = 0; grid_row < kSize; ++grid_row) {
-    for (size_t grid_col = 0; grid_col < kSize; ++grid_col) {
+  for (size_t grid_row = 0; grid_row < grid.size(); ++grid_row) {
+    for (size_t grid_col = 0; grid_col < grid.at(grid_row).size(); ++grid_col) {
       if (grid.at(grid_row).at(grid_col) == to_find[0] &&
-          grid_col + to_find.length() <= kSize) {
+          grid_col + to_find.length() <= grid.at(grid_row).size()) {
         bool found = true;
 
         for (size_t i = 1; i < to_find.length(); ++i) {
@@ -108,8 +113,8 @@ bool FindWordRight(const WordSearch& grid, const string& to_find, int& row,
 /// but we check if the word fits and matches in the word search in reverse.
 bool FindWordLeft(const WordSearch& grid, const string& to_find, int& row,
                   int& col) {
-  for (size_t grid_row = 0; grid_row < kSize; ++grid_row) {
-    for (size_t grid_col = 0; grid_col < kSize; ++grid_col) {
+  for (size_t grid_row = 0; grid_row < grid.size(); ++grid_row) {
+    for (size_t grid_col = 0; grid_col < grid.at(grid_row).size(); ++grid_col) {
       if (grid.at(grid_row).at(grid_col) == to_find[0] &&
           grid_col >= to_find.length() - 1) {
         bool found = true;
@@ -139,10 +144,10 @@ bool FindWordLeft(const WordSearch& grid, const string& to_find, int& row,
 /// bottom.
 bool FindWordDown(const WordSearch& grid, const string& to_find, int& row,
                   int& col) {
-  for (size_t grid_row = 0; grid_row < kSize; ++grid_row) {
-    for (size_t grid_col = 0; grid_col < kSize; ++grid_col) {
+  for (size_t grid_row = 0; grid_row < grid.size(); ++grid_row) {
+    for (size_t grid_col = 0; grid_col < grid.at(grid_row).size(); ++grid_col) {
       if (grid.at(grid_row).at(grid_col) == to_find[0] &&
-          grid_row + to_find.length() <= kSize) {
+          grid_row + to_find.length() <= grid.size()) {
         bool found = true;
 
         for (size_t i = 1; i < to_find.length(); ++i) {
@@ -170,8 +175,8 @@ bool FindWordDown(const WordSearch& grid, const string& to_find, int& row,
 /// to top.
 bool FindWordUp(const WordSearch& grid, const string& to_find, int& row,
                 int& col) {
-  for (size_t grid_row = 0; grid_row < kSize; ++grid_row) {
-    for (size_t grid_col = 0; grid_col < kSize; ++grid_col) {
+  for (size_t grid_row = 0; grid_row < grid.size(); ++grid_row) {
+    for (size_t grid_col = 0; grid_col < grid.at(grid_row).size(); ++grid_col) {
       if (grid.at(grid_row).at(grid_col) == to_find[0] &&
           grid_row >= to_find.length() - 1) {
         bool found = true;
@@ -202,11 +207,11 @@ bool FindWordUp(const WordSearch& grid, const string& to_find, int& row,
 /// diagonal is the length of the string in both the row and col direction.
 bool FindWordDiagonal(const WordSearch& grid, const string& to_find, int& row,
                       int& col) {
-  for (size_t grid_row = 0; grid_row < kSize; ++grid_row) {
-    for (size_t grid_col = 0; grid_col < kSize; ++grid_col) {
+  for (size_t grid_row = 0; grid_row < grid.size(); ++grid_row) {
+    for (size_t grid_col = 0; grid_col < grid.at(grid_row).size(); ++grid_col) {
       if (grid.at(grid_row).at(grid_col) == to_find[0] &&
-          grid_row + to_find.length() <= kSize &&
-          grid_col + to_find.length() <= kSize) {
+          grid_row + to_find.length() <= grid.size() &&
+          grid_col + to_find.length() <= grid.at(grid_row).size()) {
         bool found = true;
 
         for (size_t i = 1; i < to_find.length(); ++i) {

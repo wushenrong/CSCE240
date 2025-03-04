@@ -4,7 +4,6 @@
     "mine.cpplint",
     "ms-vscode.cmake-tools",
     "ms-vscode.cpptools-extension-pack",
-    "ryanluker.vscode-coverage-gutters",
-    "twxs.cmake"
+    "ryanluker.vscode-coverage-gutters"
   ]
 }

@@ -57,4 +57,4 @@ endif()
 
 # Include source and test code
 add_subdirectory(src)
-add_subdirectory(test)
+add_subdirectory(tests)
