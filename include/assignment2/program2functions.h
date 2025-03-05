@@ -35,14 +35,14 @@ DLLEXPORT bool IsSquare(int n);
 ///   a perfect number or it is a negative integer.
 DLLEXPORT bool IsPerfect(int n);
 
-/// Checks if a charater is a vowel (i.e. 'a', 'e', 'i', 'o', 'u').
+/// Checks if a charater is a vowel.
 ///
 /// @param c The character to check.
 /// @param check_y Makes the character 'y' a vowel.
 /// @return True if the character is a vowel, otherwise returns false.
 DLLEXPORT bool IsVowel(char c, bool check_y = true);
 
-/// Checks if a character is a consonant (i.e. not 'a', 'e', 'i', 'o', 'u').
+/// Checks if a character is a consonant.
 ///
 /// @param c The character to check.
 /// @param check_y Makes the character 'y' a consonant.
@@ -53,8 +53,8 @@ DLLEXPORT bool IsConsonant(char c, bool check_y = true);
 /// inclusive.
 ///
 /// @param c The character to convert.
-/// @return The integer 1 to 9 if the character is '1' to '9', otherwise return.
-///   0
+/// @return The integer 1 to 9 if the character is '1' to '9', otherwise return
+///   0.
 DLLEXPORT int ToDigit(char c);
 
 /// Calculates the range of two integers. If x is greater than y, then the
