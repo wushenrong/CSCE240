@@ -49,7 +49,7 @@ if(ENABLE_CODE_COVERAGE AND NOT MSVC)
 
   append_coverage_compiler_flags()
 
-  set(COVERAGE_LCOV_EXCLUDES "/usr/include/*" "build/*" "test/*")
+  set(COVERAGE_LCOV_EXCLUDES "/usr/include/*" "build/*" "tests/*")
 
   setup_target_for_coverage_lcov(NAME csce240_tests_coverage EXECUTABLE
                                  csce240_tests DEPENDENCIES csce240_tests)

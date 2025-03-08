@@ -12,6 +12,7 @@
 
 #include <array>
 #include <string>
+#include <string_view>
 
 #ifdef WIN32
 #ifdef wordsearchfunctions_EXPORTS
@@ -52,8 +53,8 @@ DLLEXPORT void PrintWordSearch(const WordSearch& grid);
 ///   found, this variable will not be modified.
 ///
 /// @return True if the word was found. Otherwise return false.
-DLLEXPORT bool FindWordRight(const WordSearch& grid, const std::string& to_find,
-                             int& row, int& col);
+bool FindWordRight(const WordSearch& grid, std::string_view to_find, int& row,
+                   int& col);
 
 /// Finds a word that is written from right to left.
 ///
@@ -65,8 +66,8 @@ DLLEXPORT bool FindWordRight(const WordSearch& grid, const std::string& to_find,
 ///   found, this variable will not be modified.
 ///
 /// @return True if the word was found. Otherwise return false.
-DLLEXPORT bool FindWordLeft(const WordSearch& grid, const std::string& to_find,
-                            int& row, int& col);
+bool FindWordLeft(const WordSearch& grid, std::string_view to_find, int& row,
+                  int& col);
 
 /// Finds a word that is written from top to bottom.
 ///
@@ -78,8 +79,8 @@ DLLEXPORT bool FindWordLeft(const WordSearch& grid, const std::string& to_find,
 ///   found, this variable will not be modified.
 ///
 /// @return True if the word was found. Otherwise return false.
-DLLEXPORT bool FindWordDown(const WordSearch& grid, const std::string& to_find,
-                            int& row, int& col);
+bool FindWordDown(const WordSearch& grid, std::string_view to_find, int& row,
+                  int& col);
 
 /// Finds a word that is written from bottom to top.
 ///
@@ -91,8 +92,8 @@ DLLEXPORT bool FindWordDown(const WordSearch& grid, const std::string& to_find,
 ///   found, this variable will not be modified.
 ///
 /// @return True if the word was found. Otherwise return false.
-DLLEXPORT bool FindWordUp(const WordSearch& grid, const std::string& to_find,
-                          int& row, int& col);
+bool FindWordUp(const WordSearch& grid, std::string_view to_find, int& row,
+                int& col);
 
 /// Finds a word that is written diagonally from left to right, top to bottom.
 ///
@@ -104,7 +105,7 @@ DLLEXPORT bool FindWordUp(const WordSearch& grid, const std::string& to_find,
 ///   found, this variable will not be modified.
 ///
 /// @return True if the word was found. Otherwise return false.
-DLLEXPORT bool FindWordDiagonal(const WordSearch& grid,
-                                const std::string& to_find, int& row, int& col);
+bool FindWordDiagonal(const WordSearch& grid, std::string_view to_find,
+                      int& row, int& col);
 
 #endif  // ASSIGNMENT3_WORD_SEARCH_FUNCTIONS_H_
