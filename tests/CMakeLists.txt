@@ -1,8 +1,9 @@
-add_executable(csce240_tests assignment2_test.cc assignment3_test.cc)
+add_executable(csce240_tests assignment2_test.cc assignment3_test.cc
+                             assignment4_test.cc)
 target_link_libraries(
   csce240_tests
   PRIVATE csce240_compiler_flags program2functions wordsearchfunctions
-          Catch2::Catch2 Catch2::Catch2WithMain)
+          program4functions Catch2::Catch2 Catch2::Catch2WithMain)
 target_include_directories(csce240_tests
                            PRIVATE "${PROJECT_SOURCE_DIR}/include")
 

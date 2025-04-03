@@ -12,3 +12,7 @@ target_link_libraries(wordsearchfunctions PRIVATE csce240_compiler_flags
                                                   Microsoft.GSL::GSL)
 target_include_directories(wordsearchfunctions
                            PUBLIC "${PROJECT_SOURCE_DIR}/include")
+
+add_library(program4functions assignment4/weight.cc assignment4/weightrange.cc)
+target_include_directories(program4functions
+                           PUBLIC "${PROJECT_SOURCE_DIR}/include")
