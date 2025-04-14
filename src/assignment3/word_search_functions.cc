@@ -50,7 +50,7 @@ bool ReadWordSearch(const std::string& file_name, WordSearch& grid) {
     return false;
   }
 
-  number_of_letters = 0;
+  number_of_letters{0};
 
   for (auto& row : grid) {
     for (auto& col : row) {

@@ -32,16 +32,16 @@ bool IsSquare(int n) {
     return false;
   }
 
-  const double root = sqrt(n);
-  const double flooredRoot = floor(root);
+  const double root{sqrt(n)};
+  const double flooredRoot{floor(root)};
 
   // Compare the root and the floored root using an percentage threshold because
   // of possible floating point rounding errors.
   // https://www.learncpp.com/cpp-tutorial/relational-operators-and-floating-point-comparisons/
   constexpr double relEpsilon{1e-8};
 
-  return (abs(root - flooredRoot) <=
-          max(abs(root), abs(flooredRoot)) * relEpsilon);
+  return abs(root - flooredRoot) <=
+         max(abs(root), abs(flooredRoot)) * relEpsilon;
 }
 
 /// Checking if a integer is a perfect number by first checking if the integer
@@ -52,7 +52,7 @@ bool IsPerfect(int n) {
     return false;
   }
 
-  int runningCount = 0;
+  int runningCount{};
 
   for (int i = 1; i < n; ++i) {
     if (n % i == 0) {
@@ -135,6 +135,6 @@ int Range(int& x, int& y) {
 /// powers of 10. Then module the double by 10 to get the digit before returning
 /// and truncating the digit to an int.
 int DigitInPosition(double x, int pos) {
-  constexpr int base = 10;
+  constexpr int base{10};
   return gsl::narrow_cast<int>(fmod(abs(x) * pow(base, pos), base));
 }

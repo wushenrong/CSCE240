@@ -16,3 +16,8 @@ target_include_directories(wordsearchfunctions
 add_library(program4functions assignment4/weight.cc assignment4/weightrange.cc)
 target_include_directories(program4functions
                            PUBLIC "${PROJECT_SOURCE_DIR}/include")
+
+add_library(program5functions assignment5/SongRecording.cc
+                              assignment5/StreamingTrack.cc)
+target_include_directories(program5functions
+                           PUBLIC "${PROJECT_SOURCE_DIR}/include")
