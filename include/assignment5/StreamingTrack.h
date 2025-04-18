@@ -5,11 +5,11 @@
 #ifndef ASSIGNMENT5_STREAMINGTRACK_H_
 #define ASSIGNMENT5_STREAMINGTRACK_H_
 
-#include <gsl/pointers>
+#include <gsl/gsl>
 #include <string>
 #include <string_view>
 
-#include "SongRecording.h"
+#include "assignment5/SongRecording.h"
 
 namespace csce240_programming_assignment_5 {
 

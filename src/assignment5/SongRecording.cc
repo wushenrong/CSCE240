@@ -4,6 +4,7 @@
 
 #include "assignment5/SongRecording.h"
 
+#include <gsl/pointers>
 #include <string>
 #include <string_view>
 
@@ -83,7 +84,7 @@ void SongRecording::SetNumArtists(int num_of_artists) {
   if (artists_ == nullptr) {
     artists_ = new string[num_of_artists];
   } else if (num_of_artists != num_of_artists_) {
-    string* temp = artists_;
+    gsl::owner<string*> temp = artists_;
     artists_ = new string[num_of_artists];
 
     for (int i = 0; i < num_of_artists && i < num_of_artists_; ++i) {

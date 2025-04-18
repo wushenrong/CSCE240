@@ -5,7 +5,7 @@
 #ifndef ASSIGNMENT5_SONGRECORDING_H_
 #define ASSIGNMENT5_SONGRECORDING_H_
 
-#include <gsl/pointers>
+#include <gsl/gsl>
 #include <string>
 #include <string_view>
 

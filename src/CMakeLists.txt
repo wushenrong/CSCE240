@@ -17,7 +17,18 @@ add_library(program4functions assignment4/weight.cc assignment4/weightrange.cc)
 target_include_directories(program4functions
                            PUBLIC "${PROJECT_SOURCE_DIR}/include")
 
-add_library(program5functions assignment5/SongRecording.cc
-                              assignment5/StreamingTrack.cc)
-target_include_directories(program5functions
+add_library(program5classes assignment5/SongRecording.cc
+                            assignment5/StreamingTrack.cc)
+target_link_libraries(program5classes PRIVATE csce240_compiler_flags
+                                              Microsoft.GSL::GSL)
+target_include_directories(program5classes
+                           PUBLIC "${PROJECT_SOURCE_DIR}/include")
+
+add_library(
+  program6classes
+  assignment6/multiplechoicequestion.cc assignment6/shortanswerquestion.cc
+  assignment6/truefalsequestion.cc)
+target_link_libraries(program6classes PRIVATE csce240_compiler_flags
+                                              Microsoft.GSL::GSL)
+target_include_directories(program6classes
                            PUBLIC "${PROJECT_SOURCE_DIR}/include")
