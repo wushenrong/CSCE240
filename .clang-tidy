@@ -10,7 +10,7 @@ Checks:
   - -google-objc-*
   - -modernize-use-trailing-return-type
 
-FormatStyle: file
+FormatStyle: Google
 
 CheckOptions:
   cppcoreguidelines-avoid-do-while.IgnoreMacros: true

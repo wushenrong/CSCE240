@@ -15,10 +15,7 @@ class Question {
 
   void SetQuestion(std::string_view question) { question_ = question; }
 
-  [[nodiscard]]
-  std::string GetQuestion() const {
-    return question_;
-  }
+  std::string GetQuestion() const { return question_; }
 
   virtual void Print(bool show_answer) const = 0;
 

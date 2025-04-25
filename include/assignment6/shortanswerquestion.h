@@ -18,10 +18,7 @@ class ShortAnswerQuestion : public Question {
 
   void SetAnswer(std::string_view answer) { answer_ = answer; }
 
-  [[nodiscard]]
-  std::string GetAnswer() const {
-    return answer_;
-  }
+  std::string GetAnswer() const { return answer_; }
 
   void Print(bool show_answer) const override;
 

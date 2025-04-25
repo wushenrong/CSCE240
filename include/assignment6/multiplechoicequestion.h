@@ -31,12 +31,9 @@ class MultipleChoiceQuestion : public Question {
     delete[] is_answer_choice_correct_;
   }
 
-  void SetAnswerChoices(int, const string*, const bool*);
+  void SetAnswerChoices(int, const std::string*, const bool*);
 
-  [[nodiscard]]
-  int GetNumOfAnswerChoices() const {
-    return num_of_answer_choices_;
-  }
+  int GetNumOfAnswerChoices() const { return num_of_answer_choices_; }
 
   void Print(bool show_answers) const override;
 

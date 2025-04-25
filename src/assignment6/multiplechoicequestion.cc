@@ -81,6 +81,7 @@ void MultipleChoiceQuestion::SetAnswerChoices(int n, const string* acs,
   answer_choices_ = new string[num_of_answer_choices_];
   is_answer_choice_correct_ = new bool[num_of_answer_choices_];
 
+  // NOLINTBEGIN(cppcoreguidelines-pro-bounds-pointer-arithmetic)
   for (int i = 0; i < num_of_answer_choices_; ++i) {
     if (acs != nullptr) {
       answer_choices_[i] = acs[i];
@@ -94,6 +95,7 @@ void MultipleChoiceQuestion::SetAnswerChoices(int n, const string* acs,
       is_answer_choice_correct_[i] = true;
     }
   }
+  // NOLINTEND(cppcoreguidelines-pro-bounds-pointer-arithmetic)
 }
 
 void MultipleChoiceQuestion::Print(bool show_answers) const {
