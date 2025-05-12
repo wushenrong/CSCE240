@@ -11,6 +11,7 @@
 
 #include "assignment6/multiplechoicequestion.h"
 
+#include <cstddef>
 #include <iostream>
 #include <string>
 #include <string_view>
@@ -27,20 +28,20 @@ MultipleChoiceQuestion::MultipleChoiceQuestion(string_view question, int n,
                                                const string* acs,
                                                const bool* iacc)
     : Question{question},
-      num_of_answer_choices_{0},
+      num_of_choices_{0},
       answer_choices_{nullptr},
-      is_answer_choice_correct_{nullptr} {
+      is_choice_correct_{nullptr} {
   SetAnswerChoices(n, acs, iacc);
 }
 
 MultipleChoiceQuestion::MultipleChoiceQuestion(
     const MultipleChoiceQuestion& rhs)
     : Question{rhs},
-      num_of_answer_choices_{0},
+      num_of_choices_{0},
       answer_choices_{nullptr},
-      is_answer_choice_correct_{nullptr} {
-  SetAnswerChoices(rhs.num_of_answer_choices_, rhs.answer_choices_,
-                   rhs.is_answer_choice_correct_);
+      is_choice_correct_{nullptr} {
+  SetAnswerChoices(rhs.num_of_choices_, rhs.answer_choices_,
+                   rhs.is_choice_correct_);
 }
 
 /**
@@ -55,8 +56,8 @@ auto MultipleChoiceQuestion::operator=(const MultipleChoiceQuestion& rhs)
 
   Question::operator=(rhs);
 
-  SetAnswerChoices(rhs.num_of_answer_choices_, rhs.answer_choices_,
-                   rhs.is_answer_choice_correct_);
+  SetAnswerChoices(rhs.num_of_choices_, rhs.answer_choices_,
+                   rhs.is_choice_correct_);
 
   return *this;
 }
@@ -68,28 +69,27 @@ auto MultipleChoiceQuestion::operator=(const MultipleChoiceQuestion& rhs)
  * answers are given, then set all answer to an empty string and mark them all
  * to be correct.
  */
-auto MultipleChoiceQuestion::SetAnswerChoices(int n, const string* acs,
-                                              const bool* iacc) -> void {
+void MultipleChoiceQuestion::SetAnswerChoices(int n, const string* acs,
+                                              const bool* iacc) {
   if (n < 0) {
     return;
   }
 
   delete[] answer_choices_;
-  delete[] is_answer_choice_correct_;
+  delete[] is_choice_correct_;
 
   if (n == 0) {
-    num_of_answer_choices_ = 0;
+    num_of_choices_ = 0;
     answer_choices_ = nullptr;
-    is_answer_choice_correct_ = nullptr;
+    is_choice_correct_ = nullptr;
     return;
   }
 
-  num_of_answer_choices_ = n;
-  answer_choices_ = new string[num_of_answer_choices_];
-  is_answer_choice_correct_ = new bool[num_of_answer_choices_];
+  num_of_choices_ = n;
+  answer_choices_ = new string[static_cast<size_t>(num_of_choices_)];
+  is_choice_correct_ = new bool[static_cast<size_t>(num_of_choices_)];
 
-  // NOLINTBEGIN(cppcoreguidelines-pro-bounds-pointer-arithmetic)
-  for (int i = 0; i < num_of_answer_choices_; ++i) {
+  for (int i = 0; i < num_of_choices_; ++i) {
     if (acs != nullptr) {
       answer_choices_[i] = acs[i];
     } else {
@@ -97,23 +97,22 @@ auto MultipleChoiceQuestion::SetAnswerChoices(int n, const string* acs,
     }
 
     if (iacc != nullptr) {
-      is_answer_choice_correct_[i] = iacc[i];
+      is_choice_correct_[i] = iacc[i];
     } else {
-      is_answer_choice_correct_[i] = true;
+      is_choice_correct_[i] = true;
     }
   }
-  // NOLINTEND(cppcoreguidelines-pro-bounds-pointer-arithmetic)
 }
 
-auto MultipleChoiceQuestion::Print(bool show_answers) const -> void {
+void MultipleChoiceQuestion::Print(bool show_answers) const {
   cout << "Question: " << GetQuestion() << '\n';
   cout << "Answer Choices:" << '\n';
 
-  for (int i = 0; i < num_of_answer_choices_; ++i) {
+  for (int i = 0; i < num_of_choices_; ++i) {
     cout << answer_choices_[i];
 
     if (show_answers) {
-      cout << (is_answer_choice_correct_[i] ? " - correct" : " - incorrect");
+      cout << (is_choice_correct_[i] ? " - correct" : " - incorrect");
     }
 
     cout << '\n';

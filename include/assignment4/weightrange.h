@@ -25,7 +25,7 @@ class WeightRange {
   Weight large_;
 
  public:
-  WeightRange() = default;
+  WeightRange();
   WeightRange(const Weight& small, const Weight& large);
 
   Weight GetSmallest() const { return small_; }

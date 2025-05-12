@@ -20,7 +20,6 @@
 #include <string_view>
 
 using std::cout;
-using std::size_t;
 using std::string;
 using std::string_view;
 
@@ -70,7 +69,7 @@ auto ReadWordSearch(const string& file_name, WordSearch& grid) -> bool {
 /**
  * Print out the word search by iterating though the word search row by row.
  */
-auto PrintWordSearch(const WordSearch& grid) -> void {
+void PrintWordSearch(const WordSearch& grid) {
   for (const auto& row : grid) {
     for (const auto& col : row) {
       cout << col << ' ';

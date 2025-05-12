@@ -11,6 +11,7 @@
 
 #include "assignment5/StreamingTrack.h"
 
+#include <cstddef>
 #include <gsl/gsl>
 #include <string>
 #include <string_view>

@@ -31,13 +31,13 @@ Weight::Weight(double value, string_view units) : value_{0}, units_{"pounds"} {
   SetUnits(units);
 }
 
-auto Weight::SetValue(double value) -> void {
+void Weight::SetValue(double value) {
   if (value >= 0) {
     value_ = value;
   }
 }
 
-auto Weight::SetUnits(string_view units) -> void {
+void Weight::SetUnits(string_view units) {
   if (units == "pounds" || units == "ounces" || units == "kilograms" ||
       units == "grams") {
     units_ = units;

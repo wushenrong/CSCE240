@@ -15,6 +15,8 @@
 
 #include "assignment4/weight.h"
 
+WeightRange::WeightRange() : small_{0}, large_{0} {}
+
 WeightRange::WeightRange(const Weight& small, const Weight& large)
     : small_{small}, large_{large} {
   if (small > large) {

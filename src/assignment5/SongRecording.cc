@@ -11,6 +11,7 @@
 
 #include "assignment5/SongRecording.h"
 
+#include <cstddef>
 #include <gsl/gsl>
 #include <string>
 #include <string_view>
@@ -74,13 +75,13 @@ auto SongRecording::operator=(const SongRecording& rhs) -> SongRecording& {
   return *this;
 }
 
-auto SongRecording::SetTitle(string_view title) -> void {
+void SongRecording::SetTitle(string_view title) {
   if (!title.empty()) {
     title_ = title;
   }
 }
 
-auto SongRecording::SetNumArtists(int num_of_artists) -> void {
+void SongRecording::SetNumArtists(int num_of_artists) {
   if (num_of_artists < 1) {
     return;
   }
@@ -105,13 +106,13 @@ auto SongRecording::SetNumArtists(int num_of_artists) -> void {
   num_of_artists_ = num_of_artists;
 }
 
-auto SongRecording::SetTrackLength(int track_length) -> void {
+void SongRecording::SetTrackLength(int track_length) {
   if (track_length >= 0) {
     track_length_ = track_length;
   }
 }
 
-auto SongRecording::SetArtist(string_view artist, int n) -> void {
+void SongRecording::SetArtist(string_view artist, int n) {
   if (n > 0 && n <= num_of_artists_ && !artist.empty()) {
     artists_[n - 1] = artist;
   }

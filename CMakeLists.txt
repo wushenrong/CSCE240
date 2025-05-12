@@ -25,7 +25,8 @@ target_compile_options(
   INTERFACE
     "$<${GCC_LIKE_CXX}:$<BUILD_INTERFACE:-Wall;-Wextra;-Wpedantic;-Weffc++>>"
     "$<${GCC_LIKE_CXX}:$<BUILD_INTERFACE:-Wconversion;-Wsign-conversion>>"
-    "$<${MSVC_LIKE_CXX}:$<BUILD_INTERFACE:-W4;-permissive-;-w44365>>")
+    "$<${MSVC_LIKE_CXX}:$<BUILD_INTERFACE:-W4;-permissive-;-w44365>>"
+    "$<${MSVC_LIKE_CXX}:$<$<CONFIG:Debug>:-Zi>>")
 
 if(ENABLE_WARNINGS_AS_ERRORS)
   target_compile_options(
@@ -34,12 +35,21 @@ if(ENABLE_WARNINGS_AS_ERRORS)
               "$<${MSVC_LIKE_CXX}:$<BUILD_INTERFACE:-WX>>")
 endif()
 
-target_compile_options(csce240_compiler_flags
-                       INTERFACE "$<${MSVC_LIKE_CXX}:$<$<CONFIG:Debug>:-Zi>>")
+if(ENABLE_COVERAGE AND NOT MSVC)
+  target_compile_options(csce240_compiler_flags INTERFACE "--coverage")
+  target_link_libraries(csce240_compiler_flags INTERFACE gcov)
+  target_link_options(csce240_compiler_flags INTERFACE "--coverage")
 
-if(ENABLE_COVERAGE)
-  target_compile_options(csce240_compiler_flags "$<${GCC_LIKE_CXX}:--coverage>")
-  link_libraries(gcov)
+  find_program(LCOV lcov REQUIRED)
+  find_program(GENHTML genhtml REQUIRED)
+
+  add_custom_target(
+    coverage
+    COMMAND ${LCOV} --directory . --capture --output-file coverage.info
+    COMMAND ${LCOV} --remove coverage.info '/usr/*' 'vcpkg_installed'
+            --output-file coverage.cleaned.info
+    COMMAND ${GENHTML} --demangle-cpp -o coverage coverage.cleaned.info
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
 endif()
 
 # Get dependencies
@@ -51,6 +61,7 @@ add_subdirectory(src/assignment2)
 add_subdirectory(src/assignment3)
 add_subdirectory(src/assignment4)
 add_subdirectory(src/assignment5)
+add_subdirectory(src/assignment6)
 
 enable_testing()
 add_subdirectory(tests)

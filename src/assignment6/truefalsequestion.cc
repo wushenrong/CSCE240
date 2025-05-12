@@ -24,7 +24,7 @@ namespace csce240_program6 {
 TrueFalseQuestion::TrueFalseQuestion(string_view question, bool answer)
     : Question{question}, answer_{answer} {}
 
-auto TrueFalseQuestion::Print(bool show_answer) const -> void {
+void TrueFalseQuestion::Print(bool show_answer) const {
   cout << "Question: " << GetQuestion() << '\n';
 
   if (show_answer) {

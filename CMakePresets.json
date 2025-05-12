@@ -6,9 +6,8 @@
   },
   "configurePresets": [
     {
-      "binaryDir": "${sourceDir}/build/${presetName}",
+      "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
-        "CMAKE_CXX_EXTENSIONS": "OFF",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake"
       },
@@ -23,6 +22,14 @@
       "description": "Debug build",
       "inherits": "base",
       "name": "debug"
+    },
+    {
+      "cacheVariables": {
+        "ENABLE_COVERAGE": "ON"
+      },
+      "description": "Enable coverage for debug build",
+      "inherits": "debug",
+      "name": "coverage"
     },
     {
       "cacheVariables": {
