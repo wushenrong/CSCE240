@@ -1,5 +1,12 @@
-/*
- * Copyright 2025 Samuel Wu
+/**
+ * @file weight.cc
+ * @author Samuel Wu
+ *
+ * @version 0.0.0
+ * @date 2025-05-11
+ *
+ * @copyright Copyright (c) 2025
+ *
  */
 
 #include "assignment4/weight.h"
@@ -8,7 +15,6 @@
 #include <string_view>
 #include <utility>
 
-using std::ostream;
 using std::string_view;
 
 constexpr double POUNDS_OUNCES_RATIO{16};
@@ -20,40 +26,35 @@ constexpr double OUNCES_GRAMS_RATIO{28.3495231};
 
 constexpr double KILOGRAMS_GRAMS_RATIO{1000};
 
-ostream& operator<<(ostream& out, const Weight& weight) {
-  out << weight.value_ << ' ' << weight.units_;
-  return out;
-}
-
 Weight::Weight(double value, string_view units) : value_{0}, units_{"pounds"} {
   SetValue(value);
   SetUnits(units);
 }
 
-void Weight::SetValue(double value) {
+auto Weight::SetValue(double value) -> void {
   if (value >= 0) {
     value_ = value;
   }
 }
 
-void Weight::SetUnits(string_view units) {
+auto Weight::SetUnits(string_view units) -> void {
   if (units == "pounds" || units == "ounces" || units == "kilograms" ||
       units == "grams") {
     units_ = units;
   }
 }
 
-bool Weight::operator<=(Weight rhs) const {
+auto Weight::operator<=(Weight rhs) const -> bool {
   rhs.ConvertUnits(units_);
   return value_ <= rhs.value_;
 }
 
-bool Weight::operator>=(Weight rhs) const {
+auto Weight::operator>=(Weight rhs) const -> bool {
   rhs.ConvertUnits(units_);
   return value_ >= rhs.value_;
 }
 
-bool Weight::operator>(Weight rhs) const {
+auto Weight::operator>(Weight rhs) const -> bool {
   return !(operator<=(std::move(rhs)));
 }
 
@@ -107,4 +108,8 @@ void Weight::ConvertUnits(string_view units) {
       value_ *= KILOGRAMS_GRAMS_RATIO;
     }
   }
+}
+
+auto operator<<(std::ostream& out, const Weight& weight) -> std::ostream& {
+  return out << weight.GetValue() << ' ' << weight.GetUnits();
 }

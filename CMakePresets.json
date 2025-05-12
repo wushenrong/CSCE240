@@ -1,24 +1,37 @@
 {
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 21,
+    "patch": 0
+  },
   "configurePresets": [
     {
-      "binaryDir": "${sourceDir}/build",
+      "binaryDir": "${sourceDir}/build/${presetName}",
       "cacheVariables": {
         "CMAKE_CXX_EXTENSIONS": "OFF",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake"
       },
       "generator": "Ninja",
-      "name": "default"
+      "hidden": true,
+      "name": "base"
     },
     {
-      "name": "shared",
       "cacheVariables": {
-        "BUILD_SHARED_LIBS": "ON"
+        "CMAKE_BUILD_TYPE": "Debug"
       },
-      "inherits": [
-        "default"
-      ]
+      "description": "Debug build",
+      "inherits": "base",
+      "name": "debug"
+    },
+    {
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      },
+      "description": "Release build",
+      "inherits": "base",
+      "name": "release"
     }
   ],
-  "version": 2
+  "version": 3
 }

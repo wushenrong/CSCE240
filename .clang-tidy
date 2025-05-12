@@ -6,11 +6,8 @@ Checks:
   - performance-*
   - portability-*
   - readability-*
-  # Ignore rules that are not applicable
-  - -google-objc-*
-  - -modernize-use-trailing-return-type
 
-FormatStyle: Google
+FormatStyle: google
 
 CheckOptions:
   cppcoreguidelines-avoid-do-while.IgnoreMacros: true
@@ -30,6 +27,6 @@ CheckOptions:
   performance-type-promotion-in-math-fn.IncludeStyle: google
   performance-unnecessary-value-param.IncludeStyle: google
   readability-function-cognitive-complexity.IgnoreMacros: true
-  readability-identifier-length.IgnoredVariableNames: ^[ijkxy]$
-  readability-identifier-length.IgnoredParameterNames: ^[cnxy]$
+  readability-identifier-length.IgnoredVariableNames: ^[a-z]$
+  readability-identifier-length.IgnoredParameterNames: ^[a-z]$
   readability-magic-numbers.IgnoredIntegerValues: 1;2;3;4;5;6;7;8;9;

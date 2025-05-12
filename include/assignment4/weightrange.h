@@ -1,21 +1,32 @@
-/*
- * Copyright 2025 Samuel Wu
+/**
+ * @file weightrange.h
+ * @author Samuel Wu
+ *
+ * @version 0.0.0
+ * @date 2025-05-11
+ *
+ * @copyright Copyright (c) 2025
+ *
  */
 
 #ifndef ASSIGNMENT4_WEIGHTRANGE_H_
 #define ASSIGNMENT4_WEIGHTRANGE_H_
 
-#include "./weight.h"
+#include <iosfwd>
+
+#include "assignment4/weight.h"
 
 /**
  * A class to represent the range of a weight that is allowed.
  */
 class WeightRange {
-  friend std::ostream& operator<<(std::ostream&, const WeightRange&);
+ private:
+  Weight small_;
+  Weight large_;
 
  public:
   WeightRange() = default;
-  WeightRange(const Weight&, const Weight&);
+  WeightRange(const Weight& small, const Weight& large);
 
   Weight GetSmallest() const { return small_; }
   Weight GetLargest() const { return large_; }
@@ -24,19 +35,20 @@ class WeightRange {
   void SetLargest(const Weight&);
 
   /**
-   * Check if a given weight is in the weight range. If isClosed is false, then
-   * the end points of the range is excluded.
+   * Check if a given weight is in the weight range.
+   *
+   * @param isClosed Include the smallest and largest weight as a part of the
+   *    weight range.
+   * @return true if the weight is in the range, otherwise false.
    */
   bool InRange(const Weight&, bool isClosed = true);
 
   /**
-   * Return the difference of the largest weight and the smallest weight.
+   * @return Difference of the largest weight and the smallest weight.
    */
   Weight Width();
-
- private:
-  Weight small_;
-  Weight large_;
 };
+
+std::ostream& operator<<(std::ostream&, const WeightRange&);
 
 #endif  // ASSIGNMENT4_WEIGHTRANGE_H_

@@ -1,21 +1,23 @@
-/// @file program1.cc
-/// @author Samuel Wu
-/// @brief Example program that converts numbers from base 2-9 to base 10.
-/// @version 0.0.0
-/// @date 2025-02-27
-///
-/// @copyright Copyright (c) 2025
-///
+/**
+ * @file program1.cc
+ * @author Samuel Wu
+ *
+ * @version 0.0.0
+ * @date 2025-05-11
+ *
+ * @copyright Copyright (c) 2025
+ *
+ */
 
 #include <iostream>
 
 using std::cin;
 using std::cout;
 
-int main() {
-  // Set the radix/base we are converting to, which is base 10
-  constexpr int radix{10};
+// Set the radix/base we are converting to, which is base 10
+constexpr int kRadix{10};
 
+auto main() -> int {
   // Variables for number of inputs and the largest input
   int number_of_values{0};
   int position_of_largest_value{1};
@@ -30,7 +32,7 @@ int main() {
     cin >> number >> base >> more_numbers;
 
     // Reject value if the base is not 2 to 9 inclusive
-    if (base < 2 || base >= radix) {
+    if (base < 2 || base >= kRadix) {
       cout << "Base Not Accepted" << '\n';
       return 0;
     }
@@ -45,11 +47,11 @@ int main() {
       number *= -1;
     }
 
-    int current_base_exponentiation = 1;
+    int current_exponentiation = 1;
 
     // Convert the value from base n to base 10 from right to left
     while (number > 0) {
-      const int current_digit = number % radix;
+      const int current_digit = number % kRadix;
 
       // Reject value if the current digit is not in base n
       if (current_digit >= base) {
@@ -57,9 +59,9 @@ int main() {
         return 0;
       }
 
-      converted_number += current_digit * current_base_exponentiation;
-      number /= radix;
-      current_base_exponentiation *= base;
+      converted_number += current_digit * current_exponentiation;
+      number /= kRadix;
+      current_exponentiation *= base;
     }  // End of inner while loop
 
     // If the value was negative, make the converted value negative
@@ -82,11 +84,11 @@ int main() {
        << position_of_largest_value;
 
   // Make sure 11th, 12th, and 13th is correctly outputted
-  const bool is_position_a_10s_position =
-      (position_of_largest_value / radix) % radix == 1;
+  const bool is_position_10s =
+      (position_of_largest_value / kRadix) % kRadix == 1;
 
-  if (!is_position_a_10s_position) {
-    switch (position_of_largest_value % radix) {
+  if (!is_position_10s) {
+    switch (position_of_largest_value % kRadix) {
       case 1:
         cout << "st";
         break;

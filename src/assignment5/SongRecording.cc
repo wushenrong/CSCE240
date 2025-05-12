@@ -1,10 +1,17 @@
-/*
- * Copyright 2025 Samuel Wu
+/**
+ * @file SongRecording.cc
+ * @author Samuel Wu
+ *
+ * @version 0.0.0
+ * @date 2025-05-11
+ *
+ * @copyright Copyright (c) 2025
+ *
  */
 
 #include "assignment5/SongRecording.h"
 
-#include <gsl/pointers>
+#include <gsl/gsl>
 #include <string>
 #include <string_view>
 
@@ -24,7 +31,7 @@ SongRecording::SongRecording(string_view title, string_view artist,
   SetTrackLength(track_length);
 
   if (artists_ == nullptr) {
-    artists_ = new string[num_of_artists_];
+    artists_ = new string[static_cast<size_t>(num_of_artists_)];
   }
 
   SetArtist(!artist.empty() ? artist : "unknown");
@@ -42,7 +49,7 @@ SongRecording::SongRecording(const SongRecording& rhs)
   }
 }
 
-SongRecording& SongRecording::operator=(const SongRecording& rhs) {
+auto SongRecording::operator=(const SongRecording& rhs) -> SongRecording& {
   // Make sure that the object does not overwrite itself when assignment itself.
   if (this == &rhs) {
     return *this;
@@ -67,13 +74,13 @@ SongRecording& SongRecording::operator=(const SongRecording& rhs) {
   return *this;
 }
 
-void SongRecording::SetTitle(string_view title) {
+auto SongRecording::SetTitle(string_view title) -> void {
   if (!title.empty()) {
     title_ = title;
   }
 }
 
-void SongRecording::SetNumArtists(int num_of_artists) {
+auto SongRecording::SetNumArtists(int num_of_artists) -> void {
   if (num_of_artists < 1) {
     return;
   }
@@ -82,10 +89,10 @@ void SongRecording::SetNumArtists(int num_of_artists) {
   // number of artists do not match, create a new list of artists and copy over
   // the old artists if the new list fits. Else do nothing.
   if (artists_ == nullptr) {
-    artists_ = new string[num_of_artists];
+    artists_ = new string[static_cast<size_t>(num_of_artists)];
   } else if (num_of_artists != num_of_artists_) {
     gsl::owner<string*> temp = artists_;
-    artists_ = new string[num_of_artists];
+    artists_ = new string[static_cast<size_t>(num_of_artists)];
 
     for (int i = 0; i < num_of_artists && i < num_of_artists_; ++i) {
       artists_[i] = temp[i];
@@ -98,19 +105,19 @@ void SongRecording::SetNumArtists(int num_of_artists) {
   num_of_artists_ = num_of_artists;
 }
 
-void SongRecording::SetTrackLength(int track_length) {
+auto SongRecording::SetTrackLength(int track_length) -> void {
   if (track_length >= 0) {
     track_length_ = track_length;
   }
 }
 
-void SongRecording::SetArtist(string_view artist, int n) {
+auto SongRecording::SetArtist(string_view artist, int n) -> void {
   if (n > 0 && n <= num_of_artists_ && !artist.empty()) {
     artists_[n - 1] = artist;
   }
 }
 
-string SongRecording::GetArtist(int n) const {
+auto SongRecording::GetArtist(int n) const -> string {
   if (n > 0 && n <= num_of_artists_) {
     return artists_[n - 1];
   }

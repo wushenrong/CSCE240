@@ -1,5 +1,12 @@
-/*
- * Copyright 2025 Samuel Wu
+/**
+ * @file truefalsequestion.cc
+ * @author Samuel Wu
+ *
+ * @version 0.0.0
+ * @date 2025-05-11
+ *
+ * @copyright Copyright (c) 2025
+ *
  */
 
 #include "assignment6/truefalsequestion.h"
@@ -17,7 +24,7 @@ namespace csce240_program6 {
 TrueFalseQuestion::TrueFalseQuestion(string_view question, bool answer)
     : Question{question}, answer_{answer} {}
 
-void TrueFalseQuestion::Print(bool show_answer) const {
+auto TrueFalseQuestion::Print(bool show_answer) const -> void {
   cout << "Question: " << GetQuestion() << '\n';
 
   if (show_answer) {

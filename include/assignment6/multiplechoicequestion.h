@@ -1,5 +1,12 @@
-/*
- * Copyright 2025 Samuel Wu
+/**
+ * @file multiplechoicequestion.h
+ * @author Samuel Wu
+ *
+ * @version 0.0.0
+ * @date 2025-05-11
+ *
+ * @copyright Copyright (c) 2025
+ *
  */
 
 #ifndef ASSIGNMENT6_MULTIPLECHOICEQUESTION_H_
@@ -18,6 +25,11 @@ namespace csce240_program6 {
  * choices.
  */
 class MultipleChoiceQuestion : public Question {
+ private:
+  int num_of_answer_choices_;
+  gsl::owner<std::string*> answer_choices_;
+  gsl::owner<bool*> is_answer_choice_correct_;
+
  public:
   explicit MultipleChoiceQuestion(std::string_view = "?", int = 0,
                                   const std::string* = nullptr,
@@ -36,11 +48,6 @@ class MultipleChoiceQuestion : public Question {
   int GetNumOfAnswerChoices() const { return num_of_answer_choices_; }
 
   void Print(bool show_answers) const override;
-
- private:
-  int num_of_answer_choices_;
-  gsl::owner<std::string*> answer_choices_;
-  gsl::owner<bool*> is_answer_choice_correct_;
 };
 
 }  // namespace csce240_program6

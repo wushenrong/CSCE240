@@ -1,5 +1,12 @@
-/*
- * Copyright 2025 Samuel Wu
+/**
+ * @file StreamingTrack.h
+ * @author Samuel Wu
+ *
+ * @version 0.0.0
+ * @date 2025-05-11
+ *
+ * @copyright Copyright (c) 2025
+ *
  */
 
 #ifndef ASSIGNMENT5_STREAMINGTRACK_H_
@@ -14,6 +21,11 @@
 namespace csce240_programming_assignment_5 {
 
 class StreamingTrack : public SongRecording {
+ private:
+  int num_of_streams_;
+  int num_of_genres_;
+  gsl::owner<std::string*> genres_;
+
  public:
   explicit StreamingTrack(std::string_view title = "untitled",
                           std::string_view artist = "unknown",
@@ -41,11 +53,6 @@ class StreamingTrack : public SongRecording {
   void RemoveGenre(std::string_view genre);
 
   bool IsGenre(std::string_view genre) const;
-
- private:
-  int num_of_streams_;
-  int num_of_genres_;
-  gsl::owner<std::string*> genres_;
 };
 
 }  // namespace csce240_programming_assignment_5

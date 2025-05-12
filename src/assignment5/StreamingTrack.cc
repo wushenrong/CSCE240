@@ -1,10 +1,17 @@
-/*
- * Copyright 2025 Samuel Wu
+/**
+ * @file StreamingTrack.cc
+ * @author Samuel Wu
+ *
+ * @version 0.0.0
+ * @date 2025-05-11
+ *
+ * @copyright Copyright (c) 2025
+ *
  */
 
 #include "assignment5/StreamingTrack.h"
 
-#include <gsl/pointers>
+#include <gsl/gsl>
 #include <string>
 #include <string_view>
 
@@ -46,7 +53,7 @@ StreamingTrack::StreamingTrack(const SongRecording& rhs, string_view genre,
   AddGenre(genre);
 }
 
-StreamingTrack& StreamingTrack::operator=(const StreamingTrack& rhs) {
+auto StreamingTrack::operator=(const StreamingTrack& rhs) -> StreamingTrack& {
   // Make sure that the object does not overwrite itself when assignment itself.
   if (this == &rhs) {
     return *this;
@@ -78,7 +85,7 @@ void StreamingTrack::SetStreams(int n) {
   }
 }
 
-std::string StreamingTrack::GetGenre(int n) const {
+auto StreamingTrack::GetGenre(int n) const -> std::string {
   if (n > 0 && n <= num_of_genres_) {
     return genres_[n - 1];
   }
@@ -103,7 +110,7 @@ void StreamingTrack::AddGenre(string_view genre) {
   // the genre to the new list.
   if (genres_ != nullptr) {
     gsl::owner<string*> temp = genres_;
-    genres_ = new string[num_of_genres_ + 1];
+    genres_ = new string[static_cast<size_t>(num_of_genres_ + 1)];
 
     for (int i = 0; i < num_of_genres_; ++i) {
       genres_[i] = temp[i];
@@ -112,7 +119,7 @@ void StreamingTrack::AddGenre(string_view genre) {
     delete[] temp;
     temp = nullptr;
   } else {
-    genres_ = new string[num_of_genres_ + 1];
+    genres_ = new string[static_cast<size_t>(num_of_genres_ + 1)];
   }
 
   genres_[num_of_genres_] = genre;
@@ -131,7 +138,7 @@ void StreamingTrack::RemoveGenre(string_view genre) {
   // there are no genres assigned to the track.
   if (num_of_genres_ > 1) {
     gsl::owner<string*> temp = genres_;
-    genres_ = new string[num_of_genres_ - 1];
+    genres_ = new string[static_cast<size_t>(num_of_genres_ - 1)];
 
     int j = 0;
 
@@ -156,7 +163,7 @@ void StreamingTrack::RemoveGenre(string_view genre) {
   }
 }
 
-bool StreamingTrack::IsGenre(string_view genre) const {
+auto StreamingTrack::IsGenre(string_view genre) const -> bool {
   for (int i = 0; i < num_of_genres_; ++i) {
     if (genres_[i] == genre) {
       return true;

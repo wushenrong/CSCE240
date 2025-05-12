@@ -1,5 +1,12 @@
-/*
- * Copyright 2025 Samuel Wu
+/**
+ * @file question.h
+ * @author Samuel Wu
+ *
+ * @version 0.0.0
+ * @date 2025-05-11
+ *
+ * @copyright Copyright (c) 2025
+ *
  */
 
 #ifndef ASSIGNMENT6_QUESTION_H_
@@ -7,8 +14,12 @@
 
 #include <string>
 #include <string_view>
+#include <utility>
 
 class Question {
+ private:
+  std::string question_;
+
  public:
   explicit Question(std::string_view question = "?") : question_{question} {}
   virtual ~Question() = default;
@@ -18,9 +29,6 @@ class Question {
   std::string GetQuestion() const { return question_; }
 
   virtual void Print(bool show_answer) const = 0;
-
- private:
-  std::string question_;
 };
 
 #endif  // ASSIGNMENT6_QUESTION_H_

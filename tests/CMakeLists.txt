@@ -1,11 +1,7 @@
-add_executable(csce240_tests assignment2_test.cc assignment3_test.cc
-                             assignment4_test.cc)
+add_executable(csce240_tests test_assignment2.cc test_assignment3.cc)
 target_link_libraries(
-  csce240_tests
-  PRIVATE csce240_compiler_flags program2functions wordsearchfunctions
-          program4functions Catch2::Catch2 Catch2::Catch2WithMain)
-target_include_directories(csce240_tests
-                           PRIVATE "${PROJECT_SOURCE_DIR}/include")
+  csce240_tests PRIVATE csce240_compiler_flags program2functions
+                        wordsearchfunctions Catch2::Catch2WithMain)
 
 add_custom_command(
   TARGET csce240_tests
@@ -14,13 +10,6 @@ add_custom_command(
           ${CMAKE_CURRENT_SOURCE_DIR}/example_wordsearch.txt
   COMMAND_EXPAND_LISTS)
 
-if(WIN32 AND BUILD_SHARED_LIBS)
-  add_custom_command(
-    TARGET csce240_tests
-    POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy -t $<TARGET_FILE_DIR:csce240_tests>
-            $<TARGET_RUNTIME_DLLS:csce240_tests>
-    COMMAND_EXPAND_LISTS)
-endif()
-
+include(CTest)
+include(Catch)
 catch_discover_tests(csce240_tests)

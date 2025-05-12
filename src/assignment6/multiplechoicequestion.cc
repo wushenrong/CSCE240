@@ -1,5 +1,12 @@
-/*
- * Copyright 2025 Samuel Wu
+/**
+ * @file multiplechoicequestion.cc
+ * @author Samuel Wu
+ *
+ * @version 0.0.0
+ * @date 2025-05-11
+ *
+ * @copyright Copyright (c) 2025
+ *
  */
 
 #include "assignment6/multiplechoicequestion.h"
@@ -19,29 +26,29 @@ namespace csce240_program6 {
 MultipleChoiceQuestion::MultipleChoiceQuestion(string_view question, int n,
                                                const string* acs,
                                                const bool* iacc)
-    : Question(question),
-      num_of_answer_choices_(0),
-      answer_choices_(nullptr),
-      is_answer_choice_correct_(nullptr) {
+    : Question{question},
+      num_of_answer_choices_{0},
+      answer_choices_{nullptr},
+      is_answer_choice_correct_{nullptr} {
   SetAnswerChoices(n, acs, iacc);
 }
 
 MultipleChoiceQuestion::MultipleChoiceQuestion(
     const MultipleChoiceQuestion& rhs)
-    : Question(rhs),
-      num_of_answer_choices_(0),
-      answer_choices_(nullptr),
-      is_answer_choice_correct_(nullptr) {
+    : Question{rhs},
+      num_of_answer_choices_{0},
+      answer_choices_{nullptr},
+      is_answer_choice_correct_{nullptr} {
   SetAnswerChoices(rhs.num_of_answer_choices_, rhs.answer_choices_,
                    rhs.is_answer_choice_correct_);
 }
 
-/*
+/**
  * Assign multiple question to another by copying over the question and answers.
  * Also making sure that the object do not assign itself to itself.
  */
-MultipleChoiceQuestion& MultipleChoiceQuestion::operator=(
-    const MultipleChoiceQuestion& rhs) {
+auto MultipleChoiceQuestion::operator=(const MultipleChoiceQuestion& rhs)
+    -> MultipleChoiceQuestion& {
   if (this == &rhs) {
     return *this;
   }
@@ -54,15 +61,15 @@ MultipleChoiceQuestion& MultipleChoiceQuestion::operator=(
   return *this;
 }
 
-/*
+/**
  * Sets up answer choices by deleting the pervious choices and the answers.
  * Next if the number of answer is zero, then make sure there are no answers for
  * the question. Otherwise create and copy over the new answer choices. If no
  * answers are given, then set all answer to an empty string and mark them all
  * to be correct.
  */
-void MultipleChoiceQuestion::SetAnswerChoices(int n, const string* acs,
-                                              const bool* iacc) {
+auto MultipleChoiceQuestion::SetAnswerChoices(int n, const string* acs,
+                                              const bool* iacc) -> void {
   if (n < 0) {
     return;
   }
@@ -98,7 +105,7 @@ void MultipleChoiceQuestion::SetAnswerChoices(int n, const string* acs,
   // NOLINTEND(cppcoreguidelines-pro-bounds-pointer-arithmetic)
 }
 
-void MultipleChoiceQuestion::Print(bool show_answers) const {
+auto MultipleChoiceQuestion::Print(bool show_answers) const -> void {
   cout << "Question: " << GetQuestion() << '\n';
   cout << "Answer Choices:" << '\n';
 

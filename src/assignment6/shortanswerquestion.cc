@@ -1,5 +1,12 @@
-/*
- * Copyright 2025 Samuel Wu
+/**
+ * @file shortanswerquestion.cc
+ * @author Samuel Wu (twopizza9621536@gmail.com)
+ *
+ * @version 0.0.0
+ * @date 2025-05-11
+ *
+ * @copyright Copyright (c) 2025
+ *
  */
 
 #include "assignment6/shortanswerquestion.h"
@@ -14,10 +21,6 @@ using std::string_view;
 
 namespace csce240_program6 {
 
-/*
- * A class that represents a question that is answered through a short
- * sentence or paragraph.
- */
 ShortAnswerQuestion::ShortAnswerQuestion(string_view question,
                                          string_view answer)
     : Question{question}, answer_{answer} {}
