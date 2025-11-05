@@ -13,7 +13,6 @@
 
 #include <iostream>
 #include <string_view>
-#include <utility>
 
 using std::string_view;
 
@@ -44,18 +43,24 @@ void Weight::SetUnits(string_view units) {
   }
 }
 
-auto Weight::operator<=(Weight rhs) const -> bool {
+bool Weight::operator<=(Weight rhs) const {
   rhs.ConvertUnits(units_);
   return value_ <= rhs.value_;
 }
 
-auto Weight::operator>=(Weight rhs) const -> bool {
+bool Weight::operator>=(Weight rhs) const {
   rhs.ConvertUnits(units_);
   return value_ >= rhs.value_;
 }
 
-auto Weight::operator>(Weight rhs) const -> bool {
-  return !(operator<=(std::move(rhs)));
+bool Weight::operator>(Weight rhs) const {
+  rhs.ConvertUnits(units_);
+  return value_ > rhs.value_;
+}
+
+bool Weight::operator<(Weight rhs) const {
+  rhs.ConvertUnits(units_);
+  return value_ < rhs.value_;
 }
 
 /**
@@ -110,6 +115,6 @@ void Weight::ConvertUnits(string_view units) {
   }
 }
 
-auto operator<<(std::ostream& out, const Weight& weight) -> std::ostream& {
+std::ostream& operator<<(std::ostream& out, const Weight& weight) {
   return out << weight.GetValue() << ' ' << weight.GetUnits();
 }

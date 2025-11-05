@@ -1,21 +1,21 @@
 Checks:
   - cppcoreguidelines-*
-  - -cppcoreguidelines-avoid-magic-numbers
   - google-*
   - misc-*
-  - -misc-use-anonymous-namespace
   - modernize-*
   - performance-*
   - portability-*
   - readability-*
-
-FormatStyle: google
+  - -cppcoreguidelines-avoid-magic-numbers
+  - -modernize-use-trailing-return-type
+  - -misc-use-anonymous-namespace
+  - -readability-magic-numbers
 
 CheckOptions:
   cppcoreguidelines-avoid-do-while.IgnoreMacros: true
   cppcoreguidelines-init-variables.IncludeStyle: google
   cppcoreguidelines-init-variables.MathHeader: <cmath>
-  cppcoreguidelines-pro-bounds-constant-array-index.GslHeader: <gsl/gsl>
+  cppcoreguidelines-pro-bounds-constant-array-index.GslHeader: <gsl-lite/gsl-lite.hpp>
   cppcoreguidelines-pro-bounds-constant-array-index.IncludeStyle: google
   modernize-loop-convert.IncludeStyle: google
   modernize-make-shared.IncludeStyle: google

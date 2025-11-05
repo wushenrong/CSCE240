@@ -41,7 +41,7 @@ class WeightRange {
    *    weight range.
    * @return true if the weight is in the range, otherwise false.
    */
-  bool InRange(const Weight&, bool isClosed = true);
+  bool InRange(const Weight&, bool isClosed = true) const;
 
   /**
    * @return Difference of the largest weight and the smallest weight.

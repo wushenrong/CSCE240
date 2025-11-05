@@ -15,10 +15,9 @@
 #include "assignment4/weightrange.h"
 
 TEST_CASE("Test Weight") {
-  Weight weight1{30, "grams"};
+  const Weight weight1{100, "grams"};
 
-  WeightRange range1{};
-  WeightRange range2{Weight{1, "pounds"}, Weight{2, "ounces"}};
+  const WeightRange range1{Weight{1, "pounds"}, Weight{2, "ounces"}};
 
-  CHECK(range2.InRange(weight1));
+  CHECK(range1.InRange(weight1));
 }

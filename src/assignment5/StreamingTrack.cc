@@ -11,8 +11,6 @@
 
 #include "assignment5/StreamingTrack.h"
 
-#include <cstddef>
-#include <gsl/gsl>
 #include <string>
 #include <string_view>
 
@@ -54,7 +52,7 @@ StreamingTrack::StreamingTrack(const SongRecording& rhs, string_view genre,
   AddGenre(genre);
 }
 
-auto StreamingTrack::operator=(const StreamingTrack& rhs) -> StreamingTrack& {
+StreamingTrack& StreamingTrack::operator=(const StreamingTrack& rhs) {
   // Make sure that the object does not overwrite itself when assignment itself.
   if (this == &rhs) {
     return *this;
@@ -86,7 +84,7 @@ void StreamingTrack::SetStreams(int n) {
   }
 }
 
-auto StreamingTrack::GetGenre(int n) const -> std::string {
+string StreamingTrack::GetGenre(int n) const {
   if (n > 0 && n <= num_of_genres_) {
     return genres_[n - 1];
   }
@@ -111,7 +109,7 @@ void StreamingTrack::AddGenre(string_view genre) {
   // the genre to the new list.
   if (genres_ != nullptr) {
     gsl::owner<string*> temp = genres_;
-    genres_ = new string[static_cast<size_t>(num_of_genres_ + 1)];
+    genres_ = new string[num_of_genres_ + 1];
 
     for (int i = 0; i < num_of_genres_; ++i) {
       genres_[i] = temp[i];
@@ -120,7 +118,7 @@ void StreamingTrack::AddGenre(string_view genre) {
     delete[] temp;
     temp = nullptr;
   } else {
-    genres_ = new string[static_cast<size_t>(num_of_genres_ + 1)];
+    genres_ = new string[num_of_genres_ + 1];
   }
 
   genres_[num_of_genres_] = genre;
@@ -139,7 +137,7 @@ void StreamingTrack::RemoveGenre(string_view genre) {
   // there are no genres assigned to the track.
   if (num_of_genres_ > 1) {
     gsl::owner<string*> temp = genres_;
-    genres_ = new string[static_cast<size_t>(num_of_genres_ - 1)];
+    genres_ = new string[num_of_genres_ - 1];
 
     int j = 0;
 
@@ -164,7 +162,7 @@ void StreamingTrack::RemoveGenre(string_view genre) {
   }
 }
 
-auto StreamingTrack::IsGenre(string_view genre) const -> bool {
+bool StreamingTrack::IsGenre(string_view genre) const {
   for (int i = 0; i < num_of_genres_; ++i) {
     if (genres_[i] == genre) {
       return true;

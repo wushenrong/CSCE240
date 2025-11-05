@@ -19,7 +19,7 @@
 
 namespace csce240_program6 {
 
-  /**
+/**
  * A class that represents a question that is answered through a short
  * sentence or paragraph.
  */

@@ -12,18 +12,12 @@
 #include "assignment2/program2functions.h"
 
 #include <algorithm>
-#include <cctype>
 #include <cmath>
 #include <gsl/gsl>
 #include <locale>
 #include <utility>
 
 using std::abs;
-using std::floor;
-using std::fmod;
-using std::max;
-using std::pow;
-using std::sqrt;
 
 /**
  * Check if an integer is a perfect square by first checking if the integer is
@@ -31,13 +25,13 @@ using std::sqrt;
  * integer. Then flooring the root and check if the floored root is the same as
  * the root.
  */
-auto IsSquare(int n) -> bool {
+bool IsSquare(int n) {
   if (n < 0) {
     return false;
   }
 
-  const double root{sqrt(n)};
-  const double flooredRoot{floor(root)};
+  const double root = std::sqrt(n);
+  const double flooredRoot = std::floor(root);
 
   // Compare the root and the floored root using an percentage threshold because
   // of possible floating point rounding errors.
@@ -45,7 +39,7 @@ auto IsSquare(int n) -> bool {
   constexpr double kRelEpsilon{1e-8};
 
   return abs(root - flooredRoot) <=
-         max(abs(root), abs(flooredRoot)) * kRelEpsilon;
+         std::max(abs(root), abs(flooredRoot)) * kRelEpsilon;
 }
 
 /**
@@ -53,7 +47,7 @@ auto IsSquare(int n) -> bool {
  * is negative. If true, return false. Else manually find all the integer's
  * proper divisors and check if the sum of the divisors equals the integer.
  */
-auto IsPerfect(int n) -> bool {
+bool IsPerfect(int n) {
   if (n < 0) {
     return false;
   }
@@ -74,7 +68,7 @@ auto IsPerfect(int n) -> bool {
  * 'y', return check_y. Else check if the character is either 'a', 'e', 'i',
  * 'o', 'u'.
  */
-auto IsVowel(char c, bool check_y) -> bool {
+bool IsVowel(char c, bool check_y) {
   const char lower = std::tolower(c, std::locale());
 
   if (lower == 'y') {
@@ -92,7 +86,7 @@ auto IsVowel(char c, bool check_y) -> bool {
  * 'y', return check_y. Else check if the character is a consonant between 'a'
  * to 'z' excluding 'a', 'e', 'i', 'o', 'u', and 'y'.
  */
-auto IsConsonant(char c, bool check_y) -> bool {
+bool IsConsonant(char c, bool check_y) {
   const char lower = std::tolower(c, std::locale());
 
   if (lower == 'y') {
@@ -108,7 +102,7 @@ auto IsConsonant(char c, bool check_y) -> bool {
  * Converts a digit character to an integer by checking if the character is '1'
  * to '9' inclusive and returns 1 to 9 respectively. Else return 0.
  */
-auto ToDigit(char c) -> int {
+int ToDigit(char c) {
   switch (c) {
     case '1':
       return 1;
@@ -138,7 +132,7 @@ auto ToDigit(char c) -> int {
  * y. If true swap the values of the variables referenced by x and y. Then
  * return the difference of y and x.
  */
-auto Range(int& x, int& y) -> int {
+int Range(int& x, int& y) {
   if (x > y) {
     std::swap(x, y);
   }
@@ -152,7 +146,7 @@ auto Range(int& x, int& y) -> int {
  * powers of 10. Then module the double by 10 to get the digit before returning
  * and truncating the digit to an int.
  */
-auto DigitInPosition(double x, int pos) -> int {
+int DigitInPosition(double x, int pos) {
   constexpr int kBase{10};
-  return gsl::narrow_cast<int>(fmod(abs(x) * pow(kBase, pos), kBase));
+  return gsl::narrow_cast<int>(std::fmod(abs(x) * std::pow(kBase, pos), kBase));
 }

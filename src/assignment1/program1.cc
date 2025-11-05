@@ -17,7 +17,7 @@ using std::cout;
 // Set the radix/base we are converting to, which is base 10
 constexpr int kRadix{10};
 
-auto main() -> int {
+int main() {
   // Variables for number of inputs and the largest input
   int number_of_values{0};
   int position_of_largest_value{1};
@@ -26,15 +26,15 @@ auto main() -> int {
   // Variables to get values from stdin/cin
   int number{};
   int base{};
-  char more_numbers{'y'};
+  char have_more_numbers{'y'};
 
-  while (more_numbers == 'y') {
-    cin >> number >> base >> more_numbers;
+  while (have_more_numbers == 'y') {
+    cin >> number >> base >> have_more_numbers;
 
     // Reject value if the base is not 2 to 9 inclusive
     if (base < 2 || base >= kRadix) {
       cout << "Base Not Accepted" << '\n';
-      return 0;
+      return 1;
     }
 
     int converted_number = 0;
@@ -56,7 +56,7 @@ auto main() -> int {
       // Reject value if the current digit is not in base n
       if (current_digit >= base) {
         cout << "Invalid Digit(s) in Number" << '\n';
-        return 0;
+        return 1;
       }
 
       converted_number += current_digit * current_exponentiation;
@@ -83,7 +83,6 @@ auto main() -> int {
   cout << "Of the " << number_of_values << " values input, the "
        << position_of_largest_value;
 
-  // Make sure 11th, 12th, and 13th is correctly outputted
   const bool is_position_10s =
       (position_of_largest_value / kRadix) % kRadix == 1;
 

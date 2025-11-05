@@ -12,6 +12,7 @@
 #ifndef ASSIGNMENT4_WEIGHT_H_
 #define ASSIGNMENT4_WEIGHT_H_
 
+#include <iosfwd>
 #include <string>
 #include <string_view>
 
@@ -39,6 +40,7 @@ class Weight {
   bool operator<=(Weight) const;
   bool operator>=(Weight) const;
   bool operator>(Weight) const;
+  bool operator<(Weight) const;
 
   /**
    * Convert the current weight to pounds, ounces, kilograms, or grams.

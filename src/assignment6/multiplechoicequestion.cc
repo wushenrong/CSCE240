@@ -11,7 +11,6 @@
 
 #include "assignment6/multiplechoicequestion.h"
 
-#include <cstddef>
 #include <iostream>
 #include <string>
 #include <string_view>
@@ -48,8 +47,8 @@ MultipleChoiceQuestion::MultipleChoiceQuestion(
  * Assign multiple question to another by copying over the question and answers.
  * Also making sure that the object do not assign itself to itself.
  */
-auto MultipleChoiceQuestion::operator=(const MultipleChoiceQuestion& rhs)
-    -> MultipleChoiceQuestion& {
+MultipleChoiceQuestion& MultipleChoiceQuestion::operator=(
+    const MultipleChoiceQuestion& rhs) {
   if (this == &rhs) {
     return *this;
   }
@@ -86,8 +85,8 @@ void MultipleChoiceQuestion::SetAnswerChoices(int n, const string* acs,
   }
 
   num_of_choices_ = n;
-  answer_choices_ = new string[static_cast<size_t>(num_of_choices_)];
-  is_choice_correct_ = new bool[static_cast<size_t>(num_of_choices_)];
+  answer_choices_ = new string[num_of_choices_];
+  is_choice_correct_ = new bool[num_of_choices_];
 
   for (int i = 0; i < num_of_choices_; ++i) {
     if (acs != nullptr) {
