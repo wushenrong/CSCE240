@@ -11,11 +11,14 @@
 
 #include "assignment5/StreamingTrack.h"
 
+#include <cstddef>
+#include <gsl/gsl>
 #include <string>
 #include <string_view>
 
 #include "assignment5/SongRecording.h"
 
+using std::size_t;
 using std::string;
 using std::string_view;
 
@@ -109,7 +112,7 @@ void StreamingTrack::AddGenre(string_view genre) {
   // the genre to the new list.
   if (genres_ != nullptr) {
     gsl::owner<string*> temp = genres_;
-    genres_ = new string[num_of_genres_ + 1];
+    genres_ = new string[static_cast<size_t>(num_of_genres_ + 1)];
 
     for (int i = 0; i < num_of_genres_; ++i) {
       genres_[i] = temp[i];
@@ -118,11 +121,11 @@ void StreamingTrack::AddGenre(string_view genre) {
     delete[] temp;
     temp = nullptr;
   } else {
-    genres_ = new string[num_of_genres_ + 1];
+    genres_ = new string[static_cast<size_t>(num_of_genres_ + 1)];
   }
 
   genres_[num_of_genres_] = genre;
-  num_of_genres_++;
+  ++num_of_genres_;
 }
 
 void StreamingTrack::RemoveGenre(string_view genre) {
@@ -132,16 +135,14 @@ void StreamingTrack::RemoveGenre(string_view genre) {
 
   // If the steaming track has multiple genres then save the current list of
   // genres, create a new list of genres and copy over the old genres without
-  // the genre that we want to remove. Otherwise if the track nly has one genre,
+  // the genre that we want to remove. Otherwise if the track only has one genre,
   // delete the list and make sure that the list is pointing to nothing and
   // there are no genres assigned to the track.
   if (num_of_genres_ > 1) {
     gsl::owner<string*> temp = genres_;
-    genres_ = new string[num_of_genres_ - 1];
+    genres_ = new string[static_cast<size_t>(num_of_genres_ - 1)];
 
-    int j = 0;
-
-    for (int i = 0; i < num_of_genres_; ++i) {
+    for (int i = 0, j = 0; i < num_of_genres_ && j < num_of_genres_ - 1; ++i) {
       if (temp[i] == genre) {
         continue;
       }
@@ -154,7 +155,7 @@ void StreamingTrack::RemoveGenre(string_view genre) {
     delete[] temp;
     temp = nullptr;
 
-    num_of_genres_--;
+    --num_of_genres_;
   } else {
     delete[] genres_;
     genres_ = nullptr;

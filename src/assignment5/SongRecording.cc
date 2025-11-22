@@ -11,10 +11,12 @@
 
 #include "assignment5/SongRecording.h"
 
+#include <cstddef>
 #include <gsl/gsl>
 #include <string>
 #include <string_view>
 
+using std::size_t;
 using std::string;
 using std::string_view;
 
@@ -31,7 +33,7 @@ SongRecording::SongRecording(string_view title, string_view artist,
   SetTrackLength(track_length);
 
   if (artists_ == nullptr) {
-    artists_ = new string[num_of_artists_];
+    artists_ = new string[static_cast<size_t>(num_of_artists_)];
   }
 
   SetArtist(!artist.empty() ? artist : "unknown");
@@ -89,10 +91,10 @@ void SongRecording::SetNumArtists(int num_of_artists) {
   // number of artists do not match, create a new list of artists and copy over
   // the old artists if the new list fits. Else do nothing.
   if (artists_ == nullptr) {
-    artists_ = new string[num_of_artists];
+    artists_ = new string[static_cast<size_t>(num_of_artists)];
   } else if (num_of_artists != num_of_artists_) {
     gsl::owner<string*> temp = artists_;
-    artists_ = new string[num_of_artists];
+    artists_ = new string[static_cast<size_t>(num_of_artists)];
 
     for (int i = 0; i < num_of_artists && i < num_of_artists_; ++i) {
       artists_[i] = temp[i];

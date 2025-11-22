@@ -11,6 +11,7 @@
 
 #include "assignment6/multiplechoicequestion.h"
 
+#include <cstddef>
 #include <iostream>
 #include <string>
 #include <string_view>
@@ -18,6 +19,7 @@
 #include "assignment6/question.h"
 
 using std::cout;
+using std::size_t;
 using std::string;
 using std::string_view;
 
@@ -85,8 +87,8 @@ void MultipleChoiceQuestion::SetAnswerChoices(int n, const string* acs,
   }
 
   num_of_choices_ = n;
-  answer_choices_ = new string[num_of_choices_];
-  is_choice_correct_ = new bool[num_of_choices_];
+  answer_choices_ = new string[static_cast<size_t>(num_of_choices_)];
+  is_choice_correct_ = new bool[static_cast<size_t>(num_of_choices_)];
 
   for (int i = 0; i < num_of_choices_; ++i) {
     if (acs != nullptr) {
