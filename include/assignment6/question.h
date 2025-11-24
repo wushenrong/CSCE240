@@ -15,19 +15,24 @@
 #include <string>
 #include <string_view>
 
+#include "program6classes_export.h"
+
 class Question {
  private:
   std::string question_;
 
  public:
-  explicit Question(std::string_view question = "?") : question_{question} {}
-  virtual ~Question() = default;
+  PROGRAM6CLASSES_EXPORT explicit Question(std::string_view question = "?")
+      : question_{question} {}
+  PROGRAM6CLASSES_EXPORT virtual ~Question() = default;
 
-  void SetQuestion(std::string_view question) { question_ = question; }
+  PROGRAM6CLASSES_EXPORT void SetQuestion(std::string_view question) {
+    question_ = question;
+  }
 
-  std::string GetQuestion() const { return question_; }
+  PROGRAM6CLASSES_EXPORT std::string GetQuestion() const { return question_; }
 
-  virtual void Print(bool show_answer) const = 0;
+  PROGRAM6CLASSES_EXPORT virtual void Print(bool show_answer) const = 0;
 };
 
 #endif  // ASSIGNMENT6_QUESTION_H_

@@ -10,86 +10,174 @@
       "installDir": "${sourceDir}/out/install/${presetName}",
       "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_EXPORT_COMPILE_COMMANDS": true
       }
     },
     {
-      "name": "msvc-debug",
-      "displayName": "Build using Visual Studio (Debug)",
-      "inherits": [
-        "base"
-      ],
+      "name": "debug",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "release",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "CMAKE_INTERPROCEDURAL_OPTIMIZATION": true
+      }
+    },
+    {
+      "name": "share",
+      "hidden": true,
+      "cacheVariables": {
+        "BUILD_SHARED_LIBS": true
+      }
+    },
+    {
+      "name": "msvc",
+      "hidden": true,
       "cacheVariables": {
         "CMAKE_CXX_COMPILER": "cl.exe"
+      },
+      "toolset": {
+        "value": "host=x64",
+        "strategy": "external"
       }
     },
     {
-      "name": "msvc-release",
-      "displayName": "Build using Visual Studio (Release)",
-      "inherits": [
-        "msvc-debug"
-      ],
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release"
-      }
-    },
-    {
-      "name": "gcc-debug",
-      "displayName": "Build using GCC (Debug)",
-      "inherits": [
-        "base"
-      ],
+      "name": "gcc",
+      "hidden": true,
       "cacheVariables": {
         "CMAKE_CXX_COMPILER": "g++"
+      },
+      "toolset": {
+        "value": "host=x64",
+        "strategy": "external"
       }
     },
     {
-      "name": "gcc-release",
+      "name": "windows-debug",
+      "displayName": "Build using Visual Studio (Debug)",
+      "inherits": [
+        "base",
+        "msvc",
+        "debug"
+      ]
+    },
+    {
+      "name": "windows-release",
+      "displayName": "Build using Visual Studio (Release)",
+      "inherits": [
+        "base",
+        "msvc",
+        "release"
+      ]
+    },
+    {
+      "name": "windows-share-debug",
+      "displayName": "Build Shared Libraries using Visual Studio (Debug)",
+      "inherits": [
+        "base",
+        "msvc",
+        "debug",
+        "share"
+      ]
+    },
+    {
+      "name": "windows-share-release",
+      "displayName": "Build Shared Libraries using Visual Studio (Release)",
+      "inherits": [
+        "base",
+        "msvc",
+        "release",
+        "share"
+      ]
+    },
+    {
+      "name": "linux-debug",
+      "displayName": "Build using GCC (Debug)",
+      "inherits": [
+        "base",
+        "gcc",
+        "debug"
+      ]
+    },
+    {
+      "name": "linux-release",
       "displayName": "Build using GCC (Release)",
       "inherits": [
-        "gcc-debug"
+        "base",
+        "gcc",
+        "release"
+      ]
+    },
+    {
+      "name": "linux-share-debug",
+      "displayName": "Build Shared Libraries using GCC (Debug)",
+      "inherits": [
+        "base",
+        "gcc",
+        "debug",
+        "share"
+      ]
+    },
+    {
+      "name": "linux-shared-release",
+      "displayName": "Build Shared Libraries using GCC (Release)",
+      "inherits": [
+        "base",
+        "gcc",
+        "release",
+        "share"
+      ]
+    },
+    {
+      "name": "windows-coverage",
+      "displayName": "Build using Visual Studio With Coverage",
+      "inherits": [
+        "base",
+        "msvc",
+        "debug"
       ],
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release"
+        "ENABLE_CODE_COVERAGE": true
       }
     },
     {
-      "name": "clang-debug",
-      "displayName": "Build using Clang (Debug)",
+      "name": "linux-coverage",
+      "displayName": "Build using GCC With Coverage",
       "inherits": [
-        "base"
+        "base",
+        "gcc",
+        "debug"
       ],
       "cacheVariables": {
-        "CMAKE_CXX_COMPILER": "clang++"
-      }
-    },
-    {
-      "name": "clang-release",
-      "displayName": "Build using Clang (Release)",
-      "inherits": [
-        "clang-debug"
-      ],
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release"
+        "ENABLE_CODE_COVERAGE": true
       }
     }
   ],
   "buildPresets": [
     {
-      "name": "default-msvc",
-      "displayName": "Default Visual Studio Build",
-      "configurePreset": "msvc-debug"
+      "name": "default-windows",
+      "displayName": "Default Windows Build",
+      "configurePreset": "windows-debug"
     },
     {
-      "name": "default-gcc",
-      "displayName": "Default GCC Build",
-      "configurePreset": "gcc-debug"
+      "name": "default-linux",
+      "displayName": "Default Linux Build",
+      "configurePreset": "linux-debug"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "test-windows",
+      "configurePreset": "windows-debug"
     },
     {
-      "name": "default-clang",
-      "displayName": "Default Clang Build",
-      "configurePreset": "clang-debug"
+      "name": "test-linux",
+      "configurePreset": "linux-debug"
     }
   ]
 }

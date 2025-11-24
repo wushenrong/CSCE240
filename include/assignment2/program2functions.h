@@ -12,6 +12,8 @@
 #ifndef ASSIGNMENT2_PROGRAM2FUNCTIONS_H_
 #define ASSIGNMENT2_PROGRAM2FUNCTIONS_H_
 
+#include "program2functions_export.h"
+
 /**
  * Checks if an integer is a perfect square.
  *
@@ -20,7 +22,7 @@
  * @return True if the number is a perfect square, false if the integer is not
  *   a perfect square or it is a negative integer.
  */
-bool IsSquare(int n);
+PROGRAM2FUNCTIONS_EXPORT bool IsSquare(int n);
 
 /**
  * Checks if an positive integer is a perfect number where the sum of its proper
@@ -31,7 +33,7 @@ bool IsSquare(int n);
  * @return True if the number is a perfect number, false if the integer is not
  *   a perfect number or it is a negative integer.
  */
-bool IsPerfect(int n);
+PROGRAM2FUNCTIONS_EXPORT bool IsPerfect(int n);
 
 /**
  * Checks if a charater is a vowel.
@@ -41,7 +43,7 @@ bool IsPerfect(int n);
  *
  * @return True if the character is a vowel, otherwise returns false.
  */
-bool IsVowel(char c, bool check_y = true);
+PROGRAM2FUNCTIONS_EXPORT bool IsVowel(char c, bool check_y = true);
 
 /**
  * Checks if a character is a consonant.
@@ -51,7 +53,7 @@ bool IsVowel(char c, bool check_y = true);
  *
  * @return True if the character is a consonant, otherwise returns false.
  */
-bool IsConsonant(char c, bool check_y = true);
+PROGRAM2FUNCTIONS_EXPORT bool IsConsonant(char c, bool check_y = true);
 
 /**
  * Converts a character to an integer if the character between '1' to '9'
@@ -62,7 +64,7 @@ bool IsConsonant(char c, bool check_y = true);
  * @return The integer 1 to 9 if the character is '1' to '9', otherwise return
  *   0.
  */
-int ToDigit(char c);
+PROGRAM2FUNCTIONS_EXPORT int ToDigit(char c);
 
 /**
  * Calculates the range of two integers. If x is greater than y, then the values
@@ -73,7 +75,7 @@ int ToDigit(char c);
  *
  * @return The range of x and y.
  */
-int Range(int& x, int& y);
+PROGRAM2FUNCTIONS_EXPORT int Range(int& x, int& y);
 
 /**
  * Calculates the digit based on its position in a real number.
@@ -85,6 +87,6 @@ int Range(int& x, int& y);
  *
  * @return The digit in the real number based on its position.
  */
-int DigitInPosition(double x, int pos);
+PROGRAM2FUNCTIONS_EXPORT int DigitInPosition(double x, int pos);
 
 #endif  // ASSIGNMENT2_PROGRAM2FUNCTIONS_H_

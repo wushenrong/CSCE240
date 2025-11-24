@@ -16,6 +16,8 @@
 #include <string>
 #include <string_view>
 
+#include "program5classes_export.h"
+
 namespace csce240_programming_assignment_5 {
 
 class SongRecording {
@@ -26,24 +28,25 @@ class SongRecording {
   gsl::owner<std::string*> artists_;
 
  public:
-  SongRecording(std::string_view = "untitled",
-                std::string_view artist = "unknown", int track_length = 0,
-                int num_of_artists = 1);
-  SongRecording(const SongRecording&);
+  PROGRAM5CLASSES_EXPORT SongRecording(std::string_view = "untitled",
+                                       std::string_view artist = "unknown",
+                                       int track_length = 0,
+                                       int num_of_artists = 1);
+  PROGRAM5CLASSES_EXPORT SongRecording(const SongRecording&);
 
-  virtual ~SongRecording() { delete[] artists_; }
+  PROGRAM5CLASSES_EXPORT virtual ~SongRecording() { delete[] artists_; }
 
-  SongRecording& operator=(const SongRecording&);
+  PROGRAM5CLASSES_EXPORT SongRecording& operator=(const SongRecording&);
 
-  void SetTitle(std::string_view title);
-  void SetNumArtists(int num_of_artists);
-  void SetTrackLength(int track_length);
-  void SetArtist(std::string_view artist, int n = 1);
+  PROGRAM5CLASSES_EXPORT void SetTitle(std::string_view title);
+  PROGRAM5CLASSES_EXPORT void SetNumArtists(int num_of_artists);
+  PROGRAM5CLASSES_EXPORT void SetTrackLength(int track_length);
+  PROGRAM5CLASSES_EXPORT void SetArtist(std::string_view artist, int n = 1);
 
-  std::string GetTitle() const { return title_; }
-  int GetNumArtists() const { return num_of_artists_; }
-  int GetTrackLength() const { return track_length_; }
-  std::string GetArtist(int n = 1) const;
+  PROGRAM5CLASSES_EXPORT std::string GetTitle() const { return title_; }
+  PROGRAM5CLASSES_EXPORT int GetNumArtists() const { return num_of_artists_; }
+  PROGRAM5CLASSES_EXPORT int GetTrackLength() const { return track_length_; }
+  PROGRAM5CLASSES_EXPORT std::string GetArtist(int n = 1) const;
 };
 
 }  // namespace csce240_programming_assignment_5

@@ -5,23 +5,42 @@ project(
   VERSION 0.1.0
   LANGUAGES CXX)
 
+option(ENABLE_WARNINGS_AS_ERRORS "Treat warnings as errors" ON)
+option(ENABLE_CODE_COVERAGE "Enable code coverage" OFF)
+option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
+
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-  set(GCC_LIKE_CXX "$<COMPILE_LANG_AND_ID:CXX,ARMClang,AppleClang,Clang,GNU,LCC>")
+  set(GCC_LIKE_CXX
+      "$<COMPILE_LANG_AND_ID:CXX,ARMClang,AppleClang,Clang,GNU,LCC>")
   set(MSVC_LIKE_CXX "$<COMPILE_LANG_AND_ID:CXX,MSVC>")
 
   add_library(csce240_compiler_flags INTERFACE)
 
   target_compile_features(csce240_compiler_flags INTERFACE cxx_std_17)
-  set_target_properties(csce240_compiler_flags
-                        PROPERTIES CXX_STANDARD_REQUIRED YES CXX_EXTENSIONS OFF)
+  set_target_properties(
+    csce240_compiler_flags
+    PROPERTIES CXX_STANDARD_REQUIRED YES
+               CXX_EXTENSIONS OFF
+               CXX_VISIBILITY_PRESET hidden
+               VISIBILITY_INLINES_HIDDEN YES)
 
-  target_compile_options(csce240_compiler_flags INTERFACE
-    "$<${GCC_LIKE_CXX}:$<BUILD_INTERFACE:-Wall;-Wextra;-Wpedantic;-Weffc++;-Wconversion;-Wsign-conversion>>"
-    "$<${MSVC_LIKE_CXX}:$<BUILD_INTERFACE:/W4;/permissive-;/w44365>>")
+  target_compile_options(
+    csce240_compiler_flags
+    INTERFACE
+      "$<${GCC_LIKE_CXX}:$<BUILD_INTERFACE:-Wall;-Wextra;-Wpedantic;-Weffc++;-Wconversion;-Wsign-conversion>>"
+      "$<${MSVC_LIKE_CXX}:$<BUILD_INTERFACE:/W4;/permissive-;/w44365>>")
+
+  if(ENABLE_WARNINGS_AS_ERRORS)
+    target_compile_options(
+      csce240_compiler_flags
+      INTERFACE "$<${GCC_LIKE_CXX}:$<BUILD_INTERFACE:-Werror>>"
+                "$<${MSVC_LIKE_CXX}:$<BUILD_INTERFACE:/WX>>")
+  endif()
+
+  include(GenerateExportHeader)
+  include(CTest)
 
   set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-
-  include(CTest)
 endif()
 
 find_package(Microsoft.GSL CONFIG REQUIRED)
