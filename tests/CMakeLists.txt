@@ -15,16 +15,6 @@ target_link_libraries(
           program6classes
           Catch2::Catch2WithMain)
 
-if(ENABLE_CODE_COVERAGE)
-  if(MSVC)
-    target_link_options(csce240_tests PRIVATE "$<BUILD_INTERFACE:/PROFILE>")
-  else()
-    target_compile_options(csce240_tests
-                           PRIVATE "$<BUILD_INTERFACE:--coverage>")
-    link_libraries(gcov)
-  endif()
-endif()
-
 add_custom_command(
   TARGET csce240_tests
   POST_BUILD

@@ -37,6 +37,16 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
                 "$<${MSVC_LIKE_CXX}:$<BUILD_INTERFACE:/WX>>")
   endif()
 
+  if(ENABLE_CODE_COVERAGE)
+    if(MSVC)
+      target_link_options(csce240_compiler_flags INTERFACE "$<BUILD_INTERFACE:/PROFILE>")
+    else()
+      target_compile_options(csce240_compiler_flags
+                             INTERFACE "$<BUILD_INTERFACE:--coverage>")
+      target_link_libraries(csce240_compiler_flags INTERFACE gcov)
+    endif()
+  endif()
+
   include(GenerateExportHeader)
   include(CTest)
 
