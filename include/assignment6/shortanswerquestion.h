@@ -33,7 +33,7 @@ class ShortAnswerQuestion : public Question {
   explicit ShortAnswerQuestion(std::string_view = "?", std::string_view = "");
 
   [[nodiscard]]
-  PROGRAM6CLASSES_EXPORT const std::string& GetAnswer() const {
+  PROGRAM6CLASSES_EXPORT auto GetAnswer() const -> const std::string& {
     return answer_;
   }
 

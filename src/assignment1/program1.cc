@@ -20,7 +20,7 @@ using std::cout;
 // Set the radix/base we are converting to, which is base 10
 constexpr int kRadix{10};
 
-static const char* get_position_ending(int position) {
+static auto get_position_ending(int position) -> const char* {
   if ((position / kRadix) % kRadix == 1) {
     return "th";
   }
@@ -37,7 +37,7 @@ static const char* get_position_ending(int position) {
   }
 }
 
-int main() {
+auto main() -> int {
   // Variables for number of inputs and the largest input
   int number_of_values{0};
   int largest_value_position{1};

@@ -33,11 +33,11 @@ class Weight {
   explicit Weight(double value = 0.0, std::string_view units = "pounds");
 
   [[nodiscard]]
-  PROGRAM4FUNCTIONS_EXPORT double GetValue() const {
+  PROGRAM4FUNCTIONS_EXPORT auto GetValue() const -> double {
     return value_;
   }
   [[nodiscard]]
-  PROGRAM4FUNCTIONS_EXPORT const std::string& GetUnits() const {
+  auto GetUnits() const -> PROGRAM4FUNCTIONS_EXPORT const std::string& {
     return units_;
   }
 
@@ -50,8 +50,8 @@ class Weight {
    * Operator overloads for comparing weights.
    */
   PROGRAM4FUNCTIONS_EXPORT
-  friend std::partial_ordering operator<=>(const Weight& lhs,
-                                           const Weight& rhs) {
+  friend auto operator<=>(const Weight& lhs, const Weight& rhs)
+      -> std::partial_ordering {
     Weight weight{rhs};
     weight.ConvertUnits(lhs.units_);
     return lhs.value_ <=> weight.value_;
@@ -65,6 +65,6 @@ class Weight {
 };
 
 PROGRAM4FUNCTIONS_EXPORT
-std::ostream& operator<<(std::ostream&, const Weight&);
+auto operator<<(std::ostream&, const Weight&) -> std::ostream&;
 
 #endif  // ASSIGNMENT4_WEIGHT_H_

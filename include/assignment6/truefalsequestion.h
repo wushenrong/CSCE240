@@ -32,7 +32,7 @@ class TrueFalseQuestion : public Question {
   explicit TrueFalseQuestion(std::string_view = "?", bool = true);
 
   [[nodiscard]]
-  PROGRAM6CLASSES_EXPORT bool GetAnswer() const {
+  PROGRAM6CLASSES_EXPORT auto GetAnswer() const -> bool {
     return answer_;
   }
 

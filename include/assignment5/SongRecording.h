@@ -22,9 +22,9 @@ namespace csce240_programming_assignment_5 {
 
 class SongRecording {
  private:
-  std::string title_;
-  int track_length_;
-  int num_of_artists_;
+  std::string title_{"untitled"};
+  int track_length_{0};
+  int num_of_artists_{1};
   gsl::owner<std::string*> artists_;
 
  public:
@@ -35,30 +35,30 @@ class SongRecording {
   PROGRAM5CLASSES_EXPORT
   SongRecording(const SongRecording&);
   PROGRAM5CLASSES_EXPORT
-  SongRecording(SongRecording&&);
+  SongRecording(SongRecording&&) noexcept;
 
   PROGRAM5CLASSES_EXPORT
   virtual ~SongRecording() { delete[] artists_; }
 
   PROGRAM5CLASSES_EXPORT
-  SongRecording& operator=(const SongRecording&);
+  auto operator=(const SongRecording&) -> SongRecording&;
   PROGRAM5CLASSES_EXPORT
-  SongRecording& operator=(SongRecording&&);
+  auto operator=(SongRecording&&) noexcept -> SongRecording&;
 
   [[nodiscard]]
-  PROGRAM5CLASSES_EXPORT const std::string& GetTitle() const {
+  PROGRAM5CLASSES_EXPORT auto GetTitle() const -> const std::string& {
     return title_;
   }
   [[nodiscard]]
-  PROGRAM5CLASSES_EXPORT int GetTrackLength() const {
+  PROGRAM5CLASSES_EXPORT auto GetTrackLength() const -> int {
     return track_length_;
   }
   [[nodiscard]]
-  PROGRAM5CLASSES_EXPORT int GetNumArtists() const {
+  PROGRAM5CLASSES_EXPORT auto GetNumArtists() const -> int {
     return num_of_artists_;
   }
   [[nodiscard]]
-  PROGRAM5CLASSES_EXPORT std::string GetArtist(int n = 1) const;
+  PROGRAM5CLASSES_EXPORT auto GetArtist(int n = 1) const -> std::string;
 
   PROGRAM5CLASSES_EXPORT
   void SetTitle(std::string_view title);

@@ -28,7 +28,7 @@ class Question {
   virtual ~Question() = default;
 
   [[nodiscard]]
-  PROGRAM6CLASSES_EXPORT const std::string& GetQuestion() const {
+  PROGRAM6CLASSES_EXPORT auto GetQuestion() const -> const std::string& {
     return question_;
   }
 

@@ -15,6 +15,7 @@
 #include <gsl/gsl>
 #include <string>
 #include <string_view>
+#include <utility>
 
 using std::size_t;
 using std::string;
@@ -24,12 +25,10 @@ namespace csce240_programming_assignment_5 {
 
 SongRecording::SongRecording(string_view title, string_view artist,
                              int track_length, int num_of_artists)
-    : title_{"untitled"},
-      track_length_{0},
+    : title_{title},
+      track_length_{track_length},
       num_of_artists_{num_of_artists},
       artists_{new string[static_cast<size_t>(num_of_artists_)]} {
-  SetTitle(title);
-  SetTrackLength(track_length);
   SetArtist(!artist.empty() ? artist : "unknown");
 }
 
@@ -43,8 +42,8 @@ SongRecording::SongRecording(const SongRecording& rhs)
   }
 }
 
-SongRecording::SongRecording(SongRecording&& rhs)
-    : title_{rhs.title_},
+SongRecording::SongRecording(SongRecording&& rhs) noexcept
+    : title_{std::move(rhs.title_)},
       track_length_{rhs.track_length_},
       num_of_artists_{rhs.num_of_artists_},
       artists_{rhs.artists_} {
@@ -54,7 +53,7 @@ SongRecording::SongRecording(SongRecording&& rhs)
   rhs.artists_ = nullptr;
 }
 
-SongRecording& SongRecording::operator=(const SongRecording& rhs) {
+auto SongRecording::operator=(const SongRecording& rhs) -> SongRecording& {
   // Make sure that the object does not overwrite itself when assignment itself.
   if (this == &rhs) {
     return *this;
@@ -69,8 +68,7 @@ SongRecording& SongRecording::operator=(const SongRecording& rhs) {
   // from.
   delete[] artists_;
 
-  SetNumArtists(rhs.num_of_artists_);
-
+  num_of_artists_ = rhs.num_of_artists_;
   artists_ = new string[static_cast<size_t>(rhs.num_of_artists_)];
 
   for (int i = 0; i < rhs.num_of_artists_; ++i) {
@@ -80,7 +78,7 @@ SongRecording& SongRecording::operator=(const SongRecording& rhs) {
   return *this;
 }
 
-SongRecording& SongRecording::operator=(SongRecording&& rhs) {
+auto SongRecording::operator=(SongRecording&& rhs) noexcept -> SongRecording& {
   // Make sure that the object does not overwrite itself when assignment itself.
   if (this == &rhs) {
     return *this;
@@ -94,8 +92,7 @@ SongRecording& SongRecording::operator=(SongRecording&& rhs) {
   // from the object that was assigned from
   delete[] artists_;
 
-  SetNumArtists(rhs.num_of_artists_);
-
+  num_of_artists_ = rhs.num_of_artists_;
   artists_ = rhs.artists_;
 
   rhs.title_ = "";
@@ -106,7 +103,7 @@ SongRecording& SongRecording::operator=(SongRecording&& rhs) {
   return *this;
 }
 
-string SongRecording::GetArtist(int n) const {
+auto SongRecording::GetArtist(int n) const -> string {
   if (n > 0 && n <= num_of_artists_) {
     return artists_[n - 1];
   }
@@ -131,14 +128,13 @@ void SongRecording::SetNumArtists(int num_of_artists) {
     return;
   }
 
-  // If we do not have a list of artists then create one. Otherwise if the
-  // number of artists do not match, create a new list of artists and copy over
-  // the old artists if the new list fits. Else do nothing.
-  if (artists_ != nullptr && num_of_artists != num_of_artists_) {
+  // If the number of artists do not match, create a new list of artists and
+  // copy over the old artists if the new list fits. Else do nothing.
+  if (num_of_artists != num_of_artists_) {
     gsl::owner<string*> temp = artists_;
     artists_ = new string[static_cast<size_t>(num_of_artists)];
 
-    for (int i = 0; i < num_of_artists && i < num_of_artists_; ++i) {
+    for (int i = 0; i < num_of_artists; ++i) {
       artists_[i] = temp[i];
     }
 

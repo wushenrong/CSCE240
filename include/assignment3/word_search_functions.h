@@ -37,7 +37,7 @@ using WordSearch = std::array<std::array<char, kSize>, kSize>;
  * @return True if the file was correctly read. Otherwise false.
  */
 WORDSEARCHFUNCTIONS_EXPORT
-bool ReadWordSearch(const std::string& file_name, WordSearch& grid);
+auto ReadWordSearch(const std::string& file_name, WordSearch& grid) -> bool;
 
 /**
  * Reads and load a word search from a file.
@@ -63,8 +63,8 @@ void PrintWordSearch(const WordSearch& grid);
  * @return True if the word was found. Otherwise return false.
  */
 WORDSEARCHFUNCTIONS_EXPORT
-bool FindWordRight(const WordSearch& grid, std::string_view to_find, int& row,
-                   int& col);
+auto FindWordRight(const WordSearch& grid, std::string_view to_find, int& row,
+                   int& col) -> bool;
 
 /**
  * Finds a word that is written from right to left.
@@ -79,8 +79,8 @@ bool FindWordRight(const WordSearch& grid, std::string_view to_find, int& row,
  * @return True if the word was found. Otherwise return false.
  */
 WORDSEARCHFUNCTIONS_EXPORT
-bool FindWordLeft(const WordSearch& grid, std::string_view to_find, int& row,
-                  int& col);
+auto FindWordLeft(const WordSearch& grid, std::string_view to_find, int& row,
+                  int& col) -> bool;
 
 /**
  * Finds a word that is written from top to bottom.
@@ -95,8 +95,8 @@ bool FindWordLeft(const WordSearch& grid, std::string_view to_find, int& row,
  * @return True if the word was found. Otherwise return false.
  */
 WORDSEARCHFUNCTIONS_EXPORT
-bool FindWordDown(const WordSearch& grid, std::string_view to_find, int& row,
-                  int& col);
+auto FindWordDown(const WordSearch& grid, std::string_view to_find, int& row,
+                  int& col) -> bool;
 
 /**
  * Finds a word that is written from bottom to top.
@@ -111,8 +111,8 @@ bool FindWordDown(const WordSearch& grid, std::string_view to_find, int& row,
  * @return True if the word was found. Otherwise return false.
  */
 WORDSEARCHFUNCTIONS_EXPORT
-bool FindWordUp(const WordSearch& grid, std::string_view to_find, int& row,
-                int& col);
+auto FindWordUp(const WordSearch& grid, std::string_view to_find, int& row,
+                int& col) -> bool;
 
 /**
  * Finds a word that is written diagonally from left to right, top to bottom.
@@ -127,7 +127,7 @@ bool FindWordUp(const WordSearch& grid, std::string_view to_find, int& row,
  * @return True if the word was found. Otherwise return false.
  */
 WORDSEARCHFUNCTIONS_EXPORT
-bool FindWordDiagonal(const WordSearch& grid, std::string_view to_find,
-                      int& row, int& col);
+auto FindWordDiagonal(const WordSearch& grid, std::string_view to_find,
+                      int& row, int& col) -> bool;
 
 #endif  // ASSIGNMENT3_WORD_SEARCH_FUNCTIONS_H_

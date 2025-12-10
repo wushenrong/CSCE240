@@ -12,7 +12,11 @@
 #ifndef ASSIGNMENT5_STREAMINGTRACK_H_
 #define ASSIGNMENT5_STREAMINGTRACK_H_
 
+#include <string>
+#include <string_view>
+
 #include "assignment5/SongRecording.h"
+#include "gsl/pointers"
 #include "program5classes_export.h"
 
 namespace csce240_programming_assignment_5 {
@@ -31,34 +35,35 @@ class StreamingTrack : public SongRecording {
                           std::string_view genre = "pop",
                           int num_of_streams = 0);
   PROGRAM5CLASSES_EXPORT
-  StreamingTrack(const StreamingTrack&) PROGRAM5CLASSES_EXPORT;
-  StreamingTrack(StreamingTrack&&);
+  StreamingTrack(const StreamingTrack&);
+  PROGRAM5CLASSES_EXPORT
+  StreamingTrack(StreamingTrack&&) noexcept;
 
   PROGRAM5CLASSES_EXPORT
   explicit StreamingTrack(const SongRecording&, std::string_view genre = "pop",
                           int num_of_streams = 0);
   PROGRAM5CLASSES_EXPORT
   explicit StreamingTrack(SongRecording&&, std::string_view genre = "pop",
-                          int num_of_streams = 0);
+                          int num_of_streams = 0) noexcept;
 
   PROGRAM5CLASSES_EXPORT
   ~StreamingTrack() override { delete[] genres_; }
 
   PROGRAM5CLASSES_EXPORT
-  StreamingTrack& operator=(const StreamingTrack&);
+  auto operator=(const StreamingTrack&) -> StreamingTrack&;
   PROGRAM5CLASSES_EXPORT
-  StreamingTrack& operator=(StreamingTrack&&);
+  auto operator=(StreamingTrack&&) noexcept -> StreamingTrack&;
 
   [[nodiscard]]
-  PROGRAM5CLASSES_EXPORT int GetStreams() const {
+  PROGRAM5CLASSES_EXPORT auto GetStreams() const -> int {
     return num_of_streams_;
   }
   [[nodiscard]]
-  PROGRAM5CLASSES_EXPORT int GetNumGenres() const {
+  PROGRAM5CLASSES_EXPORT auto GetNumGenres() const -> int {
     return num_of_genres_;
   }
   [[nodiscard]]
-  PROGRAM5CLASSES_EXPORT std::string GetGenre(int n = 1) const;
+  PROGRAM5CLASSES_EXPORT auto GetGenre(int n = 1) const -> std::string;
 
   PROGRAM5CLASSES_EXPORT
   void SetStreams(int n);
@@ -72,7 +77,7 @@ class StreamingTrack : public SongRecording {
   void RemoveGenre(std::string_view genre);
 
   [[nodiscard]]
-  PROGRAM5CLASSES_EXPORT bool IsGenre(std::string_view genre) const;
+  PROGRAM5CLASSES_EXPORT auto IsGenre(std::string_view genre) const -> bool;
 };
 
 }  // namespace csce240_programming_assignment_5

@@ -39,12 +39,12 @@ class MultipleChoiceQuestion : public Question {
   PROGRAM6CLASSES_EXPORT
   MultipleChoiceQuestion(const MultipleChoiceQuestion&);
   PROGRAM6CLASSES_EXPORT
-  MultipleChoiceQuestion(MultipleChoiceQuestion&&);
+  MultipleChoiceQuestion(MultipleChoiceQuestion&&) noexcept;
 
   PROGRAM6CLASSES_EXPORT
-  MultipleChoiceQuestion& operator=(const MultipleChoiceQuestion&);
+  auto operator=(const MultipleChoiceQuestion&) -> MultipleChoiceQuestion&;
   PROGRAM6CLASSES_EXPORT
-  MultipleChoiceQuestion& operator=(MultipleChoiceQuestion&&);
+  auto operator=(MultipleChoiceQuestion&&) noexcept -> MultipleChoiceQuestion&;
 
   PROGRAM6CLASSES_EXPORT
   ~MultipleChoiceQuestion() override {
@@ -53,7 +53,7 @@ class MultipleChoiceQuestion : public Question {
   }
 
   [[nodiscard]]
-  PROGRAM6CLASSES_EXPORT int GetNumOfAnswerChoices() const {
+  PROGRAM6CLASSES_EXPORT auto GetNumOfAnswerChoices() const -> int {
     return num_of_choices_;
   }
 

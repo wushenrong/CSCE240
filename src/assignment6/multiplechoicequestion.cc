@@ -15,7 +15,6 @@
 #include <print>
 #include <string>
 #include <string_view>
-#include <utility>
 
 #include "assignment6/question.h"
 
@@ -45,8 +44,9 @@ MultipleChoiceQuestion::MultipleChoiceQuestion(
                    rhs.is_choice_correct_);
 }
 
-MultipleChoiceQuestion::MultipleChoiceQuestion(MultipleChoiceQuestion&& rhs)
-    : Question{std::move(rhs)},
+MultipleChoiceQuestion::MultipleChoiceQuestion(
+    MultipleChoiceQuestion&& rhs) noexcept
+    : Question{rhs},
       num_of_choices_{rhs.num_of_choices_},
       answer_choices_{rhs.answer_choices_},
       is_choice_correct_{rhs.is_choice_correct_} {
@@ -59,8 +59,8 @@ MultipleChoiceQuestion::MultipleChoiceQuestion(MultipleChoiceQuestion&& rhs)
  * Assign multiple question to another by copying over the question and answers.
  * Also making sure that the object do not assign itself to itself.
  */
-MultipleChoiceQuestion& MultipleChoiceQuestion::operator=(
-    const MultipleChoiceQuestion& rhs) {
+auto MultipleChoiceQuestion::operator=(const MultipleChoiceQuestion& rhs)
+    -> MultipleChoiceQuestion& {
   if (this == &rhs) {
     return *this;
   }
@@ -77,8 +77,8 @@ MultipleChoiceQuestion& MultipleChoiceQuestion::operator=(
  * Assign multiple question to another by moving over the question and answers.
  * Also making sure that the object do not assign itself to itself.
  */
-MultipleChoiceQuestion& MultipleChoiceQuestion::operator=(
-    MultipleChoiceQuestion&& rhs) {
+auto MultipleChoiceQuestion::operator=(MultipleChoiceQuestion&& rhs) noexcept
+    -> MultipleChoiceQuestion& {
   if (this == &rhs) {
     return *this;
   }

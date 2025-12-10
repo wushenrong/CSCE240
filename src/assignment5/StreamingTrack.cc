@@ -29,10 +29,9 @@ StreamingTrack::StreamingTrack(string_view title, string_view artist,
                                int track_length, int num_of_artists,
                                string_view genre, int num_of_streams)
     : SongRecording{title, artist, track_length, num_of_artists},
-      num_of_streams_{0},
+      num_of_streams_{num_of_streams},
       num_of_genres_{0},
       genres_{nullptr} {
-  SetStreams(num_of_streams);
   AddGenre(genre);
 }
 
@@ -56,7 +55,7 @@ StreamingTrack::StreamingTrack(const SongRecording& rhs, string_view genre,
   AddGenre(genre);
 }
 
-StreamingTrack::StreamingTrack(StreamingTrack&& rhs)
+StreamingTrack::StreamingTrack(StreamingTrack&& rhs) noexcept
     : SongRecording{std::move(rhs)},
       num_of_streams_{rhs.num_of_streams_},
       num_of_genres_{rhs.num_of_genres_},
@@ -66,7 +65,7 @@ StreamingTrack::StreamingTrack(StreamingTrack&& rhs)
 }
 
 StreamingTrack::StreamingTrack(SongRecording&& rhs, string_view genre,
-                               int num_of_streams)
+                               int num_of_streams) noexcept
     : SongRecording{std::move(rhs)},
       num_of_streams_{0},
       num_of_genres_{0},
@@ -75,7 +74,7 @@ StreamingTrack::StreamingTrack(SongRecording&& rhs, string_view genre,
   AddGenre(genre);
 }
 
-StreamingTrack& StreamingTrack::operator=(const StreamingTrack& rhs) {
+auto StreamingTrack::operator=(const StreamingTrack& rhs) -> StreamingTrack& {
   // Make sure that the object does not overwrite itself when assignment itself.
   if (this == &rhs) {
     return *this;
@@ -101,7 +100,8 @@ StreamingTrack& StreamingTrack::operator=(const StreamingTrack& rhs) {
   return *this;
 }
 
-StreamingTrack& StreamingTrack::operator=(StreamingTrack&& rhs) {
+auto StreamingTrack::operator=(StreamingTrack&& rhs) noexcept
+    -> StreamingTrack& {
   // Make sure that the object does not overwrite itself when assignment itself.
   if (this == &rhs) {
     return *this;
@@ -127,7 +127,7 @@ StreamingTrack& StreamingTrack::operator=(StreamingTrack&& rhs) {
   return *this;
 }
 
-string StreamingTrack::GetGenre(int n) const {
+auto StreamingTrack::GetGenre(int n) const -> string {
   if (n > 0 && n <= num_of_genres_) {
     return genres_[n - 1];
   }
@@ -209,7 +209,7 @@ void StreamingTrack::RemoveGenre(string_view genre) {
   }
 }
 
-bool StreamingTrack::IsGenre(string_view genre) const {
+auto StreamingTrack::IsGenre(string_view genre) const -> bool {
   for (int i = 0; i < num_of_genres_; ++i) {
     if (genres_[i] == genre) {
       return true;

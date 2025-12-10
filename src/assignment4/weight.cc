@@ -26,10 +26,20 @@ constexpr double OUNCES_GRAMS_RATIO{28.3495231};
 
 constexpr double KILOGRAMS_GRAMS_RATIO{1000};
 
+inline static auto IsValidUnit(std::string_view units) -> bool {
+  return units == "pounds" || units == "ounces" || units == "kilograms" ||
+         units == "grams";
+}
+
 Weight::Weight(double value, std::string_view units)
-    : value_{0}, units_{"pounds"} {
-  SetValue(value);
-  SetUnits(units);
+    : value_{value}, units_{units} {
+  if (value < 0) {
+    throw value;
+  }
+
+  if (!IsValidUnit(units)) {
+    throw units;
+  }
 }
 
 void Weight::SetValue(double value) {
@@ -39,8 +49,7 @@ void Weight::SetValue(double value) {
 }
 
 void Weight::SetUnits(string_view units) {
-  if (units == "pounds" || units == "ounces" || units == "kilograms" ||
-      units == "grams") {
+  if (IsValidUnit(units)) {
     units_ = units;
   }
 }
@@ -97,6 +106,6 @@ void Weight::ConvertUnits(string_view units) {
   }
 }
 
-std::ostream& operator<<(std::ostream& out, const Weight& weight) {
+auto operator<<(std::ostream& out, const Weight& weight) -> std::ostream& {
   return out << weight.GetValue() << ' ' << weight.GetUnits();
 }

@@ -40,7 +40,7 @@ void WeightRange::SetLargest(const Weight& weight) {
  * is smaller than the large weight and is larger than the small weight.
  * If isClosed is false, the weights are not included in the range.
  */
-bool WeightRange::InRange(const Weight& weight, bool isClosed) const {
+auto WeightRange::InRange(const Weight& weight, bool isClosed) const -> bool {
   return isClosed ? (large_ >= weight) && (weight >= small_)
                   : (large_ > weight) && (weight > small_);
 }
@@ -51,12 +51,12 @@ bool WeightRange::InRange(const Weight& weight, bool isClosed) const {
  * the difference of the large and the small weigh in the same units as the
  * large weight.
  */
-const Weight WeightRange::Width() const {
+auto WeightRange::Width() const -> Weight {
   Weight weight{small_};
   weight.ConvertUnits(large_.GetUnits());
   return Weight(large_.GetValue() - weight.GetValue(), large_.GetUnits());
 }
 
-std::ostream& operator<<(std::ostream& out, const WeightRange& weight) {
+auto operator<<(std::ostream& out, const WeightRange& weight) -> std::ostream& {
   return out << weight.GetSmallest() << " - " << weight.GetLargest();
 }
