@@ -14,7 +14,7 @@
 #include "assignment4/weight.h"
 #include "assignment4/weightrange.h"
 
-TEST_CASE("Test Weight") {
+TEST_CASE("Tests Constant Weight", "[weights]") {
   const Weight weight1{100, "grams"};
 
   const WeightRange range1{Weight{1, "pounds"}, Weight{2, "ounces"}};

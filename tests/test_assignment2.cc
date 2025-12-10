@@ -14,7 +14,7 @@
 
 #include "assignment2/program2functions.h"
 
-TEST_CASE("Check perfect squares") {
+TEST_CASE("Check perfect squares", "[assignment2]") {
   auto accept = GENERATE(0, 4, 36, 121, 225, 1024);
   CHECK(IsSquare(accept));
 
@@ -22,7 +22,7 @@ TEST_CASE("Check perfect squares") {
   CHECK_FALSE(IsSquare(reject));
 }
 
-TEST_CASE("Check perfect numbers") {
+TEST_CASE("Check perfect numbers", "[assignment2]") {
   auto accept = GENERATE(6, 28, 496);
   CHECK(IsPerfect(accept));
 
@@ -30,7 +30,7 @@ TEST_CASE("Check perfect numbers") {
   CHECK_FALSE(IsPerfect(reject));
 }
 
-TEST_CASE("Check vowels") {
+TEST_CASE("Check vowels", "[assignment2]") {
   auto accept = GENERATE('A', 'e', 'i', 'o', 'u', 'y');
   CHECK(IsVowel(accept));
 
@@ -39,7 +39,7 @@ TEST_CASE("Check vowels") {
   CHECK_FALSE(IsVowel('y', false));
 }
 
-TEST_CASE("Check consonant") {
+TEST_CASE("Check consonant", "[assignment2]") {
   auto accept = GENERATE('C', 'g', 'k', 's', 'w', 'z', 'y');
   CHECK(IsConsonant(accept));
 
@@ -48,7 +48,7 @@ TEST_CASE("Check consonant") {
   CHECK_FALSE(IsConsonant('y', false));
 }
 
-TEST_CASE("Convert digit to int") {
+TEST_CASE("Convert digit to int", "[assignment2]") {
   CHECK(ToDigit('1') == 1);
   CHECK(ToDigit('2') == 2);
   CHECK(ToDigit('3') == 3);
@@ -62,7 +62,7 @@ TEST_CASE("Convert digit to int") {
   CHECK(ToDigit('a') == 0);
 }
 
-TEST_CASE("Get range between numbers") {
+TEST_CASE("Get range between numbers", "[assignment2]") {
   int x{9};
   int y{-3};
   int result = Range(x, y);
@@ -80,7 +80,7 @@ TEST_CASE("Get range between numbers") {
   CHECK(y == 7);
 }
 
-TEST_CASE("Get digit in position") {
+TEST_CASE("Get digit in position", "[assignment2]") {
   constexpr double test_positive_number{12345.06789};
   constexpr double test_negative_number{-12345.06789};
 

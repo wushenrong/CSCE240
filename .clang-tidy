@@ -24,6 +24,7 @@ CheckOptions:
   modernize-replace-random-shuffle.IncludeStyle: google
   modernize-use-std-numbers.IncludeStyle: google
   modernize-use-std-print.IncludeStyle: google
+  modernize-use-trailing-return-type.TransformLambdas: none
   performance-type-promotion-in-math-fn.IncludeStyle: google
   performance-unnecessary-value-param.IncludeStyle: google
   readability-function-cognitive-complexity.IgnoreMacros: true
