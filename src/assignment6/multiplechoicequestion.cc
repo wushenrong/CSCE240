@@ -12,13 +12,13 @@
 #include "assignment6/multiplechoicequestion.h"
 
 #include <cstddef>
-#include <iostream>
+#include <print>
 #include <string>
 #include <string_view>
+#include <utility>
 
 #include "assignment6/question.h"
 
-using std::cout;
 using std::size_t;
 using std::string;
 using std::string_view;
@@ -45,6 +45,16 @@ MultipleChoiceQuestion::MultipleChoiceQuestion(
                    rhs.is_choice_correct_);
 }
 
+MultipleChoiceQuestion::MultipleChoiceQuestion(MultipleChoiceQuestion&& rhs)
+    : Question{std::move(rhs)},
+      num_of_choices_{rhs.num_of_choices_},
+      answer_choices_{rhs.answer_choices_},
+      is_choice_correct_{rhs.is_choice_correct_} {
+  rhs.num_of_choices_ = 0;
+  rhs.answer_choices_ = nullptr;
+  rhs.is_choice_correct_ = nullptr;
+}
+
 /**
  * Assign multiple question to another by copying over the question and answers.
  * Also making sure that the object do not assign itself to itself.
@@ -59,6 +69,33 @@ MultipleChoiceQuestion& MultipleChoiceQuestion::operator=(
 
   SetAnswerChoices(rhs.num_of_choices_, rhs.answer_choices_,
                    rhs.is_choice_correct_);
+
+  return *this;
+}
+
+/**
+ * Assign multiple question to another by moving over the question and answers.
+ * Also making sure that the object do not assign itself to itself.
+ */
+MultipleChoiceQuestion& MultipleChoiceQuestion::operator=(
+    MultipleChoiceQuestion&& rhs) {
+  if (this == &rhs) {
+    return *this;
+  }
+
+  Question::operator=(rhs);
+
+  num_of_choices_ = rhs.num_of_choices_;
+
+  delete[] answer_choices_;
+  delete[] is_choice_correct_;
+
+  answer_choices_ = rhs.answer_choices_;
+  is_choice_correct_ = rhs.is_choice_correct_;
+
+  rhs.num_of_choices_ = 0;
+  rhs.answer_choices_ = nullptr;
+  rhs.is_choice_correct_ = nullptr;
 
   return *this;
 }
@@ -106,17 +143,17 @@ void MultipleChoiceQuestion::SetAnswerChoices(int n, const string* acs,
 }
 
 void MultipleChoiceQuestion::Print(bool show_answers) const {
-  cout << "Question: " << GetQuestion() << '\n';
-  cout << "Answer Choices:" << '\n';
+  std::println("Question: {}", GetQuestion());
+  std::println("Answer Choices:");
 
   for (int i = 0; i < num_of_choices_; ++i) {
-    cout << answer_choices_[i];
+    std::print("{}", answer_choices_[i]);
 
     if (show_answers) {
-      cout << (is_choice_correct_[i] ? " - correct" : " - incorrect");
+      std::print("{}", is_choice_correct_[i] ? " - correct" : " - incorrect");
     }
 
-    cout << '\n';
+    std::println();
   }
 }
 

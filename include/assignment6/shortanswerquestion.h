@@ -29,16 +29,19 @@ class ShortAnswerQuestion : public Question {
   std::string answer_;
 
  public:
-  PROGRAM6CLASSES_EXPORT explicit ShortAnswerQuestion(std::string_view = "?",
-                                                      std::string_view = "");
+  PROGRAM6CLASSES_EXPORT
+  explicit ShortAnswerQuestion(std::string_view = "?", std::string_view = "");
 
-  PROGRAM6CLASSES_EXPORT void SetAnswer(std::string_view answer) {
-    answer_ = answer;
+  [[nodiscard]]
+  PROGRAM6CLASSES_EXPORT const std::string& GetAnswer() const {
+    return answer_;
   }
 
-  PROGRAM6CLASSES_EXPORT std::string GetAnswer() const { return answer_; }
+  PROGRAM6CLASSES_EXPORT
+  void SetAnswer(std::string_view answer) { answer_ = answer; }
 
-  PROGRAM6CLASSES_EXPORT void Print(bool show_answer) const override;
+  PROGRAM6CLASSES_EXPORT
+  void Print(bool show_answer) const override;
 };
 
 }  // namespace csce240_program6

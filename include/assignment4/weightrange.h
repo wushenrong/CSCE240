@@ -26,15 +26,22 @@ class WeightRange {
   Weight large_;
 
  public:
-  PROGRAM4FUNCTIONS_EXPORT WeightRange();
-  PROGRAM4FUNCTIONS_EXPORT WeightRange(const Weight& small,
-                                       const Weight& large);
+  PROGRAM4FUNCTIONS_EXPORT
+  WeightRange(const Weight& small, const Weight& large);
 
-  PROGRAM4FUNCTIONS_EXPORT Weight GetSmallest() const { return small_; }
-  PROGRAM4FUNCTIONS_EXPORT Weight GetLargest() const { return large_; }
+  [[nodiscard]]
+  PROGRAM4FUNCTIONS_EXPORT Weight GetSmallest() const {
+    return small_;
+  }
+  [[nodiscard]]
+  PROGRAM4FUNCTIONS_EXPORT Weight GetLargest() const {
+    return large_;
+  }
 
-  PROGRAM4FUNCTIONS_EXPORT void SetSmallest(const Weight&);
-  PROGRAM4FUNCTIONS_EXPORT void SetLargest(const Weight&);
+  PROGRAM4FUNCTIONS_EXPORT
+  void SetSmallest(const Weight&);
+  PROGRAM4FUNCTIONS_EXPORT
+  void SetLargest(const Weight&);
 
   /**
    * Check if a given weight is in the weight range.
@@ -43,16 +50,18 @@ class WeightRange {
    *    weight range.
    * @return true if the weight is in the range, otherwise false.
    */
+  [[nodiscard]]
   PROGRAM4FUNCTIONS_EXPORT bool InRange(const Weight&,
                                         bool isClosed = true) const;
 
   /**
    * @return Difference of the largest weight and the smallest weight.
    */
-  PROGRAM4FUNCTIONS_EXPORT Weight Width();
+  PROGRAM4FUNCTIONS_EXPORT
+  const Weight Width() const;
 };
 
-PROGRAM4FUNCTIONS_EXPORT std::ostream& operator<<(std::ostream&,
-                                                  const WeightRange&);
+PROGRAM4FUNCTIONS_EXPORT
+std::ostream& operator<<(std::ostream&, const WeightRange&);
 
 #endif  // ASSIGNMENT4_WEIGHTRANGE_H_

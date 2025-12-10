@@ -15,6 +15,7 @@
 #include <gsl/gsl>
 #include <string>
 #include <string_view>
+#include <utility>
 
 #include "assignment5/SongRecording.h"
 
@@ -55,6 +56,25 @@ StreamingTrack::StreamingTrack(const SongRecording& rhs, string_view genre,
   AddGenre(genre);
 }
 
+StreamingTrack::StreamingTrack(StreamingTrack&& rhs)
+    : SongRecording{std::move(rhs)},
+      num_of_streams_{rhs.num_of_streams_},
+      num_of_genres_{rhs.num_of_genres_},
+      genres_{rhs.genres_} {
+  rhs.num_of_genres_ = 0;
+  rhs.genres_ = nullptr;
+}
+
+StreamingTrack::StreamingTrack(SongRecording&& rhs, string_view genre,
+                               int num_of_streams)
+    : SongRecording{std::move(rhs)},
+      num_of_streams_{0},
+      num_of_genres_{0},
+      genres_{nullptr} {
+  SetStreams(num_of_streams);
+  AddGenre(genre);
+}
+
 StreamingTrack& StreamingTrack::operator=(const StreamingTrack& rhs) {
   // Make sure that the object does not overwrite itself when assignment itself.
   if (this == &rhs) {
@@ -81,10 +101,30 @@ StreamingTrack& StreamingTrack::operator=(const StreamingTrack& rhs) {
   return *this;
 }
 
-void StreamingTrack::SetStreams(int n) {
-  if (n >= 0) {
-    num_of_streams_ = n;
+StreamingTrack& StreamingTrack::operator=(StreamingTrack&& rhs) {
+  // Make sure that the object does not overwrite itself when assignment itself.
+  if (this == &rhs) {
+    return *this;
   }
+
+  // Call the base copy assignment operator for copying members from
+  // SongRecording.
+  SongRecording::operator=(std::move(rhs));
+
+  // Get the num of times that the track has been stream
+  SetStreams(rhs.num_of_streams_);
+
+  // Delete the current list of genres if we have any and manually move the
+  // genre over.
+  delete[] genres_;
+  num_of_genres_ = rhs.num_of_genres_;
+  genres_ = rhs.genres_;
+
+  rhs.num_of_streams_ = 0;
+  rhs.num_of_genres_ = 0;
+  rhs.genres_ = nullptr;
+
+  return *this;
 }
 
 string StreamingTrack::GetGenre(int n) const {
@@ -93,6 +133,12 @@ string StreamingTrack::GetGenre(int n) const {
   }
 
   return "out of bounds";
+}
+
+void StreamingTrack::SetStreams(int n) {
+  if (n >= 0) {
+    num_of_streams_ = n;
+  }
 }
 
 void StreamingTrack::AddStreams(int n) {
@@ -135,9 +181,9 @@ void StreamingTrack::RemoveGenre(string_view genre) {
 
   // If the steaming track has multiple genres then save the current list of
   // genres, create a new list of genres and copy over the old genres without
-  // the genre that we want to remove. Otherwise if the track only has one genre,
-  // delete the list and make sure that the list is pointing to nothing and
-  // there are no genres assigned to the track.
+  // the genre that we want to remove. Otherwise if the track only has one
+  // genre, delete the list and make sure that the list is pointing to nothing
+  // and there are no genres assigned to the track.
   if (num_of_genres_ > 1) {
     gsl::owner<string*> temp = genres_;
     genres_ = new string[static_cast<size_t>(num_of_genres_ - 1)];

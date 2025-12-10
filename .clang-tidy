@@ -6,7 +6,7 @@ Checks:
   - performance-*
   - portability-*
   - readability-*
-  - -cppcoreguidelines-avoid-magic-numbers
+  - -cppcoreguidelines-pro-bounds-*
   - -modernize-use-trailing-return-type
   - -misc-use-anonymous-namespace
   - -readability-magic-numbers

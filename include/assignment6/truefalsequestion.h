@@ -28,13 +28,19 @@ class TrueFalseQuestion : public Question {
   bool answer_;
 
  public:
-  PROGRAM6CLASSES_EXPORT explicit TrueFalseQuestion(std::string_view = "?",
-                                                    bool = true);
+  PROGRAM6CLASSES_EXPORT
+  explicit TrueFalseQuestion(std::string_view = "?", bool = true);
 
-  PROGRAM6CLASSES_EXPORT void SetAnswer(bool a) { answer_ = a; }
-  PROGRAM6CLASSES_EXPORT bool GetAnswer() const { return answer_; }
+  [[nodiscard]]
+  PROGRAM6CLASSES_EXPORT bool GetAnswer() const {
+    return answer_;
+  }
 
-  PROGRAM6CLASSES_EXPORT void Print(bool show_answer) const override;
+  PROGRAM6CLASSES_EXPORT
+  void SetAnswer(bool a) { answer_ = a; }
+
+  PROGRAM6CLASSES_EXPORT
+  void Print(bool show_answer) const override;
 };
 
 }  // namespace csce240_program6

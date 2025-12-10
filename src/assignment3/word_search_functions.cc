@@ -15,11 +15,10 @@
 #include <cstddef>
 #include <fstream>
 #include <gsl/gsl>
-#include <iostream>
+#include <print>
 #include <string>
 #include <string_view>
 
-using std::cout;
 using std::size_t;
 using std::string;
 using std::string_view;
@@ -73,9 +72,10 @@ bool ReadWordSearch(const string& file_name, WordSearch& grid) {
 void PrintWordSearch(const WordSearch& grid) {
   for (const auto& row : grid) {
     for (const auto& col : row) {
-      cout << col << ' ';
+      std::print("{} ", col);
     }
-    cout << '\n';
+
+    std::println();
   }
 }
 

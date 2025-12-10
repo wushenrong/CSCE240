@@ -22,17 +22,21 @@ class Question {
   std::string question_;
 
  public:
-  PROGRAM6CLASSES_EXPORT explicit Question(std::string_view question = "?")
-      : question_{question} {}
-  PROGRAM6CLASSES_EXPORT virtual ~Question() = default;
+  PROGRAM6CLASSES_EXPORT
+  explicit Question(std::string_view question = "?") : question_{question} {}
+  PROGRAM6CLASSES_EXPORT
+  virtual ~Question() = default;
 
-  PROGRAM6CLASSES_EXPORT void SetQuestion(std::string_view question) {
-    question_ = question;
+  [[nodiscard]]
+  PROGRAM6CLASSES_EXPORT const std::string& GetQuestion() const {
+    return question_;
   }
 
-  PROGRAM6CLASSES_EXPORT std::string GetQuestion() const { return question_; }
+  PROGRAM6CLASSES_EXPORT
+  void SetQuestion(std::string_view question) { question_ = question; }
 
-  PROGRAM6CLASSES_EXPORT virtual void Print(bool show_answer) const = 0;
+  PROGRAM6CLASSES_EXPORT
+  virtual void Print(bool show_answer) const = 0;
 };
 
 #endif  // ASSIGNMENT6_QUESTION_H_

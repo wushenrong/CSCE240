@@ -12,10 +12,10 @@
 #include "assignment2/program2functions.h"
 
 #include <algorithm>
+#include <cctype>
 #include <cmath>
 #include <gsl/gsl>
 #include <locale>
-#include <utility>
 
 using std::abs;
 
@@ -103,42 +103,18 @@ bool IsConsonant(char c, bool check_y) {
  * to '9' inclusive and returns 1 to 9 respectively. Else return 0.
  */
 int ToDigit(char c) {
-  switch (c) {
-    case '1':
-      return 1;
-    case '2':
-      return 2;
-    case '3':
-      return 3;
-    case '4':
-      return 4;
-    case '5':
-      return 5;
-    case '6':
-      return 6;
-    case '7':
-      return 7;
-    case '8':
-      return 8;
-    case '9':
-      return 9;
-    default:
-      return 0;
+  if (c < '0' || c > '9') {
+    return 0;
   }
+
+  return c - '0';
 }
 
 /**
- * Returns the range between two numbers by first checking if x is greater than
- * y. If true swap the values of the variables referenced by x and y. Then
- * return the difference of y and x.
+ * Returns the range between two numbers by returning the absolute difference of
+ * y and x.
  */
-int Range(int& x, int& y) {
-  if (x > y) {
-    std::swap(x, y);
-  }
-
-  return y - x;
-}
+int Range(int& x, int& y) { return abs(y - x); }
 
 /**
  * Returns the digit from a double based on its position by first shifting the

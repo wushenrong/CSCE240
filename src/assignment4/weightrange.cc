@@ -11,11 +11,9 @@
 
 #include "assignment4/weightrange.h"
 
-#include <iostream>
+#include <ostream>
 
 #include "assignment4/weight.h"
-
-WeightRange::WeightRange() : small_{0}, large_{0} {}
 
 WeightRange::WeightRange(const Weight& small, const Weight& large)
     : small_{small}, large_{large} {
@@ -53,9 +51,10 @@ bool WeightRange::InRange(const Weight& weight, bool isClosed) const {
  * the difference of the large and the small weigh in the same units as the
  * large weight.
  */
-Weight WeightRange::Width() {
-  small_.ConvertUnits(large_.GetUnits());
-  return Weight(large_.GetValue() - small_.GetValue(), large_.GetUnits());
+const Weight WeightRange::Width() const {
+  Weight weight{small_};
+  weight.ConvertUnits(large_.GetUnits());
+  return Weight(large_.GetValue() - weight.GetValue(), large_.GetUnits());
 }
 
 std::ostream& operator<<(std::ostream& out, const WeightRange& weight) {

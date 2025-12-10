@@ -11,7 +11,8 @@
 
 #include "assignment4/weight.h"
 
-#include <iostream>
+#include <ostream>
+#include <string>
 #include <string_view>
 
 using std::string_view;
@@ -25,7 +26,8 @@ constexpr double OUNCES_GRAMS_RATIO{28.3495231};
 
 constexpr double KILOGRAMS_GRAMS_RATIO{1000};
 
-Weight::Weight(double value, string_view units) : value_{0}, units_{"pounds"} {
+Weight::Weight(double value, std::string_view units)
+    : value_{0}, units_{"pounds"} {
   SetValue(value);
   SetUnits(units);
 }
@@ -41,26 +43,6 @@ void Weight::SetUnits(string_view units) {
       units == "grams") {
     units_ = units;
   }
-}
-
-bool Weight::operator<=(Weight rhs) const {
-  rhs.ConvertUnits(units_);
-  return value_ <= rhs.value_;
-}
-
-bool Weight::operator>=(Weight rhs) const {
-  rhs.ConvertUnits(units_);
-  return value_ >= rhs.value_;
-}
-
-bool Weight::operator>(Weight rhs) const {
-  rhs.ConvertUnits(units_);
-  return value_ > rhs.value_;
-}
-
-bool Weight::operator<(Weight rhs) const {
-  rhs.ConvertUnits(units_);
-  return value_ < rhs.value_;
 }
 
 /**

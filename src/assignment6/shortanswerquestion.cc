@@ -11,12 +11,11 @@
 
 #include "assignment6/shortanswerquestion.h"
 
-#include <iostream>
+#include <print>
 #include <string_view>
 
 #include "assignment6/question.h"
 
-using std::cout;
 using std::string_view;
 
 namespace csce240_program6 {
@@ -26,10 +25,10 @@ ShortAnswerQuestion::ShortAnswerQuestion(string_view question,
     : Question{question}, answer_{answer} {}
 
 void ShortAnswerQuestion::Print(bool show_answer) const {
-  cout << "Question: " << GetQuestion() << '\n';
+  std::println("Question: {}", GetQuestion());
 
   if (show_answer) {
-    cout << "Correct Answer: " << answer_ << '\n';
+    std::println("Correct Answer: {}", answer_);
   }
 }
 
