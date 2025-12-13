@@ -46,7 +46,7 @@ MultipleChoiceQuestion::MultipleChoiceQuestion(
 
 MultipleChoiceQuestion::MultipleChoiceQuestion(
     MultipleChoiceQuestion&& rhs) noexcept
-    : Question{rhs},
+    : Question{std::move(rhs)},
       num_of_choices_{rhs.num_of_choices_},
       answer_choices_{rhs.answer_choices_},
       is_choice_correct_{rhs.is_choice_correct_} {
@@ -83,7 +83,7 @@ auto MultipleChoiceQuestion::operator=(MultipleChoiceQuestion&& rhs) noexcept
     return *this;
   }
 
-  Question::operator=(rhs);
+  Question::operator=(std::move(rhs));
 
   num_of_choices_ = rhs.num_of_choices_;
 
