@@ -26,6 +26,8 @@ class Question {
   explicit Question(std::string_view question = "?") : question_{question} {}
   PROGRAM6CLASSES_EXPORT
   virtual ~Question() = default;
+
+ protected:
   PROGRAM6CLASSES_EXPORT
   Question(const Question&) = default;
   PROGRAM6CLASSES_EXPORT
@@ -36,6 +38,7 @@ class Question {
   PROGRAM6CLASSES_EXPORT
   auto operator=(Question&&) -> Question& = default;
 
+ public:
   [[nodiscard]]
   PROGRAM6CLASSES_EXPORT auto GetQuestion() const -> const std::string& {
     return question_;
