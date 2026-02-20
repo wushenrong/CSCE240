@@ -18,7 +18,6 @@
 
 #include "assignment6/question.h"
 
-using std::size_t;
 using std::string;
 using std::string_view;
 
@@ -59,8 +58,8 @@ MultipleChoiceQuestion::MultipleChoiceQuestion(
  * Assign multiple question to another by copying over the question and answers.
  * Also making sure that the object do not assign itself to itself.
  */
-auto MultipleChoiceQuestion::operator=(const MultipleChoiceQuestion& rhs)
-    -> MultipleChoiceQuestion& {
+MultipleChoiceQuestion& MultipleChoiceQuestion::operator=(
+    const MultipleChoiceQuestion& rhs) {
   if (this == &rhs) {
     return *this;
   }
@@ -77,8 +76,8 @@ auto MultipleChoiceQuestion::operator=(const MultipleChoiceQuestion& rhs)
  * Assign multiple question to another by moving over the question and answers.
  * Also making sure that the object do not assign itself to itself.
  */
-auto MultipleChoiceQuestion::operator=(MultipleChoiceQuestion&& rhs) noexcept
-    -> MultipleChoiceQuestion& {
+MultipleChoiceQuestion& MultipleChoiceQuestion::operator=(
+    MultipleChoiceQuestion&& rhs) noexcept {
   if (this == &rhs) {
     return *this;
   }

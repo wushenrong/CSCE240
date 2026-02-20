@@ -19,7 +19,6 @@
 #include <string>
 #include <string_view>
 
-using std::size_t;
 using std::string;
 using std::string_view;
 
@@ -31,7 +30,7 @@ using std::string_view;
  * If the number of characters read does not equals kSize * kSize, return
  * false. Otherwise, fill the character array and return true.
  */
-auto ReadWordSearch(const string& file_name, WordSearch& grid) -> bool {
+bool ReadWordSearch(const string& file_name, WordSearch& grid) {
   std::ifstream word_search{file_name};
 
   if (!word_search) {
@@ -91,8 +90,8 @@ void PrintWordSearch(const WordSearch& grid) {
  * the word search without matching the word, then the word is not in the word
  * search and return false.
  */
-auto FindWordRight(const WordSearch& grid, string_view to_find, int& row,
-                   int& col) -> bool {
+bool FindWordRight(const WordSearch& grid, string_view to_find, int& row,
+                   int& col) {
   for (size_t grid_row = 0; grid_row < grid.size(); ++grid_row) {
     for (size_t grid_col = 0; grid_col < grid.at(grid_row).size(); ++grid_col) {
       if (grid.at(grid_row).at(grid_col) == to_find[0] &&
@@ -123,8 +122,8 @@ auto FindWordRight(const WordSearch& grid, string_view to_find, int& row,
  * iterating though the grid. The implementation is the same as FindWordRight
  * but we check if the word fits and matches in the word search in reverse.
  */
-auto FindWordLeft(const WordSearch& grid, string_view to_find, int& row,
-                  int& col) -> bool {
+bool FindWordLeft(const WordSearch& grid, string_view to_find, int& row,
+                  int& col) {
   for (size_t grid_row = 0; grid_row < grid.size(); ++grid_row) {
     for (size_t grid_col = 0; grid_col < grid.at(grid_row).size(); ++grid_col) {
       if (grid.at(grid_row).at(grid_col) == to_find[0] &&
@@ -156,8 +155,8 @@ auto FindWordLeft(const WordSearch& grid, string_view to_find, int& row,
  * but we check if the word fits and matches in the word search in from top to
  * bottom.
  */
-auto FindWordDown(const WordSearch& grid, string_view to_find, int& row,
-                  int& col) -> bool {
+bool FindWordDown(const WordSearch& grid, string_view to_find, int& row,
+                  int& col) {
   for (size_t grid_row = 0; grid_row < grid.size(); ++grid_row) {
     for (size_t grid_col = 0; grid_col < grid.at(grid_row).size(); ++grid_col) {
       if (grid.at(grid_row).at(grid_col) == to_find[0] &&
@@ -189,8 +188,8 @@ auto FindWordDown(const WordSearch& grid, string_view to_find, int& row,
  * but we check if the word fits and matches in the word search in from bottom
  * to top.
  */
-auto FindWordUp(const WordSearch& grid, string_view to_find, int& row, int& col)
-    -> bool {
+bool FindWordUp(const WordSearch& grid, string_view to_find, int& row,
+                int& col) {
   for (size_t grid_row = 0; grid_row < grid.size(); ++grid_row) {
     for (size_t grid_col = 0; grid_col < grid.at(grid_row).size(); ++grid_col) {
       if (grid.at(grid_row).at(grid_col) == to_find[0] &&
@@ -223,8 +222,8 @@ auto FindWordUp(const WordSearch& grid, string_view to_find, int& row, int& col)
  * search from from right to left and top to bottom as the length of the
  * diagonal is the length of the string in both the row and col direction.
  */
-auto FindWordDiagonal(const WordSearch& grid, string_view to_find, int& row,
-                      int& col) -> bool {
+bool FindWordDiagonal(const WordSearch& grid, string_view to_find, int& row,
+                      int& col) {
   for (size_t grid_row = 0; grid_row < grid.size(); ++grid_row) {
     for (size_t grid_col = 0; grid_col < grid.at(grid_row).size(); ++grid_col) {
       if (grid.at(grid_row).at(grid_col) == to_find[0] &&

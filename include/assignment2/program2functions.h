@@ -23,7 +23,7 @@
  *   a perfect square or it is a negative integer.
  */
 PROGRAM2FUNCTIONS_EXPORT
-auto IsSquare(int n) -> bool;
+bool IsSquare(int n);
 
 /**
  * Checks if an positive integer is a perfect number where the sum of its proper
@@ -35,7 +35,7 @@ auto IsSquare(int n) -> bool;
  *   a perfect number or it is a negative integer.
  */
 PROGRAM2FUNCTIONS_EXPORT
-auto IsPerfect(int n) -> bool;
+bool IsPerfect(int n);
 
 /**
  * Checks if a charater is a vowel.
@@ -46,7 +46,7 @@ auto IsPerfect(int n) -> bool;
  * @return True if the character is a vowel, otherwise returns false.
  */
 PROGRAM2FUNCTIONS_EXPORT
-auto IsVowel(char c, bool check_y = true) -> bool;
+bool IsVowel(char c, bool check_y = true);
 
 /**
  * Checks if a character is a consonant.
@@ -57,7 +57,7 @@ auto IsVowel(char c, bool check_y = true) -> bool;
  * @return True if the character is a consonant, otherwise returns false.
  */
 PROGRAM2FUNCTIONS_EXPORT
-auto IsConsonant(char c, bool check_y = true) -> bool;
+bool IsConsonant(char c, bool check_y = true);
 
 /**
  * Converts a character to an integer if the character between '1' to '9'
@@ -69,7 +69,7 @@ auto IsConsonant(char c, bool check_y = true) -> bool;
  *   0.
  */
 PROGRAM2FUNCTIONS_EXPORT
-auto ToDigit(char c) -> int;
+int ToDigit(char c);
 
 /**
  * Calculates the range of two integers. If x is greater than y, then the values
@@ -81,7 +81,7 @@ auto ToDigit(char c) -> int;
  * @return The range of x and y.
  */
 PROGRAM2FUNCTIONS_EXPORT
-auto Range(int& x, int& y) -> int;
+int Range(int& x, int& y);
 
 /**
  * Calculates the digit based on its position in a real number.
@@ -94,6 +94,6 @@ auto Range(int& x, int& y) -> int;
  * @return The digit in the real number based on its position.
  */
 PROGRAM2FUNCTIONS_EXPORT
-auto DigitInPosition(double x, int pos) -> int;
+int DigitInPosition(double x, int pos);
 
 #endif  // ASSIGNMENT2_PROGRAM2FUNCTIONS_H_

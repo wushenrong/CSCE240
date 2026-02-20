@@ -17,7 +17,6 @@
 #include <string_view>
 #include <utility>
 
-using std::size_t;
 using std::string;
 using std::string_view;
 
@@ -53,7 +52,7 @@ SongRecording::SongRecording(SongRecording&& rhs) noexcept
   rhs.artists_ = nullptr;
 }
 
-auto SongRecording::operator=(const SongRecording& rhs) -> SongRecording& {
+SongRecording& SongRecording::operator=(const SongRecording& rhs) {
   // Make sure that the object does not overwrite itself when assignment itself.
   if (this == &rhs) {
     return *this;
@@ -78,7 +77,7 @@ auto SongRecording::operator=(const SongRecording& rhs) -> SongRecording& {
   return *this;
 }
 
-auto SongRecording::operator=(SongRecording&& rhs) noexcept -> SongRecording& {
+SongRecording& SongRecording::operator=(SongRecording&& rhs) noexcept {
   // Make sure that the object does not overwrite itself when assignment itself.
   if (this == &rhs) {
     return *this;
@@ -103,7 +102,7 @@ auto SongRecording::operator=(SongRecording&& rhs) noexcept -> SongRecording& {
   return *this;
 }
 
-auto SongRecording::GetArtist(int n) const -> string {
+string SongRecording::GetArtist(int n) const {
   if (n > 0 && n <= num_of_artists_) {
     return artists_[n - 1];
   }

@@ -25,7 +25,7 @@ using std::abs;
  * integer. Then flooring the root and check if the floored root is the same as
  * the root.
  */
-auto IsSquare(int n) -> bool {
+bool IsSquare(int n) {
   if (n < 0) {
     return false;
   }
@@ -47,7 +47,7 @@ auto IsSquare(int n) -> bool {
  * is negative. If true, return false. Else manually find all the integer's
  * proper divisors and check if the sum of the divisors equals the integer.
  */
-auto IsPerfect(int n) -> bool {
+bool IsPerfect(int n) {
   if (n < 0) {
     return false;
   }
@@ -68,7 +68,7 @@ auto IsPerfect(int n) -> bool {
  * 'y', return check_y. Else check if the character is either 'a', 'e', 'i',
  * 'o', 'u'.
  */
-auto IsVowel(char c, bool check_y) -> bool {
+bool IsVowel(char c, bool check_y) {
   const char lower = std::tolower(c, std::locale());
 
   if (lower == 'y') {
@@ -86,7 +86,7 @@ auto IsVowel(char c, bool check_y) -> bool {
  * 'y', return check_y. Else check if the character is a consonant between 'a'
  * to 'z' excluding 'a', 'e', 'i', 'o', 'u', and 'y'.
  */
-auto IsConsonant(char c, bool check_y) -> bool {
+bool IsConsonant(char c, bool check_y) {
   const char lower = std::tolower(c, std::locale());
 
   if (lower == 'y') {
@@ -102,7 +102,7 @@ auto IsConsonant(char c, bool check_y) -> bool {
  * Converts a digit character to an integer by checking if the character is '1'
  * to '9' inclusive and returns 1 to 9 respectively. Else return 0.
  */
-auto ToDigit(char c) -> int {
+int ToDigit(char c) {
   if (c < '0' || c > '9') {
     return 0;
   }
@@ -114,7 +114,7 @@ auto ToDigit(char c) -> int {
  * Returns the range between two numbers by returning the absolute difference of
  * y and x.
  */
-auto Range(int& x, int& y) -> int { return abs(y - x); }
+int Range(int& x, int& y) { return abs(y - x); }
 
 /**
  * Returns the digit from a double based on its position by first shifting the
@@ -122,7 +122,7 @@ auto Range(int& x, int& y) -> int { return abs(y - x); }
  * powers of 10. Then module the double by 10 to get the digit before returning
  * and truncating the digit to an int.
  */
-auto DigitInPosition(double x, int pos) -> int {
+int DigitInPosition(double x, int pos) {
   constexpr int kBase{10};
   return gsl::narrow_cast<int>(std::fmod(abs(x) * std::pow(kBase, pos), kBase));
 }

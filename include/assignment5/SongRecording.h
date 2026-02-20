@@ -41,24 +41,24 @@ class SongRecording {
   virtual ~SongRecording() { delete[] artists_; }
 
   PROGRAM5CLASSES_EXPORT
-  auto operator=(const SongRecording&) -> SongRecording&;
+  SongRecording& operator=(const SongRecording&);
   PROGRAM5CLASSES_EXPORT
-  auto operator=(SongRecording&&) noexcept -> SongRecording&;
+  SongRecording& operator=(SongRecording&&) noexcept;
 
   [[nodiscard]]
-  PROGRAM5CLASSES_EXPORT auto GetTitle() const -> const std::string& {
+  PROGRAM5CLASSES_EXPORT const std::string& GetTitle() const {
     return title_;
   }
   [[nodiscard]]
-  PROGRAM5CLASSES_EXPORT auto GetTrackLength() const -> int {
+  PROGRAM5CLASSES_EXPORT int GetTrackLength() const {
     return track_length_;
   }
   [[nodiscard]]
-  PROGRAM5CLASSES_EXPORT auto GetNumArtists() const -> int {
+  PROGRAM5CLASSES_EXPORT int GetNumArtists() const {
     return num_of_artists_;
   }
   [[nodiscard]]
-  PROGRAM5CLASSES_EXPORT auto GetArtist(int n = 1) const -> std::string;
+  PROGRAM5CLASSES_EXPORT std::string GetArtist(int n = 1) const;
 
   PROGRAM5CLASSES_EXPORT
   void SetTitle(std::string_view title);

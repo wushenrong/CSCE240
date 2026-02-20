@@ -34,13 +34,13 @@ class Question {
   Question(Question&&) = default;
 
   PROGRAM6CLASSES_EXPORT
-  auto operator=(const Question&) -> Question& = default;
+  Question& operator=(const Question&) = default;
   PROGRAM6CLASSES_EXPORT
-  auto operator=(Question&&) -> Question& = default;
+  Question& operator=(Question&&) = default;
 
  public:
   [[nodiscard]]
-  PROGRAM6CLASSES_EXPORT auto GetQuestion() const -> const std::string& {
+  PROGRAM6CLASSES_EXPORT const std::string& GetQuestion() const {
     return question_;
   }
 

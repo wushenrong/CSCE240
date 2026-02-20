@@ -19,7 +19,6 @@
 
 #include "assignment5/SongRecording.h"
 
-using std::size_t;
 using std::string;
 using std::string_view;
 
@@ -74,7 +73,7 @@ StreamingTrack::StreamingTrack(SongRecording&& rhs, string_view genre,
   AddGenre(genre);
 }
 
-auto StreamingTrack::operator=(const StreamingTrack& rhs) -> StreamingTrack& {
+StreamingTrack& StreamingTrack::operator=(const StreamingTrack& rhs) {
   // Make sure that the object does not overwrite itself when assignment itself.
   if (this == &rhs) {
     return *this;
@@ -100,8 +99,7 @@ auto StreamingTrack::operator=(const StreamingTrack& rhs) -> StreamingTrack& {
   return *this;
 }
 
-auto StreamingTrack::operator=(StreamingTrack&& rhs) noexcept
-    -> StreamingTrack& {
+StreamingTrack& StreamingTrack::operator=(StreamingTrack&& rhs) noexcept {
   // Make sure that the object does not overwrite itself when assignment itself.
   if (this == &rhs) {
     return *this;
@@ -127,7 +125,7 @@ auto StreamingTrack::operator=(StreamingTrack&& rhs) noexcept
   return *this;
 }
 
-auto StreamingTrack::GetGenre(int n) const -> string {
+string StreamingTrack::GetGenre(int n) const {
   if (n > 0 && n <= num_of_genres_) {
     return genres_[n - 1];
   }
@@ -209,7 +207,7 @@ void StreamingTrack::RemoveGenre(string_view genre) {
   }
 }
 
-auto StreamingTrack::IsGenre(string_view genre) const -> bool {
+bool StreamingTrack::IsGenre(string_view genre) const {
   for (int i = 0; i < num_of_genres_; ++i) {
     if (genres_[i] == genre) {
       return true;

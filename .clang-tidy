@@ -8,6 +8,7 @@ Checks:
   - readability-*
   - -cppcoreguidelines-pro-bounds-*
   - -misc-use-anonymous-namespace
+  - -modernize-use-trailing-return-type
   - -readability-magic-numbers
 
 CheckOptions:

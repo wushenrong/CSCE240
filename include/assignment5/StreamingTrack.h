@@ -50,20 +50,20 @@ class StreamingTrack : public SongRecording {
   ~StreamingTrack() override { delete[] genres_; }
 
   PROGRAM5CLASSES_EXPORT
-  auto operator=(const StreamingTrack&) -> StreamingTrack&;
+  StreamingTrack& operator=(const StreamingTrack&);
   PROGRAM5CLASSES_EXPORT
-  auto operator=(StreamingTrack&&) noexcept -> StreamingTrack&;
+  StreamingTrack& operator=(StreamingTrack&&) noexcept;
 
   [[nodiscard]]
-  PROGRAM5CLASSES_EXPORT auto GetStreams() const -> int {
+  PROGRAM5CLASSES_EXPORT int GetStreams() const {
     return num_of_streams_;
   }
   [[nodiscard]]
-  PROGRAM5CLASSES_EXPORT auto GetNumGenres() const -> int {
+  PROGRAM5CLASSES_EXPORT int GetNumGenres() const {
     return num_of_genres_;
   }
   [[nodiscard]]
-  PROGRAM5CLASSES_EXPORT auto GetGenre(int n = 1) const -> std::string;
+  PROGRAM5CLASSES_EXPORT std::string GetGenre(int n = 1) const;
 
   PROGRAM5CLASSES_EXPORT
   void SetStreams(int n);
@@ -77,7 +77,7 @@ class StreamingTrack : public SongRecording {
   void RemoveGenre(std::string_view genre);
 
   [[nodiscard]]
-  PROGRAM5CLASSES_EXPORT auto IsGenre(std::string_view genre) const -> bool;
+  PROGRAM5CLASSES_EXPORT bool IsGenre(std::string_view genre) const;
 };
 
 }  // namespace csce240_programming_assignment_5
