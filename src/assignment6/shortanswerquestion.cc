@@ -11,7 +11,7 @@
 
 #include "assignment6/shortanswerquestion.h"
 
-#include <print>
+#include <iostream>
 #include <string_view>
 
 #include "assignment6/question.h"
@@ -25,10 +25,10 @@ ShortAnswerQuestion::ShortAnswerQuestion(string_view question,
     : Question{question}, answer_{answer} {}
 
 void ShortAnswerQuestion::Print(bool show_answer) const {
-  std::println("Question: {}", GetQuestion());
+  std::cout << "Question: " << GetQuestion() << "\n";
 
   if (show_answer) {
-    std::println("Correct Answer: {}", answer_);
+    std::cout << "Correct Answer: " << answer_;
   }
 }
 

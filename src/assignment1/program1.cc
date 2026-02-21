@@ -12,7 +12,6 @@
 #include <cmath>
 #include <gsl/gsl>
 #include <iostream>
-#include <print>
 
 using std::cin;
 
@@ -38,8 +37,8 @@ static const char* get_position_ending(int position) {
 
 int main() {
   // Variables for number of inputs and the largest input
-  int number_of_values{};
-  int largest_value_position{1};
+  int num_values{};
+  int largest_value_index{1};
   int largest_value{};
 
   // Variables to get values from stdin/cin
@@ -52,7 +51,7 @@ int main() {
 
     // Reject value if the base is not 2 to 9 inclusive
     if (base < 2 || base >= kRadix) {
-      std::println("Base Not Accepted");
+      std::cout << "Base Not Accepted\n";
       return 1;
     }
 
@@ -73,7 +72,7 @@ int main() {
 
       // Reject value if the current digit is not in base n
       if (digit >= base) {
-        std::println("Invalid Digit(s) in Number");
+        std::cout << "Invalid Digit(s) in Number\n";
         return 1;
       }
 
@@ -88,19 +87,19 @@ int main() {
       converted_value *= -1;
     }
 
-    std::println("{}", converted_value);
+    std::cout << converted_value;
 
-    ++number_of_values;
+    ++num_values;
 
     if (converted_value > largest_value) {
       largest_value = converted_value;
-      largest_value_position = number_of_values;
+      largest_value_index = num_values;
     }
   }  // End of outer while loop
 
-  std::println(
-      "Of the {} values input, the {}{} value entered ({}) was the largest.",
-      number_of_values, largest_value_position,
-      get_position_ending(largest_value_position), largest_value);
+  std::cout << "Of the " << num_values << " values input, the "
+            << largest_value_index << get_position_ending(largest_value_index)
+            << " value entered (" << largest_value << ") was the largest.\n";
+
   return 0;
 }

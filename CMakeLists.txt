@@ -16,7 +16,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 
   add_library(csce240_compiler_flags INTERFACE)
 
-  target_compile_features(csce240_compiler_flags INTERFACE cxx_std_23)
+  target_compile_features(csce240_compiler_flags INTERFACE cxx_std_20)
   set_target_properties(
     csce240_compiler_flags
     PROPERTIES CXX_STANDARD_REQUIRED YES

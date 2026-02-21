@@ -12,19 +12,27 @@
 #include "assignment4/weight.h"
 
 #include <ostream>
+#include <stdexcept>
 #include <string>
 #include <string_view>
 
 using std::string_view;
 
-constexpr double POUNDS_OUNCES_RATIO{16};
-constexpr double POUNDS_KILOGRAMS_RATIO{2.20462262};
-constexpr double POUNDS_GRAMS_RATIO{453.59237};
+constexpr double kPoundsToOuncesRatio{16};
+constexpr double kPoundsToKilogramsRatio{0.45359237};
+constexpr double kPoundsToGramsRatio{453.59237};
 
-constexpr double OUNCES_KILOGRAMS_RATIO{35.273962};
-constexpr double OUNCES_GRAMS_RATIO{28.3495231};
+constexpr double kOuncesToPoundsRatio{0.0625};
+constexpr double kOuncesToKilogramsRatio{0.02834952};
+constexpr double kOuncesToGramsRatio{28.3495231};
 
-constexpr double KILOGRAMS_GRAMS_RATIO{1000};
+constexpr double kKilogramsToPoundsRatio{2.20462262};
+constexpr double kKilogramsToOuncesRatio{35.273962};
+constexpr double kKilogramsToGramsRatio{1000};
+
+constexpr double kGramsToPoundsRatio{0.00220462};
+constexpr double kGramsToOuncesRatio{0.03527396};
+constexpr double kGramsToKilogramsRatio{0.001};
 
 inline static bool IsValidUnit(string_view units) {
   return units == "pounds" || units == "ounces" || units == "kilograms" ||
@@ -33,11 +41,11 @@ inline static bool IsValidUnit(string_view units) {
 
 Weight::Weight(double value, string_view units) : value_{value}, units_{units} {
   if (value < 0) {
-    throw value;
+    throw std::invalid_argument{"Value cannot be negative"};
   }
 
   if (!IsValidUnit(units)) {
-    throw units;
+    throw std::invalid_argument{"Units is unsupported"};
   }
 }
 
@@ -61,46 +69,46 @@ void Weight::ConvertUnits(string_view units) {
   if (units == "pounds") {
     if (units_ == "ounces") {
       units_ = units;
-      value_ /= POUNDS_OUNCES_RATIO;
+      value_ *= kOuncesToPoundsRatio;
     } else if (units_ == "kilograms") {
       units_ = units;
-      value_ *= POUNDS_KILOGRAMS_RATIO;
+      value_ *= kKilogramsToPoundsRatio;
     } else if (units_ == "grams") {
       units_ = units;
-      value_ /= POUNDS_GRAMS_RATIO;
+      value_ *= kGramsToPoundsRatio;
     }
   } else if (units == "ounces") {
     if (units_ == "pounds") {
       units_ = units;
-      value_ *= POUNDS_OUNCES_RATIO;
+      value_ *= kPoundsToOuncesRatio;
     } else if (units_ == "kilograms") {
       units_ = units;
-      value_ *= OUNCES_KILOGRAMS_RATIO;
+      value_ *= kKilogramsToOuncesRatio;
     } else if (units_ == "grams") {
       units_ = units;
-      value_ /= OUNCES_GRAMS_RATIO;
+      value_ *= kGramsToOuncesRatio;
     }
   } else if (units == "kilograms") {
     if (units_ == "pounds") {
       units_ = units;
-      value_ /= POUNDS_KILOGRAMS_RATIO;
+      value_ *= kPoundsToKilogramsRatio;
     } else if (units_ == "ounces") {
       units_ = units;
-      value_ /= OUNCES_KILOGRAMS_RATIO;
+      value_ *= kOuncesToKilogramsRatio;
     } else if (units_ == "grams") {
       units_ = units;
-      value_ /= KILOGRAMS_GRAMS_RATIO;
+      value_ *= kGramsToKilogramsRatio;
     }
   } else if (units == "grams") {
     if (units_ == "pounds") {
       units_ = units;
-      value_ *= POUNDS_GRAMS_RATIO;
+      value_ *= kPoundsToGramsRatio;
     } else if (units_ == "ounces") {
       units_ = units;
-      value_ *= OUNCES_GRAMS_RATIO;
+      value_ *= kOuncesToGramsRatio;
     } else if (units_ == "kilograms") {
       units_ = units;
-      value_ *= KILOGRAMS_GRAMS_RATIO;
+      value_ *= kKilogramsToGramsRatio;
     }
   }
 }

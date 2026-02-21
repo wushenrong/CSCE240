@@ -11,7 +11,7 @@
 
 #include "assignment6/truefalsequestion.h"
 
-#include <print>
+#include <iostream>
 #include <string_view>
 
 #include "assignment6/question.h"
@@ -24,10 +24,11 @@ TrueFalseQuestion::TrueFalseQuestion(string_view question, bool answer)
     : Question{question}, answer_{answer} {}
 
 void TrueFalseQuestion::Print(bool show_answer) const {
-  std::println("Question: {}", GetQuestion());
+  std::cout << "Question: " << GetQuestion() << "\n";
 
   if (show_answer) {
-    std::println("Correct Answer: {}", answer_ ? "true" : "false");
+    std::cout << "Correct Answer: " << std::boolalpha << answer_
+              << std::noboolalpha;
   }
 }
 

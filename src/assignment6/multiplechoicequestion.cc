@@ -12,7 +12,7 @@
 #include "assignment6/multiplechoicequestion.h"
 
 #include <cstddef>
-#include <print>
+#include <iostream>
 #include <string>
 #include <string_view>
 #include <utility>
@@ -143,17 +143,17 @@ void MultipleChoiceQuestion::SetAnswerChoices(int n, const string* acs,
 }
 
 void MultipleChoiceQuestion::Print(bool show_answers) const {
-  std::println("Question: {}", GetQuestion());
-  std::println("Answer Choices:");
+  std::cout << "Question: " << GetQuestion() << "\n";
+  std::cout << "Answer Choices:\n";
 
   for (int i = 0; i < num_of_choices_; ++i) {
-    std::print("{}", answer_choices_[i]);
+    std::cout << answer_choices_[i];
 
     if (show_answers) {
-      std::print("{}", is_choice_correct_[i] ? " - correct" : " - incorrect");
+      std::cout << (is_choice_correct_[i] ? " - correct" : " - incorrect");
     }
 
-    std::println();
+    std::cout << "\n";
   }
 }
 
