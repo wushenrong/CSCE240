@@ -38,7 +38,7 @@ bool ReadWordSearch(const string& file_name, WordSearch& grid) {
   }
 
   std::array<char, kSize * kSize> letters{};
-  size_t number_of_letters{0};
+  size_t number_of_letters{};
 
   char letter{};
   while (word_search.good() && number_of_letters < letters.size()) {
@@ -96,7 +96,7 @@ bool FindWordRight(const WordSearch& grid, string_view to_find, int& row,
     for (size_t grid_col = 0; grid_col < grid.at(grid_row).size(); ++grid_col) {
       if (grid.at(grid_row).at(grid_col) == to_find[0] &&
           grid_col + to_find.length() <= grid.at(grid_row).size()) {
-        bool found = true;
+        bool found{true};
 
         for (size_t i = 1; i < to_find.length(); ++i) {
           if (grid.at(grid_row).at(grid_col + i) != to_find[i]) {
@@ -128,7 +128,7 @@ bool FindWordLeft(const WordSearch& grid, string_view to_find, int& row,
     for (size_t grid_col = 0; grid_col < grid.at(grid_row).size(); ++grid_col) {
       if (grid.at(grid_row).at(grid_col) == to_find[0] &&
           grid_col >= to_find.length() - 1) {
-        bool found = true;
+        bool found{true};
 
         for (size_t i = 1; i < to_find.length(); ++i) {
           if (grid.at(grid_row).at(grid_col - i) != to_find[i]) {
@@ -161,7 +161,7 @@ bool FindWordDown(const WordSearch& grid, string_view to_find, int& row,
     for (size_t grid_col = 0; grid_col < grid.at(grid_row).size(); ++grid_col) {
       if (grid.at(grid_row).at(grid_col) == to_find[0] &&
           grid_row + to_find.length() <= grid.size()) {
-        bool found = true;
+        bool found{true};
 
         for (size_t i = 1; i < to_find.length(); ++i) {
           if (grid.at(grid_row + i).at(grid_col) != to_find[i]) {
@@ -194,7 +194,7 @@ bool FindWordUp(const WordSearch& grid, string_view to_find, int& row,
     for (size_t grid_col = 0; grid_col < grid.at(grid_row).size(); ++grid_col) {
       if (grid.at(grid_row).at(grid_col) == to_find[0] &&
           grid_row >= to_find.length() - 1) {
-        bool found = true;
+        bool found{true};
 
         for (size_t i = 1; i < to_find.length(); ++i) {
           if (grid.at(grid_row - i).at(grid_col) != to_find[i]) {
@@ -229,7 +229,7 @@ bool FindWordDiagonal(const WordSearch& grid, string_view to_find, int& row,
       if (grid.at(grid_row).at(grid_col) == to_find[0] &&
           grid_row + to_find.length() <= grid.size() &&
           grid_col + to_find.length() <= grid.at(grid_row).size()) {
-        bool found = true;
+        bool found{true};
 
         for (size_t i = 1; i < to_find.length(); ++i) {
           if (grid.at(grid_row + i).at(grid_col + i) != to_find[i]) {

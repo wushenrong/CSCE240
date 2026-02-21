@@ -22,9 +22,9 @@ namespace csce240_programming_assignment_5 {
 
 class SongRecording {
  private:
-  std::string title_{"untitled"};
-  int track_length_{0};
-  int num_of_artists_{1};
+  std::string title_;
+  int track_length_;
+  int num_of_artists_;
   gsl::owner<std::string*> artists_;
 
  public:

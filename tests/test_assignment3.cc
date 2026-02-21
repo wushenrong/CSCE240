@@ -45,7 +45,7 @@ TEST_CASE("Reading a word seach file", "[wordsearch]") {
 
     const std::ostringstream expected_output{};
     const std::ostringstream output{};
-    auto* cout_buff = std::cout.rdbuf();
+    auto* cout_buff{std::cout.rdbuf()};
 
     std::cout.rdbuf(expected_output.rdbuf());
     PrintWordSearch(expected_wordsearch);

@@ -38,9 +38,9 @@ static const char* get_position_ending(int position) {
 
 int main() {
   // Variables for number of inputs and the largest input
-  int number_of_values{0};
+  int number_of_values{};
   int largest_value_position{1};
-  int largest_value{0};
+  int largest_value{};
 
   // Variables to get values from stdin/cin
   int number{};
@@ -56,8 +56,8 @@ int main() {
       return 1;
     }
 
-    int converted_value = 0;
-    bool negative = false;
+    int converted_value{};
+    bool negative{};
 
     // Check if the value inputted is negative and make the value positive.
     if (number < 0) {
@@ -65,11 +65,11 @@ int main() {
       number *= -1;
     }
 
-    int current_position = 1;
+    int current_position{1};
 
     // Convert the value from base n to base 10 from right to left
     while (number > 0) {
-      const int digit = number % kRadix;
+      const int digit{number % kRadix};
 
       // Reject value if the current digit is not in base n
       if (digit >= base) {

@@ -15,6 +15,7 @@
 #include <cctype>
 #include <cmath>
 #include <gsl/gsl>
+#include <limits>
 #include <locale>
 
 using std::abs;
@@ -30,16 +31,13 @@ bool IsSquare(int n) {
     return false;
   }
 
-  const double root = std::sqrt(n);
-  const double flooredRoot = std::floor(root);
+  const double root{std::sqrt(n)};
+  const double flooredRoot{std::floor(root)};
 
   // Compare the root and the floored root using an percentage threshold because
   // of possible floating point rounding errors.
-  // https://www.learncpp.com/cpp-tutorial/relational-operators-and-floating-point-comparisons/
-  constexpr double kRelEpsilon{1e-8};
-
-  return abs(root - flooredRoot) <=
-         std::max(abs(root), abs(flooredRoot)) * kRelEpsilon;
+  return abs(root - flooredRoot) <= std::max(abs(root), abs(flooredRoot)) *
+                                        std::numeric_limits<double>::epsilon();
 }
 
 /**
@@ -69,7 +67,7 @@ bool IsPerfect(int n) {
  * 'o', 'u'.
  */
 bool IsVowel(char c, bool check_y) {
-  const char lower = std::tolower(c, std::locale());
+  const char lower{std::tolower(c, std::locale())};
 
   if (lower == 'y') {
     return check_y;
@@ -87,7 +85,7 @@ bool IsVowel(char c, bool check_y) {
  * to 'z' excluding 'a', 'e', 'i', 'o', 'u', and 'y'.
  */
 bool IsConsonant(char c, bool check_y) {
-  const char lower = std::tolower(c, std::locale());
+  const char lower{std::tolower(c, std::locale())};
 
   if (lower == 'y') {
     return check_y;
