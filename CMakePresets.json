@@ -8,10 +8,15 @@
       "hidden": true,
       "binaryDir": "${sourceDir}/out/build/${presetName}",
       "installDir": "${sourceDir}/out/install/${presetName}",
-      "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
       "cacheVariables": {
         "CMAKE_EXPORT_COMPILE_COMMANDS": true
       }
+    },
+    {
+      "name": "vcpkg",
+      "displayName": "Get libraries using vcpkg",
+      "hidden": true,
+      "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
     },
     {
       "name": "debug",
@@ -62,6 +67,7 @@
       "displayName": "Build using Visual Studio (Debug)",
       "inherits": [
         "base",
+        "vcpkg",
         "msvc",
         "debug"
       ]
@@ -71,6 +77,7 @@
       "displayName": "Build using Visual Studio (Release)",
       "inherits": [
         "base",
+        "vcpkg",
         "msvc",
         "release"
       ]
@@ -80,6 +87,7 @@
       "displayName": "Build Shared Libraries using Visual Studio (Debug)",
       "inherits": [
         "base",
+        "vcpkg",
         "msvc",
         "debug",
         "share"
@@ -90,6 +98,7 @@
       "displayName": "Build Shared Libraries using Visual Studio (Release)",
       "inherits": [
         "base",
+        "vcpkg",
         "msvc",
         "release",
         "share"
