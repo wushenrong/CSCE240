@@ -14,7 +14,7 @@
 #include <algorithm>
 #include <cctype>
 #include <cmath>
-#include <gsl/gsl>
+#include <gsl-lite/gsl-lite.hpp>
 #include <limits>
 #include <locale>
 
@@ -112,7 +112,7 @@ int ToDigit(char c) {
  * Returns the range between two numbers by returning the absolute difference of
  * y and x.
  */
-int Range(int& x, int& y) { return abs(y - x); }
+int Range(const int& x, const int& y) { return abs(y - x); }
 
 /**
  * Returns the digit from a double based on its position by first shifting the
@@ -122,5 +122,6 @@ int Range(int& x, int& y) { return abs(y - x); }
  */
 int DigitInPosition(double x, int pos) {
   constexpr int kBase{10};
-  return gsl::narrow_cast<int>(std::fmod(abs(x) * std::pow(kBase, pos), kBase));
+  return gsl_lite::narrow_cast<int>(
+      std::fmod(abs(x) * std::pow(kBase, pos), kBase));
 }

@@ -1,6 +1,6 @@
 {
   "dependencies": [
     "catch2",
-    "ms-gsl"
+    "gsl-lite"
   ]
 }

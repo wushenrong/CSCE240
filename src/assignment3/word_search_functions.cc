@@ -14,7 +14,7 @@
 #include <array>
 #include <cstddef>
 #include <fstream>
-#include <gsl/gsl>
+#include <gsl-lite/gsl-lite.hpp>
 #include <iostream>
 #include <string>
 #include <string_view>
@@ -106,8 +106,8 @@ bool FindWordRight(const WordSearch& grid, string_view to_find, int& row,
         }
 
         if (found) {
-          row = gsl::narrow_cast<int>(grid_row);
-          col = gsl::narrow_cast<int>(grid_col);
+          row = gsl_lite::narrow_cast<int>(grid_row);
+          col = gsl_lite::narrow_cast<int>(grid_col);
           return true;
         }
       }
@@ -138,8 +138,8 @@ bool FindWordLeft(const WordSearch& grid, string_view to_find, int& row,
         }
 
         if (found) {
-          row = gsl::narrow_cast<int>(grid_row);
-          col = gsl::narrow_cast<int>(grid_col);
+          row = gsl_lite::narrow_cast<int>(grid_row);
+          col = gsl_lite::narrow_cast<int>(grid_col);
           return true;
         }
       }
@@ -171,8 +171,8 @@ bool FindWordDown(const WordSearch& grid, string_view to_find, int& row,
         }
 
         if (found) {
-          row = gsl::narrow_cast<int>(grid_row);
-          col = gsl::narrow_cast<int>(grid_col);
+          row = gsl_lite::narrow_cast<int>(grid_row);
+          col = gsl_lite::narrow_cast<int>(grid_col);
           return true;
         }
       }
@@ -204,8 +204,8 @@ bool FindWordUp(const WordSearch& grid, string_view to_find, int& row,
         }
 
         if (found) {
-          row = gsl::narrow_cast<int>(grid_row);
-          col = gsl::narrow_cast<int>(grid_col);
+          row = gsl_lite::narrow_cast<int>(grid_row);
+          col = gsl_lite::narrow_cast<int>(grid_col);
           return true;
         }
       }
@@ -239,8 +239,8 @@ bool FindWordDiagonal(const WordSearch& grid, string_view to_find, int& row,
         }
 
         if (found) {
-          row = gsl::narrow_cast<int>(grid_row);
-          col = gsl::narrow_cast<int>(grid_col);
+          row = gsl_lite::narrow_cast<int>(grid_row);
+          col = gsl_lite::narrow_cast<int>(grid_col);
           return true;
         }
       }

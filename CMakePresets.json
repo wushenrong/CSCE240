@@ -1,89 +1,99 @@
 {
-  "version": 8,
+  "buildPresets": [
+    {
+      "configurePreset": "windows-debug",
+      "displayName": "Default Windows Build",
+      "name": "default-windows"
+    },
+    {
+      "configurePreset": "linux-debug",
+      "displayName": "Default Linux Build",
+      "name": "default-linux"
+    }
+  ],
   "configurePresets": [
     {
-      "name": "base",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": true
+      },
       "displayName": "Default build using Ninja",
       "generator": "Ninja",
       "hidden": true,
-      "binaryDir": "${sourceDir}/out/build/${presetName}",
       "installDir": "${sourceDir}/out/install/${presetName}",
-      "cacheVariables": {
-        "CMAKE_EXPORT_COMPILE_COMMANDS": true
-      }
+      "name": "base"
     },
     {
-      "name": "vcpkg",
       "displayName": "Get libraries using vcpkg",
       "hidden": true,
+      "name": "vcpkg",
       "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
     },
     {
-      "name": "debug",
-      "hidden": true,
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug"
-      }
+      },
+      "hidden": true,
+      "name": "debug"
     },
     {
-      "name": "release",
-      "hidden": true,
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "RelWithDebInfo",
         "CMAKE_INTERPROCEDURAL_OPTIMIZATION": true
-      }
+      },
+      "hidden": true,
+      "name": "release"
     },
     {
-      "name": "share",
-      "hidden": true,
       "cacheVariables": {
         "BUILD_SHARED_LIBS": true
-      }
+      },
+      "hidden": true,
+      "name": "share"
     },
     {
-      "name": "msvc",
-      "hidden": true,
       "cacheVariables": {
         "CMAKE_CXX_COMPILER": "cl.exe"
       },
+      "hidden": true,
+      "name": "msvc",
       "toolset": {
-        "value": "host=x64",
-        "strategy": "external"
+        "strategy": "external",
+        "value": "host=x64"
       }
     },
     {
-      "name": "gcc",
-      "hidden": true,
       "cacheVariables": {
         "CMAKE_CXX_COMPILER": "g++"
       },
+      "hidden": true,
+      "name": "gcc",
       "toolset": {
-        "value": "host=x64",
-        "strategy": "external"
+        "strategy": "external",
+        "value": "host=x64"
       }
     },
     {
-      "name": "windows-debug",
       "displayName": "Build using Visual Studio (Debug)",
       "inherits": [
         "base",
         "vcpkg",
         "msvc",
         "debug"
-      ]
+      ],
+      "name": "windows-debug"
     },
     {
-      "name": "windows-release",
       "displayName": "Build using Visual Studio (Release)",
       "inherits": [
         "base",
         "vcpkg",
         "msvc",
         "release"
-      ]
+      ],
+      "name": "windows-release"
     },
     {
-      "name": "windows-share-debug",
       "displayName": "Build Shared Libraries using Visual Studio (Debug)",
       "inherits": [
         "base",
@@ -91,10 +101,10 @@
         "msvc",
         "debug",
         "share"
-      ]
+      ],
+      "name": "windows-share-debug"
     },
     {
-      "name": "windows-share-release",
       "displayName": "Build Shared Libraries using Visual Studio (Release)",
       "inherits": [
         "base",
@@ -102,91 +112,124 @@
         "msvc",
         "release",
         "share"
-      ]
+      ],
+      "name": "windows-share-release"
     },
     {
-      "name": "linux-debug",
       "displayName": "Build using GCC (Debug)",
       "inherits": [
         "base",
         "gcc",
         "debug"
-      ]
+      ],
+      "name": "linux-debug"
     },
     {
-      "name": "linux-release",
       "displayName": "Build using GCC (Release)",
       "inherits": [
         "base",
         "gcc",
         "release"
-      ]
+      ],
+      "name": "linux-release"
     },
     {
-      "name": "linux-share-debug",
       "displayName": "Build Shared Libraries using GCC (Debug)",
       "inherits": [
         "base",
         "gcc",
         "debug",
         "share"
-      ]
+      ],
+      "name": "linux-share-debug"
     },
     {
-      "name": "linux-shared-release",
       "displayName": "Build Shared Libraries using GCC (Release)",
       "inherits": [
         "base",
         "gcc",
         "release",
         "share"
-      ]
+      ],
+      "name": "linux-shared-release"
     },
     {
-      "name": "windows-coverage",
+      "displayName": "Build using GCC (Debug) with vcpkg",
+      "inherits": [
+        "base",
+        "vcpkg",
+        "gcc",
+        "debug"
+      ],
+      "name": "linux-vcpkg-debug"
+    },
+    {
+      "displayName": "Build using GCC (Release) with vcpkg",
+      "inherits": [
+        "base",
+        "vcpkg",
+        "gcc",
+        "release"
+      ],
+      "name": "linux-vcpkg-release"
+    },
+    {
+      "displayName": "Build Shared Libraries using GCC (Debug) with vcpkg",
+      "inherits": [
+        "base",
+        "vcpkg",
+        "gcc",
+        "debug",
+        "share"
+      ],
+      "name": "linux-vcpkg-share-debug"
+    },
+    {
+      "displayName": "Build Shared Libraries using GCC (Release) with vcpkg",
+      "inherits": [
+        "base",
+        "vcpkg",
+        "gcc",
+        "release",
+        "share"
+      ],
+      "name": "linux-vcpkg-shared-release"
+    },
+    {
+      "cacheVariables": {
+        "ENABLE_CODE_COVERAGE": true
+      },
       "displayName": "Build using Visual Studio With Coverage",
       "inherits": [
         "base",
+        "vcpkg",
         "msvc",
         "debug"
       ],
-      "cacheVariables": {
-        "ENABLE_CODE_COVERAGE": true
-      }
+      "name": "windows-coverage"
     },
     {
-      "name": "linux-coverage",
+      "cacheVariables": {
+        "ENABLE_CODE_COVERAGE": true
+      },
       "displayName": "Build using GCC With Coverage",
       "inherits": [
         "base",
         "gcc",
         "debug"
       ],
-      "cacheVariables": {
-        "ENABLE_CODE_COVERAGE": true
-      }
-    }
-  ],
-  "buildPresets": [
-    {
-      "name": "default-windows",
-      "displayName": "Default Windows Build",
-      "configurePreset": "windows-debug"
-    },
-    {
-      "name": "default-linux",
-      "displayName": "Default Linux Build",
-      "configurePreset": "linux-debug"
+      "name": "linux-coverage"
     }
   ],
   "testPresets": [
     {
-      "name": "test-windows",
-      "configurePreset": "windows-debug"
+      "configurePreset": "windows-debug",
+      "name": "test-windows"
     },
     {
-      "name": "test-linux",
-      "configurePreset": "linux-debug"
+      "configurePreset": "linux-debug",
+      "name": "test-linux"
     }
-  ]
+  ],
+  "version": 8
 }

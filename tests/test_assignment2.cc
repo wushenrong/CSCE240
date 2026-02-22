@@ -68,8 +68,8 @@ TEST_CASE("Get range between numbers", "[assignment2]") {
   int result = Range(x, y);
 
   CHECK(result == 12);
-  CHECK(x == -3);
-  CHECK(y == 9);
+  CHECK(x == 9);
+  CHECK(y == -3);
 
   x = 4;
   y = 7;

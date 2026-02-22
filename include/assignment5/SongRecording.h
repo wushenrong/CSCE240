@@ -12,7 +12,7 @@
 #ifndef ASSIGNMENT5_SONGRECORDING_H_
 #define ASSIGNMENT5_SONGRECORDING_H_
 
-#include <gsl/gsl>
+#include <gsl-lite/gsl-lite.hpp>
 #include <string>
 #include <string_view>
 
@@ -25,7 +25,7 @@ class SongRecording {
   std::string title_;
   int track_length_;
   int num_of_artists_;
-  gsl::owner<std::string*> artists_;
+  gsl_lite::owner<std::string*> artists_;
 
  public:
   PROGRAM5CLASSES_EXPORT

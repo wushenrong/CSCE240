@@ -65,7 +65,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 endif()
 
-find_package(Microsoft.GSL CONFIG REQUIRED)
+find_package(gsl-lite 1.0 REQUIRED)
 
 add_subdirectory(src)
 

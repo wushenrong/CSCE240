@@ -12,7 +12,7 @@
 #include "assignment5/SongRecording.h"
 
 #include <cstddef>
-#include <gsl/gsl>
+#include <gsl-lite/gsl-lite.hpp>
 #include <string>
 #include <string_view>
 #include <utility>
@@ -130,7 +130,7 @@ void SongRecording::SetNumArtists(int num_of_artists) {
   // If the number of artists do not match, create a new list of artists and
   // copy over the old artists if the new list fits. Else do nothing.
   if (num_of_artists != num_of_artists_) {
-    gsl::owner<string*> temp = artists_;
+    gsl_lite::owner<string*> temp = artists_;
     artists_ = new string[static_cast<size_t>(num_of_artists)];
 
     for (int i = 0; i < num_of_artists; ++i) {

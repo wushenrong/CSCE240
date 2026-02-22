@@ -12,7 +12,7 @@
 #include "assignment5/StreamingTrack.h"
 
 #include <cstddef>
-#include <gsl/gsl>
+#include <gsl-lite/gsl-lite.hpp>
 #include <string>
 #include <string_view>
 #include <utility>
@@ -155,7 +155,7 @@ void StreamingTrack::AddGenre(string_view genre) {
   // list with our newlist. Otherwise if the track has no genre, create and add
   // the genre to the new list.
   if (genres_ != nullptr) {
-    gsl::owner<string*> temp = genres_;
+    gsl_lite::owner<string*> temp = genres_;
     genres_ = new string[static_cast<size_t>(num_of_genres_ + 1)];
 
     for (int i = 0; i < num_of_genres_; ++i) {
@@ -183,7 +183,7 @@ void StreamingTrack::RemoveGenre(string_view genre) {
   // genre, delete the list and make sure that the list is pointing to nothing
   // and there are no genres assigned to the track.
   if (num_of_genres_ > 1) {
-    gsl::owner<string*> temp = genres_;
+    gsl_lite::owner<string*> temp = genres_;
     genres_ = new string[static_cast<size_t>(num_of_genres_ - 1)];
 
     for (int i = 0, j = 0; i < num_of_genres_ && j < num_of_genres_ - 1; ++i) {

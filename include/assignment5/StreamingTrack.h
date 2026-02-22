@@ -12,11 +12,11 @@
 #ifndef ASSIGNMENT5_STREAMINGTRACK_H_
 #define ASSIGNMENT5_STREAMINGTRACK_H_
 
+#include <gsl-lite/gsl-lite.hpp>
 #include <string>
 #include <string_view>
 
 #include "assignment5/SongRecording.h"
-#include "gsl/pointers"
 #include "program5classes_export.h"
 
 namespace csce240_programming_assignment_5 {
@@ -25,7 +25,7 @@ class StreamingTrack : public SongRecording {
  private:
   int num_of_streams_;
   int num_of_genres_;
-  gsl::owner<std::string*> genres_;
+  gsl_lite::owner<std::string*> genres_;
 
  public:
   PROGRAM5CLASSES_EXPORT

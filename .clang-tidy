@@ -15,7 +15,7 @@ CheckOptions:
   cppcoreguidelines-avoid-do-while.IgnoreMacros: true
   cppcoreguidelines-init-variables.IncludeStyle: google
   cppcoreguidelines-init-variables.MathHeader: <cmath>
-  cppcoreguidelines-pro-bounds-constant-array-index.GslHeader: <gsl/gsl>
+  cppcoreguidelines-pro-bounds-constant-array-index.GslHeader: <gsl-lite/gsl-lite.hpp>
   cppcoreguidelines-pro-bounds-constant-array-index.IncludeStyle: google
   modernize-loop-convert.IncludeStyle: google
   modernize-make-shared.IncludeStyle: google

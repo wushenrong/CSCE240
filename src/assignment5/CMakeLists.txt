@@ -14,7 +14,7 @@ if(NOT BUILD_SHARED_LIBS)
 endif()
 
 target_link_libraries(program5classes PRIVATE csce240_compiler_flags
-                                              Microsoft.GSL::GSL)
+                                              gsl-lite::gsl-lite)
 
 target_include_directories(
   program5classes PUBLIC "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>")

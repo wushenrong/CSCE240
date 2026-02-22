@@ -12,7 +12,7 @@
 #ifndef ASSIGNMENT6_MULTIPLECHOICEQUESTION_H_
 #define ASSIGNMENT6_MULTIPLECHOICEQUESTION_H_
 
-#include <gsl/gsl>
+#include <gsl-lite/gsl-lite.hpp>
 #include <string>
 #include <string_view>
 
@@ -28,8 +28,8 @@ namespace csce240_program6 {
 class MultipleChoiceQuestion : public Question {
  private:
   int num_of_choices_;
-  gsl::owner<std::string*> answer_choices_;
-  gsl::owner<bool*> is_choice_correct_;
+  gsl_lite::owner<std::string*> answer_choices_;
+  gsl_lite::owner<bool*> is_choice_correct_;
 
  public:
   PROGRAM6CLASSES_EXPORT

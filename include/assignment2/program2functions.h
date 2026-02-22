@@ -81,7 +81,7 @@ int ToDigit(char c);
  * @return The range of x and y.
  */
 PROGRAM2FUNCTIONS_EXPORT
-int Range(int& x, int& y);
+int Range(const int& x, const int& y);
 
 /**
  * Calculates the digit based on its position in a real number.

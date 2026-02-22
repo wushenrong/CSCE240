@@ -10,7 +10,7 @@
  */
 
 #include <cmath>
-#include <gsl/gsl>
+#include <gsl-lite/gsl-lite.hpp>
 #include <iostream>
 
 using std::cin;
@@ -77,7 +77,7 @@ int main() {
       }
 
       converted_value +=
-          gsl::narrow_cast<int>(digit * std::pow(base, current_position));
+          gsl_lite::narrow_cast<int>(digit * std::pow(base, current_position));
       number /= kRadix;
       ++current_position;
     }  // End of inner while loop

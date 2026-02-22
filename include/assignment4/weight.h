@@ -12,7 +12,6 @@
 #ifndef ASSIGNMENT4_WEIGHT_H_
 #define ASSIGNMENT4_WEIGHT_H_
 
-#include <compare>
 #include <iosfwd>
 #include <string>
 #include <string_view>
@@ -50,8 +49,7 @@ class Weight {
    * Operator overloads for comparing weights.
    */
   PROGRAM4FUNCTIONS_EXPORT
-  friend std::partial_ordering operator<=>(const Weight& lhs,
-                                           const Weight& rhs) {
+  friend auto operator<=>(const Weight& lhs, const Weight& rhs) {
     Weight weight{rhs};
     weight.ConvertUnits(lhs.units_);
     return lhs.value_ <=> weight.value_;

@@ -13,7 +13,6 @@
 
 #include <ostream>
 #include <stdexcept>
-#include <string>
 #include <string_view>
 
 using std::string_view;
@@ -63,7 +62,7 @@ void Weight::SetUnits(string_view units) {
 
 /**
  * Converts the current weight to pounds, ounces, kilograms, or grams by
- * multiplying or dividing the ratio between the units.
+ * multiplying ratio between the units.
  */
 void Weight::ConvertUnits(string_view units) {
   if (units == "pounds") {
@@ -114,5 +113,5 @@ void Weight::ConvertUnits(string_view units) {
 }
 
 std::ostream& operator<<(std::ostream& out, const Weight& weight) {
-  return out << weight.GetValue() << ' ' << weight.GetUnits();
+  return out << weight.GetValue() << " " << weight.GetUnits();
 }
