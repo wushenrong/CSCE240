@@ -93,7 +93,7 @@ bool IsConsonant(char c, bool check_y) {
 
   return (lower > 'a' && lower < 'e') || (lower > 'e' && lower < 'i') ||
          (lower > 'i' && lower < 'o') || (lower > 'o' && lower < 'u') ||
-         (lower > 'u' && lower < 'y') || (lower == 'z');
+         (lower > 'u' && lower <= 'z');
 }
 
 /**
